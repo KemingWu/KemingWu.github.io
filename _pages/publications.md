@@ -11,5 +11,4 @@ author_profile: true
 
 {% include base_path %}
 
-{% include_relative _publications/publications_sum.md %}
-
+{% include publications_sum.md %}
