@@ -18,7 +18,7 @@ Conference Papers (*Equal contribution)
 
 Journal Publications (*Equal contribution)
 ------
-* [A Novel Quantum Belief Entropy for Uncertainty Measure in Complex Evidence Theory](https://openreview.net/forum?id=rLG6KQMs42&noteId=vFzJM2SvEH)
+* [A Novel Quantum Belief Entropy for Uncertainty Measure in Complex Evidence Theory](https://www.sciencedirect.com/science/article/abs/pii/S0020025523013294)
   [Keming Wu](https://kemingwu.github.io/), [Fuyuan Xiao](http://www.cse.cqu.edu.cn/info/2095/5902.htm)
 
 Preprint (*Equal contribution)
