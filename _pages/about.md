@@ -12,28 +12,23 @@ Hi,there!
 I am Keming Wu (Chinese name: 吴科明), a junior undergraduate student in the [School of Big Data & Software Engineering](http://www.cse.cqu.edu.cn/) at [Chongqing University](https://www.cqu.edu.cn/).
 
 I have had the opportunity to work on complex evidence theory under the guidance of Professor [Fuyuan Xiao](http://www.cse.cqu.edu.cn/info/2095/5902.htm) from the School of Big Data & Software Engineering at Chongqing University. I have also worked on Spiking Neural Networks (SNN) in the team of Professor Guoqi Li from the Institute of Automation, Chinese
-Academy of Sciences. Currently, I am working on AI for Science under the guidance of Assistant Professor [Wentao Zhang](https://zwt233.github.io/) from Peking University. I am fortunate to be collaborating with [Minghao Xu](https://chrisallenming.github.io/) and Jiaze Song.
+Academy of Sciences. Currently, I am working on AI for Science under the guidance of Assistant Professor [Wentao Zhang](https://zwt233.github.io/) from Peking University. I am fortunate to be collaborating with [Minghao Xu](https://chrisallenming.github.io/).
 
 My current research interests focus on 3D scene understanding, 3D Multimodal Models. 
 
 
 Research Interests
 ======
-\begin{itemize}
-\item 3D scene understanding
-\item 3D Multimodal Models
 
-\end{itemize}
+* scene understanding
+* 3D Multimodal Models
 
-Getting started
+
+
+🔥 News
 ======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this repository](https://github.com/academicpages/academicpages.github.io) by clicking the "fork" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](http://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
-
+* *2024.07:* One paper is accepted by ACM MM 2024 (My first CCF-A. Congratulations!).
+* *2024.01:* One paper is accepted by  Information Sciences (CCF-B tier journal. Congratulations!).
 Site-wide configuration
 ------
 The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
