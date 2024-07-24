@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "&#x1F649; About me"
+title: "About me"
 author_profile: true
 redirect_from: 
   - /about/
@@ -16,6 +16,9 @@ Academy of Sciences. Currently, I am working on AI for Science under the guidanc
 
 My current research interests focus on 3D scene understanding, 3D Multimodal Models. 
 
+&#x1F4D6; Education
+------
+* **[Sep. 2021 – now]** Undergraduate, School of Big Data & Software Engineering, Chongqing University, China. Majoring in Software Engineering.
 
 &#x1F680; Research Interests
 ------
@@ -27,8 +30,8 @@ My current research interests focus on 3D scene understanding, 3D Multimodal Mod
 
 🔥 News
 ------
-* *2024.07:* One paper is accepted by ACM MM 2024 (My first CCF-A conference paper. Congratulations!).
-* *2023.01:* One paper is accepted by  Information Sciences (CCF-B tier journal).
+* *2024.07:* One paper is accepted by ACM MM 2024 (My first <span style="color: red;"> CCF-A </span>  conference paper. Congratulations!).
+* *2023.01:* One paper is accepted by  Information Sciences (<span style="color: red;"> CCF-B </span> tier journal).
 
 
 &#x1F4C5; Experiences
@@ -44,5 +47,4 @@ Academy of Sciences supervised by Prof. [Guoqi Li](https://casialiguoqi.github.i
 * **[Oct. 2023]** National Scholarship (Award Rate: <span style="color: red;"> 0.2% </span> national-wide) Ministry of Education, China
 * **[Oct. 2022]** National Scholarship (Award Rate: <span style="color: red;"> 0.2% </span> national-wide) Ministry of Education, China
 
-For more info
-------
+
