@@ -17,7 +17,7 @@ Academy of Sciences. Currently, I am working on AI for Science under the guidanc
 My current research interests focus on 3D scene understanding, 3D Multimodal Models. 
 
 
-Research Interests
+&#x1F680 Research Interests
 ======
 
 * scene understanding
@@ -28,7 +28,7 @@ Research Interests
 🔥 News
 ======
 * *2024.07:* One paper is accepted by ACM MM 2024 (My first CCF-A. Congratulations!).
-* *2024.01:* One paper is accepted by  Information Sciences (CCF-B tier journal. Congratulations!).
+* *2024.01:* One paper is accepted by  Information Sciences (CCF-B tier journal).
 
 
 Create content & metadata
