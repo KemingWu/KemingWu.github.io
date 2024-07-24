@@ -14,7 +14,7 @@ I am Keming Wu (Chinese name: 吴科明), a junior undergraduate student in the 
 I have had the opportunity to work on complex evidence theory under the guidance of Professor [Fuyuan Xiao](http://www.cse.cqu.edu.cn/info/2095/5902.htm) from the School of Big Data & Software Engineering at Chongqing University. I have also worked on Spiking Neural Networks (SNNs) in the team of Professor Guoqi Li from the Institute of Automation, Chinese
 Academy of Sciences. Currently, I am working on AI for Science under the guidance of Assistant Professor [Wentao Zhang](https://zwt233.github.io/) from Peking University, where I am fortunate to be collaborate with [Minghao Xu](https://chrisallenming.github.io/).
 
-My current research interests focus on 3D Scene Understanding, 3D Multimodal Models. I have also previously worked on Information Fusion(mainly Complex Evidence Theory), Spiking Neural Networks, AI for Science, etc. If you are interested in any of the above topics, please feel free to contact me for further discussion and potential collaboration!
+My current research interests focus on 3D Scene Understanding, 3D Multimodal Models. I have also previously worked on Information Fusion (mainly Complex Evidence Theory), Spiking Neural Networks, AI for Science, etc. If you are interested in any of the above topics, please feel free to contact me for further discussion and potential collaboration!
 
 &#x1F4D6; Education
 ------
