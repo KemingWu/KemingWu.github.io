@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "About me"
+title: "&#x1F649; About me"
 author_profile: true
 redirect_from: 
   - /about/
@@ -17,7 +17,7 @@ Academy of Sciences. Currently, I am working on AI for Science under the guidanc
 My current research interests focus on 3D scene understanding, 3D Multimodal Models. 
 
 
-&#x1F680 Research Interests
+&#x1F680; Research Interests
 ======
 
 * scene understanding
