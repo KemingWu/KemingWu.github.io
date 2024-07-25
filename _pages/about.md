@@ -31,7 +31,7 @@ My current research interests focus on 3D Scene Understanding, 3D Multimodal Mod
 🔥 News
 ------
 * *2024.07:* One paper is accepted by ACM MM 2024 (My first <span style="color: red;"> CCF-A </span>  conference paper. Congratulations!).
-* *2023.01:* One paper is accepted by  Information Sciences (<span style="color: red;"> CCF-B </span> tier journal).
+* *2024.01:* One paper is accepted by  Information Sciences (<span style="color: red;"> CCF-B </span> tier journal).
 
 
 &#x1F4C5; Experiences
