@@ -23,7 +23,7 @@ My current research interests focus on 3D Scene Understanding, 3D Multimodal Mod
 &#x1F680; Research Interests
 ------
 
-* 3D scene understanding
+* 3D Scene Understanding
 * 3D Multimodal Models
 
 
