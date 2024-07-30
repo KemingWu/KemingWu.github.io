@@ -13,7 +13,7 @@ author_profile: true
 
 Conference Publications (*Equal contribution)
 ------
-* RSC-SNN: Exploring the Trade-off Between Adversarial Robustness and Accuracy in Spiking Neural Networks via Randomized Smoothing Coding
+* RSC-SNN: Exploring the Trade-off Between Adversarial Robustness and Accuracy in Spiking Neural Networks via Randomized Smoothing Coding  
   *ACM Multimedia (ACM MM'2024, <span style="color: red;"> CCF-A </span> conference), Melbourne, Australia.* [[PDF]](https://arxiv.org/pdf/2407.20099)  
   [Keming Wu](https://kemingwu.github.io/) <sup>*</sup>, Man Yao <sup>*</sup>, Yuhong Chou, [Xuerui Qiu](https://bollossom.github.io/), Rui Yang, Bo Xu, [Guoqi Li](https://casialiguoqi.github.io/)
 
