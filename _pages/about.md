@@ -18,7 +18,7 @@ My current research interests focus on 3D Scene Understanding, 3D Multimodal Mod
 
 &#x1F4D6; Education
 ------
-* **[Sep. 2021 – now]** Undergraduate, School of Big Data & Software Engineering, Chongqing University, China. Majoring in Software Engineering (Ranking: <span style="color: red;"> **1/251** </span>).
+* **[Sep. 2021 – now]** Undergraduate, School of Big Data & Software Engineering, Chongqing University, China. Majoring in Software Engineering (Ranking: <span style="color: red;"> **1/251**</span>).
 
 &#x1F680; Research Interests
 ------
