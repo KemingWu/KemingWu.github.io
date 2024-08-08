@@ -48,4 +48,4 @@ Academy of Sciences supervised by Prof. [Guoqi Li](https://casialiguoqi.github.i
 * **[Oct. 2022]** National Scholarship (Award Rate: <span style="color: red;"> 0.2% </span> national-wide) Ministry of Education, China
 
 
-<a href='https://clustrmaps.com/site/1c0rc'  title='Visit tracker'><img src='//clustrmaps.com/map_v2.png?cl=ffffff&w=600&t=n&d=cKc7Wx7G5hG6Og0yBAYJLS_gR5Sc2FMlfnB9zn0pRhE'/></a>
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=400&t=n&d=cKc7Wx7G5hG6Og0yBAYJLS_gR5Sc2FMlfnB9zn0pRhE'></script>
