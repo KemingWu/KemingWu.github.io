@@ -16,3 +16,11 @@
     padding : 5px;
     font-size: 6px; /* 根据需要调整这个值 */
 }
+
+#clstr_globe {
+    width: 100px; /* 你希望的宽度 */
+    height: 100px; /* 你希望的高度 */
+    display: block; /* 使元素作为块级元素显示 */
+    margin-left: auto; /* 左外边距自动，用于居中 */
+    margin-right: auto; /* 右外边距自动，用于居中 */
+}
