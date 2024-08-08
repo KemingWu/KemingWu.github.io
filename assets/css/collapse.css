@@ -18,9 +18,7 @@
 }
 
 #clstr_globe {
-    width: 100px; /* 你希望的宽度 */
-    height: 100px; /* 你希望的高度 */
-    display: block; /* 使元素作为块级元素显示 */
-    margin-left: auto; /* 左外边距自动，用于居中 */
-    margin-right: auto; /* 右外边距自动，用于居中 */
+    width: 20px; /* 你希望的宽度 */
+    height: 20px; /* 你希望的高度 */
+    margin: auto; /* 使地图在容器中居中 */
 }
