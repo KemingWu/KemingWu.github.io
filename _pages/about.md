@@ -33,6 +33,7 @@ My current research interests focus on Generative AI, 3D Scene Understanding, Mu
 
 🔥 News
 ------
+* *2024.07:* One paper about glycan modeling is submitted to ICLR 2025 (<span style="color: red;"> **CCF-A** </span>).
 * *2024.07:* One paper is accepted by ACM MM 2024 (My first <span style="color: red;"> **CCF-A** </span>  conference paper. Congratulations!).
 * *2024.01:* One paper is accepted by  Information Sciences (<span style="color: red;"> **CCF-B** </span> tier journal).
 
