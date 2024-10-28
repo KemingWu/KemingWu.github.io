@@ -19,8 +19,12 @@ Conference Publications (*Equal contribution)
 
 Journal Publications (*Equal contribution)
 ------
+* [A Fractal-based Complex Belief Entropy for Uncertainty Measure in Complex Evidence Theory](https://arxiv.org/abs/2312.16080)  
+  *IEEE Transactions on Systems, Man and Cybernetics: Systems, 2025, <span style="color: red;"> CCF-B </span> journal.*  
+  [Keming Wu](https://kemingwu.github.io/), [Fuyuan Xiao](http://www.cse.cqu.edu.cn/info/2095/5902.htm)
+  
 * [A Novel Quantum Belief Entropy for Uncertainty Measure in Complex Evidence Theory](https://www.sciencedirect.com/science/article/abs/pii/S0020025523013294)  
-  *Information Sciences, 2024, <span style="color: red;"> CCF-B </span> tier journal.*  
+  *Information Sciences, 2024, <span style="color: red;"> CCF-B </span> journal.*  
   [Keming Wu](https://kemingwu.github.io/), [Fuyuan Xiao](http://www.cse.cqu.edu.cn/info/2095/5902.htm)
 
 Preprint Publications (*Equal contribution)
@@ -33,6 +37,3 @@ Under Review (*Equal contribution)
 * [Modeling All-Atom Glycan Structures via Hierarchical Message Passing and Multi-Scale Pre-training](https://openreview.net/forum?id=HcRpl6hOAl)  
   *Submit to ICLR 2025, <span style="color: red;"> CCF-A </span> conference*  
   
-* [A Fractal-based Complex Belief Entropy for Uncertainty Measure in Complex Evidence Theory](https://arxiv.org/abs/2312.16080)  
-  *Submit to IEEE Transactions on Systems, Man and Cybernetics: Systems, <span style="color: red;"> CCF-B </span> tier journal.*  
-  [Keming Wu](https://kemingwu.github.io/), [Fuyuan Xiao](http://www.cse.cqu.edu.cn/info/2095/5902.htm)
