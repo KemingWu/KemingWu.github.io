@@ -21,7 +21,7 @@ repository               : "KemingWu/KemingWu.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "life2.jpg"
+  avatar           : "profile.png"
   name             : "Keming Wu (Charles Wu)"
   pronouns         : # example: "she/her"  
   bio              : "Feel free to explore and have a passion for life!"
