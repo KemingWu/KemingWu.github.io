@@ -33,10 +33,10 @@ My current research interests focus on Generative AI, 3D Scene Understanding, Mu
 
 🔥 News
 ------
-* *2024.10:* One paper about information fusion is accepted by IEEE Transactions on Systems, Man and Cybernetics: Systems (<span style="color: red;"> **CCF-B** </span> journal, **First Author**).
-* *2024.10:* One paper about glycan modeling is submitted to ICLR 2025 (<span style="color: red;"> **CCF-A** </span>).
-* *2024.07:* One paper is accepted by ACM MM 2024 (My first <span style="color: red;"> **CCF-A** </span>  conference paper, **First Author**. Congratulations!).
-* *2024.01:* One paper is accepted by  Information Sciences (<span style="color: red;"> **CCF-B** </span> journal, **First Author**).
+* *2024.10:* One paper about information fusion is accepted by *IEEE Transactions on Systems, Man and Cybernetics: Systems* (<span style="color: red;"> **CCF-B** </span> journal, **First Author**.).
+* *2024.10:* One paper about glycan modeling is submitted to *ICLR 2025* (<span style="color: red;"> **CCF-A** </span>).
+* *2024.07:* One paper is accepted by *ACM MM 2024* (My first <span style="color: red;"> **CCF-A** </span>  conference paper, **First Author**. Congratulations!).
+* *2024.01:* One paper is accepted by  *Information Sciences* (<span style="color: red;"> **CCF-B** </span> journal, **First Author**.).
 
 
 &#x1F4C5; Experiences
