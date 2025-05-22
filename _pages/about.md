@@ -26,7 +26,6 @@ My current research interests focus on computer vision, generative AI. I have al
 * *2025.05:* One paper is accepted by *ICML 2025*.
 * *2025.02:* One paper is accepted by *CVPR 2025*.
 * *2024.10:* One paper about information fusion is accepted by *IEEE Transactions on Systems, Man and Cybernetics: Systems* (<span style="color: red;"> **CCF-B** </span> journal, **First Author**.).
-* *2024.10:* One paper about glycan modeling is submitted to *ICLR 2025* (<span style="color: red;"> **CCF-A** </span>).
 * *2024.07:* One paper is accepted by *ACM MM 2024* (My first <span style="color: red;"> **CCF-A** </span>  conference paper, **First Author**. Congratulations!).
 * *2024.01:* One paper is accepted by  *Information Sciences* (<span style="color: red;"> **CCF-B** </span> journal, **First Author**.).
 
