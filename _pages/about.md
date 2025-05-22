@@ -33,10 +33,9 @@ My current research interests focus on computer vision, generative AI. I have al
 &#x1F4C5; Experiences
 ------
 * **[Sep. 2024 – Apr. 2025]** Research intern at Microsoft Research Asia supervised by [Yuhui Yuan](https://scholar.google.com/citations?user=PzyvzksAAAAJ&hl=en) and [Dong Chen](https://scholar.google.com/citations?hl=en&user=_fKSYOwAAAAJ). 
-* **[Jan. 2024 – Sep. 2024]** I am an intern student at the Peking University supervised by Prof. [Wentao Zhang](https://zwt233.github.io/). 
-* **[Apr. 2023 – Jan. 2024]** I am a research assistant at the Institute of Automation, Chinese
-Academy of Sciences supervised by Prof. [Guoqi Li](https://casialiguoqi.github.io/). 
-* **[Jul. 2022 – Apr. 2023]** I am an intern student at the Chongqing University supervised by Prof. [Fuyuan Xiao](http://www.cse.cqu.edu.cn/info/2095/5902.htm).
+* **[Jan. 2024 – Sep. 2024]** Research intern at Peking University supervised by Prof. [Wentao Zhang](https://zwt233.github.io/). 
+* **[Apr. 2023 – Jan. 2024]** Research intern at Institute of Automation, Chinese Academy of Sciences supervised by Prof. [Guoqi Li](https://casialiguoqi.github.io/). 
+* **[Jul. 2022 – Apr. 2023]** Research intern at Chongqing University supervised by Prof. [Fuyuan Xiao](http://www.cse.cqu.edu.cn/info/2095/5902.htm).
 
 &#x1F3C6; Award and Achievement
 ------
