@@ -24,7 +24,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd8d2a9f-8cff-4cbe-a7cd-b67dc8daa143" name="Default Changelist" comment="update 20250626" />
+    <list default="true" id="bd8d2a9f-8cff-4cbe-a7cd-b67dc8daa143" name="Default Changelist" comment="update 20250714">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +53,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../human_evl" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hybrid-layout-msra.github.io" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -68,20 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1721792348741</updated>
-    </task>
-    <task id="LOCAL-00023" summary="update personal page">
-      <created>1721822418936</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1721822418936</updated>
-    </task>
-    <task id="LOCAL-00024" summary="update personal page">
-      <created>1721822522424</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1721822522424</updated>
     </task>
     <task id="LOCAL-00025" summary="update personal page">
       <created>1721822961079</created>
@@ -412,7 +401,21 @@
       <option name="project" value="LOCAL" />
       <updated>1750875270739</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="update 20250714">
+      <created>1752501114202</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1752501114203</updated>
+    </task>
+    <task id="LOCAL-00073" summary="update 20250714">
+      <created>1752501267515</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1752501267515</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -437,13 +440,14 @@
     <MESSAGE value="update 20250604 new page" />
     <MESSAGE value="update 20250606" />
     <MESSAGE value="update 20250626" />
-    <option name="LAST_COMMIT_MESSAGE" value="update 20250626" />
+    <MESSAGE value="update 20250714" />
+    <option name="LAST_COMMIT_MESSAGE" value="update 20250714" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="528" y="198" key="FileChooserDialogImpl" timestamp="1743611516482">
+    <state x="528" y="198" key="FileChooserDialogImpl" timestamp="1752987308206">
       <screen x="0" y="0" width="1493" height="885" />
     </state>
-    <state x="528" y="198" key="FileChooserDialogImpl/0.0.1493.885@0.0.1493.885" timestamp="1743611516482" />
+    <state x="528" y="198" key="FileChooserDialogImpl/0.0.1493.885@0.0.1493.885" timestamp="1752987308206" />
     <state x="249" y="88" key="SettingsEditor" timestamp="1748975824037">
       <screen x="0" y="0" width="1493" height="885" />
     </state>
