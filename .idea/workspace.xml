@@ -24,7 +24,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd8d2a9f-8cff-4cbe-a7cd-b67dc8daa143" name="Default Changelist" comment="update 20250714">
+    <list default="true" id="bd8d2a9f-8cff-4cbe-a7cd-b67dc8daa143" name="Default Changelist" comment="update 20250720">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
@@ -53,7 +53,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hybrid-layout-msra.github.io" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HybridLayout" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -71,13 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1721792348741</updated>
-    </task>
-    <task id="LOCAL-00025" summary="update personal page">
-      <created>1721822961079</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1721822961079</updated>
     </task>
     <task id="LOCAL-00026" summary="update personal page">
       <created>1721823093124</created>
@@ -415,7 +408,14 @@
       <option name="project" value="LOCAL" />
       <updated>1752501267515</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="update 20250720">
+      <created>1753005102309</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1753005102309</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -441,13 +441,14 @@
     <MESSAGE value="update 20250606" />
     <MESSAGE value="update 20250626" />
     <MESSAGE value="update 20250714" />
-    <option name="LAST_COMMIT_MESSAGE" value="update 20250714" />
+    <MESSAGE value="update 20250720" />
+    <option name="LAST_COMMIT_MESSAGE" value="update 20250720" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="528" y="198" key="FileChooserDialogImpl" timestamp="1752987308206">
+    <state x="528" y="198" key="FileChooserDialogImpl" timestamp="1753978648272">
       <screen x="0" y="0" width="1493" height="885" />
     </state>
-    <state x="528" y="198" key="FileChooserDialogImpl/0.0.1493.885@0.0.1493.885" timestamp="1752987308206" />
+    <state x="528" y="198" key="FileChooserDialogImpl/0.0.1493.885@0.0.1493.885" timestamp="1753978648272" />
     <state x="249" y="88" key="SettingsEditor" timestamp="1748975824037">
       <screen x="0" y="0" width="1493" height="885" />
     </state>
