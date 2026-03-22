@@ -7,7 +7,7 @@
   <meta name="description" content="Keming Wu | Multimodal AI, generative models, evaluation, and reasoning">
   <meta name="google-site-verification" content="yy_3iiS_X6pJdegdwitJMrH0LRLHXwpjrV9RKLXxKjg">
   <link rel="shortcut icon" href="myIcon.ico">
-  <title>Keming Wu | Dark Tech Research Portfolio</title>
+  <title>Keming Wu | Homepage</title>
   <style>
     :root {
       color-scheme: dark;
@@ -90,20 +90,19 @@
         radial-gradient(circle at 10% 20%, rgba(104, 232, 255, 0.18), transparent 32%),
         radial-gradient(circle at 85% 18%, rgba(139, 92, 246, 0.16), transparent 30%),
         radial-gradient(circle at 60% 70%, rgba(255, 77, 141, 0.12), transparent 28%);
-      filter: blur(28px);
-      animation: drift 18s ease-in-out infinite alternate;
+      filter: blur(18px);
+      animation: drift 26s ease-in-out infinite alternate;
     }
 
     .cursor-glow {
       z-index: 10;
       background: radial-gradient(circle at center, rgba(104, 232, 255, 0.14), transparent 42%);
-      width: 300px;
-      height: 300px;
+      width: 220px;
+      height: 220px;
       transform: translate(-50%, -50%);
-      opacity: 0.75;
+      opacity: 0.28;
       border-radius: 50%;
-      mix-blend-mode: screen;
-      transition: transform 0.12s linear;
+      transition: transform 0.08s linear;
     }
 
     .scroll-progress {
@@ -127,7 +126,7 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(10px);
       background: rgba(4, 7, 18, 0.55);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
@@ -215,9 +214,9 @@
       border-radius: 28px;
       box-shadow: var(--glow);
       overflow: hidden;
-      opacity: 0.72;
-      transform: translateY(28px) scale(0.988);
-      transition: transform 0.8s ease, opacity 0.8s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      opacity: 1;
+      transform: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .section::before {
@@ -228,28 +227,9 @@
       pointer-events: none;
     }
 
-    .section::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(115deg, transparent 0%, rgba(104, 232, 255, 0.08) 40%, transparent 65%);
-      transform: translateX(-120%);
-      transition: transform 0.9s ease;
-      pointer-events: none;
-    }
-
-    .section.in-view {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .section.in-view::after {
-      transform: translateX(120%);
-    }
-
     .section.is-current {
-      border-color: rgba(104, 232, 255, 0.16);
-      box-shadow: 0 0 0 1px rgba(104, 232, 255, 0.08), 0 24px 80px rgba(8, 13, 31, 0.62);
+      border-color: rgba(104, 232, 255, 0.12);
+      box-shadow: 0 0 0 1px rgba(104, 232, 255, 0.05), 0 18px 56px rgba(8, 13, 31, 0.46);
     }
 
     .section-inner {
@@ -392,7 +372,7 @@
     .button.primary {
       background: linear-gradient(135deg, rgba(104, 232, 255, 0.2), rgba(139, 92, 246, 0.18));
       border-color: rgba(104, 232, 255, 0.24);
-      box-shadow: 0 14px 44px rgba(9, 14, 32, 0.45);
+      box-shadow: 0 10px 28px rgba(9, 14, 32, 0.32);
     }
 
     .button.secondary {
@@ -405,7 +385,7 @@
     .filter-button:hover,
     .social-link:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(4, 7, 18, 0.42);
+      box-shadow: 0 10px 26px rgba(4, 7, 18, 0.28);
     }
 
     .hero-links {
@@ -609,7 +589,7 @@
       border: 1px solid rgba(255, 255, 255, 0.07);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
       transform-style: preserve-3d;
-      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+      transition: transform 0.18s ease, border-color 0.22s ease, box-shadow 0.22s ease;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
@@ -622,7 +602,7 @@
     .award-card:hover,
     .contact-panel:hover {
       border-color: rgba(104, 232, 255, 0.18);
-      box-shadow: 0 22px 64px rgba(3, 7, 18, 0.42);
+      box-shadow: 0 14px 36px rgba(3, 7, 18, 0.28);
     }
 
     .metric-card {
@@ -918,8 +898,8 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(14px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
     }
 
     .reveal.visible {
@@ -1005,6 +985,11 @@
         display: none;
       }
 
+      .cursor-glow,
+      #particle-canvas {
+        display: none;
+      }
+
       .contact-chip {
         flex-basis: 100%;
       }
@@ -1042,7 +1027,7 @@
         <div class="brand-badge">KW</div>
         <div class="brand-text">
           <strong>Keming Wu</strong>
-          <span>Dark-tech research portfolio</span>
+          <span>Research, publications, and projects</span>
         </div>
       </a>
       <nav class="nav-links" id="nav-links">
@@ -1063,7 +1048,7 @@
       <section class="section hero" id="home">
         <div class="section-inner hero-grid">
           <div class="hero-copy reveal">
-            <div class="status-pill"><span class="pulse-dot"></span> Open to research collaboration, RA, and internship opportunities</div>
+            <div class="status-pill"><span class="pulse-dot"></span> Open to collaboration, RA, and internship opportunities</div>
             <div class="meta-row" style="margin-top: 16px;">
               <div class="meta-pill">Ph.D. Student, Tsinghua University</div>
               <div class="meta-pill">Beijing, China</div>
@@ -1085,7 +1070,7 @@
               <div class="tag">Long-video Understanding</div>
             </div>
             <div class="hero-actions">
-              <a class="button primary" href="#contributions">View Selected Contributions</a>
+              <a class="button primary" href="#contributions">Selected Work</a>
               <a class="button secondary" href="#publications">Browse Publications</a>
             </div>
             <div class="hero-links">
@@ -1154,7 +1139,7 @@
         <div class="section-inner">
           <div class="section-header reveal">
             <div>
-              <div class="eyebrow">Research Dashboard</div>
+              <div class="eyebrow">Overview</div>
               <h2 class="section-title">A concise quantitative view of my current research profile.</h2>
               <p class="section-subtitle">
                 Here I summarize my publications, research directions, and current academic activity in a compact, data-oriented view.
@@ -1164,9 +1149,9 @@
           <div class="dashboard-grid">
             <div class="dashboard-card reveal tilt-card">
               <div class="card-topline">
-                <div class="status-pill">Profile Snapshot</div>
+                <div class="status-pill">At a Glance</div>
               </div>
-              <h3 class="card-title">Selected indicators</h3>
+              <h3 class="card-title">A few numbers</h3>
               <div class="dashboard-kpis">
                 <div class="dashboard-kpi">
                   <span>Selected publications</span>
@@ -1188,9 +1173,9 @@
             </div>
             <div class="dashboard-card reveal tilt-card">
               <div class="card-topline">
-                <div class="status-pill">Research Distribution</div>
+                <div class="status-pill">Research Areas</div>
               </div>
-              <h3 class="card-title">Primary research directions represented on this page</h3>
+              <h3 class="card-title">Research areas reflected in this page</h3>
               <div class="bar-group">
                 <div class="bar-item">
                   <div class="bar-head"><span class="mini-bar-label">Generation / Editing</span><strong>6</strong></div>
@@ -1212,20 +1197,20 @@
             </div>
             <div class="dashboard-card reveal tilt-card">
               <div class="card-topline">
-                <div class="status-pill">Current Signals</div>
+                <div class="status-pill">Current Focus</div>
               </div>
-              <h3 class="card-title">What the portfolio emphasizes</h3>
+              <h3 class="card-title">A few things I want to highlight</h3>
               <div class="signal-stack">
                 <div class="signal-item">
-                  <strong>Contribution-first narrative</strong>
-                <small>I highlight flagship papers and systems before the full publication list.</small>
+                  <strong>Selected contributions first</strong>
+                  <small>I put a few representative papers and systems first, before the full publication list.</small>
                 </div>
                 <div class="signal-item">
-                  <strong>Formal academic tone</strong>
+                  <strong>Academic tone</strong>
                   <small>I use a more formal tone here to keep the site closer to an academic homepage.</small>
                 </div>
                 <div class="signal-item">
-                  <strong>Interactive inspection</strong>
+                  <strong>More detail on demand</strong>
                   <small>I use hover states and section transitions to show more context without making the default view too dense.</small>
                 </div>
               </div>
@@ -1238,7 +1223,7 @@
         <div class="section-inner">
           <div class="section-header reveal">
             <div>
-              <div class="eyebrow">Core Contributions</div>
+              <div class="eyebrow">Selected Work</div>
               <h2 class="section-title">Selected contributions at the intersection of generation, evaluation, and reasoning.</h2>
               <p class="section-subtitle">
                 I highlight a few representative papers and systems here, with each card giving a short summary and additional context on hover.
@@ -1253,7 +1238,7 @@
         <div class="section-inner">
           <div class="section-header reveal">
             <div>
-              <div class="eyebrow">Research Timeline</div>
+              <div class="eyebrow">News</div>
               <h2 class="section-title">Recent research updates and publication milestones.</h2>
               <p class="section-subtitle">
                 I use this timeline to keep a compact record of recent papers, releases, and milestones.
@@ -1268,7 +1253,7 @@
         <div class="section-inner">
           <div class="section-header reveal">
             <div>
-              <div class="eyebrow">Publication Explorer</div>
+              <div class="eyebrow">Publications</div>
               <h2 class="section-title">Publications and preprints in a searchable, filterable view.</h2>
               <p class="section-subtitle">
                 Here you can browse my full publication list by venue, topic, and research direction.
@@ -1309,7 +1294,7 @@
         <div class="section-inner">
           <div class="section-header reveal">
             <div>
-              <div class="eyebrow">Experience Map</div>
+              <div class="eyebrow">Experience</div>
               <h2 class="section-title">Academic training, research appointments, and visiting experiences.</h2>
               <p class="section-subtitle">
                 Here I summarize my academic training, research appointments, advisors, and major topics over time.
@@ -1324,7 +1309,7 @@
         <div class="section-inner">
           <div class="section-header reveal">
             <div>
-              <div class="eyebrow">Recognition</div>
+              <div class="eyebrow">Service & Awards</div>
               <h2 class="section-title">Honors, reviewing, and academic service.</h2>
               <p class="section-subtitle">
                 I also list selected honors, reviewing, and academic service here.
@@ -1392,7 +1377,7 @@
               <div class="metric-card" style="height: 100%;">
                 <span>Last updated</span>
                 <strong class="mono" style="font-size: 1.5rem;">2026/01/26</strong>
-                <small>I keep the original content here, but present it in a more interactive and academically focused way.</small>
+                <small>I keep this page up to date as my work evolves.</small>
               </div>
             </div>
           </div>
@@ -1402,7 +1387,7 @@
 
     <footer class="footer">
       <span>&copy; Keming Wu</span>
-      <span>Interactive academic homepage</span>
+      <span>Academic homepage</span>
     </footer>
   </div>
 
@@ -1427,8 +1412,8 @@
       {
         tag: "Image Editing Reward",
         title: "EditReward",
-        text: "A human-aligned reward model for instruction-guided image editing, positioned as a flagship contribution in multimodal generative evaluation.",
-        detail: "This work emphasizes alignment between model scoring and human preference in image editing, highlighting both evaluation rigor and practical editing quality.",
+        text: "I study human-aligned reward modeling for instruction-guided image editing.",
+        detail: "In this work, I focus on aligning model preferences with human judgments in image editing, with an emphasis on both evaluation quality and practical usefulness.",
         venue: "ICLR 2026",
         links: [
           { label: "WebPage", href: "https://tiger-ai-lab.github.io/EditReward" },
@@ -1438,8 +1423,8 @@
       {
         tag: "Controllable Generation",
         title: "Hybrid Layout Control",
-        text: "A first-author ICCV 2025 paper on layout-aware diffusion transformers with an emphasis on stronger aesthetics under weaker supervision.",
-        detail: "The project reflects a broader interest in controllable generation, balancing annotation efficiency with visual quality and compositional control.",
+        text: "In this first-author ICCV 2025 paper, I study layout-aware diffusion transformers for controllable image generation.",
+        detail: "Here I focus on improving visual quality and compositional control while reducing the amount of required annotation.",
         venue: "ICCV 2025",
         links: [
           { label: "WebPage", href: "https://hybrid-layout-msra.github.io/" },
@@ -1449,8 +1434,8 @@
       {
         tag: "Multimodal Reasoning",
         title: "OpenMMReasoner",
-        text: "An open and general recipe for multimodal reasoning that reached the Top #1 position on HuggingFace Daily Papers.",
-        detail: "This contribution broadens the portfolio from generative modeling into reasoning-centric multimodal systems with strong open-community impact.",
+        text: "I also work on open multimodal reasoning systems, including OpenMMReasoner.",
+        detail: "In this project, I explore multimodal reasoning beyond generation, with an emphasis on open recipes and broad applicability.",
         venue: "CVPR 2026",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2511.16334" },
@@ -1460,8 +1445,8 @@
       {
         tag: "Long Video Reasoning",
         title: "LongVT",
-        text: "A native tool-calling framework that encourages long-video reasoning and reached the Top #2 position on HuggingFace Daily Papers.",
-        detail: "The work demonstrates an interest in temporal multimodal reasoning, tool use, and longer-horizon perception beyond standard short-context benchmarks.",
+        text: "LongVT reflects my interest in long-video reasoning and native tool use.",
+        detail: "In this line of work, I am interested in temporal reasoning, tool use, and longer-horizon multimodal understanding beyond short-context settings.",
         venue: "CVPR 2026",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2511.20785" },
@@ -1494,7 +1479,7 @@
         venue: "ICLR 2026",
         authors: "Keming Wu, Sicong Jiang, Max Ku, Ping Nie, Minghao Liu, Wenhu Chen",
         note: "Flagship work on reward modeling for instruction-guided image editing.",
-        detail: "Focus: aligning reward signals with human preference for practical image editing evaluation and optimization.",
+        detail: "I focus on aligning reward signals with human preference for practical image editing evaluation and optimization.",
         links: [
           { label: "WebPage", href: "https://tiger-ai-lab.github.io/EditReward" },
           { label: "Code", href: "https://github.com/TIGER-AI-Lab/EditReward" }
@@ -1507,7 +1492,7 @@
         venue: "ICCV 2025",
         authors: "Keming Wu, Junwen Chen, Zhanhao Liang, Yinuo Wang, Ji Li, Chao Zhang, Bin Wang, Yuhui Yuan",
         note: "First-author work on controllable image generation with stronger visual quality.",
-        detail: "Focus: controllable layout-to-image generation with improved aesthetics under reduced supervision.",
+        detail: "I focus on controllable layout-to-image generation with improved aesthetics under reduced supervision.",
         links: [
           { label: "WebPage", href: "https://hybrid-layout-msra.github.io/" },
           { label: "Code", href: "https://github.com/KemingWu/HybridLayout" }
@@ -1520,7 +1505,7 @@
         venue: "CVPR 2025",
         authors: "Yuyang Peng, Shishi Xiao, Keming Wu, Qisheng Liao, Bohan Chen, Kevin Lin, Danqing Huang, Ji Li, Yuhui Yuan",
         note: "Generative infographic work focused on article-level visual text rendering.",
-        detail: "Focus: rendering-rich infographic synthesis that combines layout, content, and visual clarity at article scale.",
+        detail: "I am interested in infographic generation that combines layout, content, and visual clarity at article scale.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2503.20672" },
           { label: "WebPage", href: "https://bizgen-msra.github.io/" },
@@ -1534,7 +1519,7 @@
         venue: "Technical Report",
         authors: "Junwen Chen*, Heyang Jiang*, Keming Wu*, Yanbin Wang*, Ji Li, Chao Zhang, Keiji Yanai, Dong Chen, Yuhui Yuan",
         note: "Open data contribution for multi-layer transparent image generation.",
-        detail: "Focus: building data resources that support high-quality transparent and layered image generation.",
+        detail: "I help build data resources for high-quality transparent and layered image generation.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2505.22523" },
           { label: "WebPage", href: "https://prism-layers.github.io/" }
@@ -1547,7 +1532,7 @@
         venue: "CVPR 2026 | Top #1 HuggingFace Daily Papers",
         authors: "Kaichen Zhang*, Keming Wu*, Zuhao Yang, Bo Li, Kairui Hu, Bin Wang, Ziwei Liu, Xingxuan Li, Lidong Bing",
         note: "A major multimodal reasoning contribution with strong community traction.",
-        detail: "Focus: open multimodal reasoning recipes that generalize across tasks while maintaining strong community visibility.",
+        detail: "I am interested in open multimodal reasoning recipes that generalize across tasks.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2511.16334" },
           { label: "WebPage", href: "https://evolvinglmms-lab.github.io/OpenMMReasoner/" },
@@ -1562,7 +1547,7 @@
         venue: "CVPR 2026 | Top #2 HuggingFace Daily Papers",
         authors: "Zuhao Yang*, Sudong Wang*, Kaichen Zhang*, Keming Wu, Sicong Leng, Yifan Zhang, Bo Li, Chengwei Qin, Shijian Lu, Xingxuan Li, Lidong Bing",
         note: "A long-video multimodal reasoning system built around native tool use.",
-        detail: "Focus: long-context video reasoning with native tool-calling support and stronger temporal deliberation.",
+        detail: "I focus on long-context video reasoning with native tool-calling support and stronger temporal reasoning.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2511.20785" },
           { label: "WebPage", href: "https://evolvinglmms-lab.github.io/LongVT/" },
@@ -1577,7 +1562,7 @@
         venue: "Technical Report",
         authors: "Yibo Wang, Lei Wang, Yue Deng, Keming Wu, Yao Xiao, Huanjin Yao, Liwei Kang, Hai Ye, Yongcheng Jing, Lidong Bing",
         note: "Automated framework for deep research task construction and agentic evaluation.",
-        detail: "Focus: benchmarking research-style agents through automated task construction and evaluation pipelines.",
+        detail: "I contribute to benchmarking research-style agents through automated task construction and evaluation pipelines.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2601.09688" },
           { label: "Code", href: "https://github.com/Infinity-AILab/DeepResearchEval" }
@@ -1590,7 +1575,7 @@
         venue: "ICLR 2026",
         authors: "Samin Mahdizadeh Sani, Max Ku, ..., Keming Wu, ..., Wenhu Chen",
         note: "Human-centered and explainable evaluation for open-ended real-world image generation tasks.",
-        detail: "Focus: explainable and human-grounded evaluation protocols for challenging real-world generation scenarios.",
+        detail: "I am interested in explainable and human-grounded evaluation for challenging real-world generation scenarios.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2601.09688" },
           { label: "Code", href: "https://github.com/Infinity-AILab/DeepResearchEval" }
@@ -1603,7 +1588,7 @@
         venue: "Technical Report",
         authors: "Yang Yao, Yixu Wang, Yuxuan Zhang, Yi Lu, Tianle Gu, Lingyu Li, Dingyi Zhao, Keming Wu, Haozhe Wang, Ping Nie, Yan Teng, Yingchun Wang",
         note: "Benchmarking deep research agents with multidimensional report-level evaluation.",
-        detail: "Focus: evaluation beyond final answers, including report quality, structure, and multidimensional research performance.",
+        detail: "I am interested in evaluating research agents beyond final answers, including report quality, structure, and multidimensional performance.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2510.02190" },
           { label: "WebPage", href: "https://github.com/EVIGBYEN/RigorousBench" }
@@ -1616,7 +1601,7 @@
         venue: "Technical Report",
         authors: "Xuan He, Dongfu Jiang, Ping Nie, Minghao Liu, Zhengxuan Jiang, Mingyi Su, Wentao Ma, Junru Lin, Chun Ye, Yi Lu, Keming Wu, Benjamin Schneider, Quy Duc Do, Zhuofeng Li, Yiming Jia + 9 more authors",
         note: "Generative video evaluation with a stronger reasoning-before-scoring perspective.",
-        detail: "Focus: more deliberate scoring strategies for generative video evaluation, integrating reasoning before judgment.",
+        detail: "I am interested in generative video evaluation that encourages reasoning before scoring.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2509.22799" },
           { label: "WebPage", href: "https://tiger-ai-lab.github.io/VideoScore2/" },
@@ -1630,7 +1615,7 @@
         venue: "ACM MM 2025 Brave New Ideas Track (Oral)",
         authors: "Haozhe Jia, Wenshuo Chen, Zhihui Huang, Lei Wang, Hongru Xiao, Nanqian Jia, Keming Wu, Songning Lai, Bowen Tian, Yutao Yue",
         note: "Cross-domain representation learning for sparse radio-map reconstruction.",
-        detail: "Focus: representation alignment with physics priors for sparse sensing and reconstruction tasks.",
+        detail: "In this work, I study representation alignment with physics priors for sparse sensing and reconstruction tasks.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2501.19160" }
         ]
@@ -1642,7 +1627,7 @@
         venue: "Technical Report",
         authors: "Wenshuo Chen, Haozhe Jia, Songning Lai, Keming Wu, Hongru Xiao, Lijie Hu, Yutao Yue",
         note: "Text-to-motion diffusion work with frequency enhancement and consistency loss.",
-        detail: "Focus: text-to-motion diffusion with consistency-aware frequency modeling.",
+        detail: "In this work, I study text-to-motion diffusion with consistency-aware frequency modeling.",
         links: [
           { label: "PDF", href: "https://arxiv.org/abs/2501.18232" },
           { label: "Code", href: "https://github.com/Hxxxz0/Free-T2m" }
@@ -1655,7 +1640,7 @@
         venue: "ACM MM 2024",
         authors: "Keming Wu*, Man Yao*, Yuhong Chou, Xuerui Qiu, Rui Yang, Bo Xu, Guoqi Li",
         note: "First-author spiking neural network work on robustness and accuracy trade-offs.",
-        detail: "Focus: balancing adversarial robustness and predictive accuracy in spiking neural networks.",
+        detail: "In this project, I study the trade-off between adversarial robustness and predictive accuracy in spiking neural networks.",
         links: [
           { label: "PDF", href: "https://dl.acm.org/doi/abs/10.1145/3664647.3680639" },
           { label: "Code", href: "https://github.com/KemingWu/RSC-SNN" }
@@ -1668,7 +1653,7 @@
         venue: "IEEE Transactions on Systems, Man and Cybernetics: Systems 2024",
         authors: "Keming Wu, Fuyuan Xiao, Yi Zhang",
         note: "First-author journal publication on uncertainty measurement in complex evidence theory.",
-        detail: "Focus: uncertainty quantification in complex evidence theory using fractal-based entropy formulations.",
+        detail: "I study uncertainty quantification in complex evidence theory using fractal-based entropy formulations.",
         links: [
           { label: "PDF", href: "https://ieeexplore.ieee.org/abstract/document/10770823/" }
         ]
@@ -1680,7 +1665,7 @@
         venue: "Information Sciences 2024",
         authors: "Keming Wu, Fuyuan Xiao",
         note: "First-author journal work on quantum belief entropy.",
-        detail: "Focus: quantum-inspired uncertainty measures for complex evidence theory.",
+        detail: "I study quantum-inspired uncertainty measures for complex evidence theory.",
         links: [
           { label: "PDF", href: "https://www.sciencedirect.com/science/article/abs/pii/S0020025523013294" }
         ]
@@ -1691,14 +1676,14 @@
       {
         title: "LMMs-Engine",
         image: "./files/open-source-proj/lmms-engine-logo.png",
-        desc: "A unified multimodal model training engine designed to remain lean, flexible, and practical for large-scale experimentation.",
+        desc: "I contribute to a unified multimodal model training engine that is lean, flexible, and practical for large-scale experimentation.",
         role: "Contributor",
         link: "https://github.com/EvolvingLMMs-Lab/lmms-engine"
       },
       {
         title: "LMMs-Eval",
         image: "./files/open-source-proj/lmms-eval-logo.png",
-        desc: "An evaluation toolkit covering text, image, video, and audio benchmarks for large multimodal models.",
+        desc: "I also contribute to an evaluation toolkit covering text, image, video, and audio benchmarks for large multimodal models.",
         role: "Contributor",
         link: "https://github.com/EvolvingLMMs-Lab/lmms-eval"
       }
@@ -1788,7 +1773,7 @@
               "<p>" + item.text + "</p>" +
             "</div>" +
             '<div class="card-hover"><p>' + item.detail + "</p></div>" +
-            '<div class="hover-hint">Hover to inspect</div>' +
+            '<div class="hover-hint">More on hover</div>' +
             '<div class="card-links">' + createLinks(item.links) + "</div>" +
           "</article>"
         );
@@ -1814,7 +1799,7 @@
         return (
           '<article class="publication-card expand-card reveal tilt-card" data-type="' + item.type + '" data-topics="' + item.topics.join(" ") + '" data-search="' + escapeAttribute([item.title, item.authors, item.venue, item.note, item.detail || "", item.topics.join(" ")].join(" ").toLowerCase()) + '">' +
             '<div class="card-topline">' +
-              '<div class="status-pill">' + (item.type === "selected" ? "Selected Publication" : "Other Publication") + "</div>" +
+              '<div class="status-pill">' + (item.type === "selected" ? "Selected paper" : "Other paper") + "</div>" +
               '<div class="venue">' + item.venue + "</div>" +
             "</div>" +
             '<div class="card-summary">' +
@@ -1824,7 +1809,7 @@
             "</div>" +
             '<div class="card-hover"><p>' + (item.detail || "") + "</p></div>" +
             '<div class="chip-row" style="margin: 14px 0 0;">' + tags + "</div>" +
-            '<div class="hover-hint">Hover to expand</div>' +
+            '<div class="hover-hint">More on hover</div>' +
             '<div class="card-links">' + createLinks(item.links) + "</div>" +
           "</article>"
         );
@@ -1977,15 +1962,42 @@
 
     function setupTilt() {
       document.querySelectorAll(".tilt-card").forEach(function(card) {
+        card.classList.remove("tilt-card");
+      });
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+          window.innerWidth < 1100) {
+        return;
+      }
+
+      document.querySelectorAll(".portrait-card, .metric-card, .dashboard-card").forEach(function(card) {
+        let rafId = null;
+        let nextTransform = "";
+
         card.addEventListener("mousemove", function(event) {
           const rect = card.getBoundingClientRect();
           const x = event.clientX - rect.left;
           const y = event.clientY - rect.top;
-          const rotateX = ((y / rect.height) - 0.5) * -6;
-          const rotateY = ((x / rect.width) - 0.5) * 8;
-          card.style.transform = "perspective(1200px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-2px)";
+          const rotateX = ((y / rect.height) - 0.5) * -3;
+          const rotateY = ((x / rect.width) - 0.5) * 4;
+          nextTransform = "perspective(1200px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-1px)";
+
+          if (rafId) {
+            return;
+          }
+
+          rafId = window.requestAnimationFrame(function() {
+            card.style.transform = nextTransform;
+            rafId = null;
+          });
         });
+
         card.addEventListener("mouseleave", function() {
+          if (rafId) {
+            window.cancelAnimationFrame(rafId);
+            rafId = null;
+          }
           card.style.transform = "";
         });
       });
@@ -1995,12 +2007,6 @@
       const progress = document.getElementById("scroll-progress");
       const sections = Array.from(document.querySelectorAll("main section[id]"));
       const navLinks = Array.from(document.querySelectorAll("#nav-links a"));
-      const visibilityObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          entry.target.classList.toggle("in-view", entry.isIntersecting);
-        });
-      }, { threshold: 0.18 });
-
       const currentObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           entry.target.classList.toggle("is-current", entry.isIntersecting);
@@ -2008,7 +2014,6 @@
       }, { threshold: 0.52 });
 
       sections.forEach(function(section) {
-        visibilityObserver.observe(section);
         currentObserver.observe(section);
       });
 
@@ -2037,31 +2042,69 @@
 
     function setupCursorGlow() {
       const glow = document.getElementById("cursor-glow");
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+          window.innerWidth < 1100) {
+        glow.style.display = "none";
+        return;
+      }
+
+      let rafId = null;
+      let mouseX = 0;
+      let mouseY = 0;
+
       window.addEventListener("mousemove", function(event) {
-        glow.style.transform = "translate(" + (event.clientX - 150) + "px, " + (event.clientY - 150) + "px)";
-      });
+        mouseX = event.clientX - 110;
+        mouseY = event.clientY - 110;
+
+        if (rafId) {
+          return;
+        }
+
+        rafId = window.requestAnimationFrame(function() {
+          glow.style.transform = "translate(" + mouseX + "px, " + mouseY + "px)";
+          rafId = null;
+        });
+      }, { passive: true });
     }
 
     function setupParticles() {
       const canvas = document.getElementById("particle-canvas");
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || window.innerWidth < 1100) {
+        canvas.style.display = "none";
+        return;
+      }
+
       const ctx = canvas.getContext("2d");
       let particles = [];
+      let lastFrameTime = 0;
 
       function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        particles = Array.from({ length: Math.min(90, Math.floor(window.innerWidth / 18)) }, function() {
+        particles = Array.from({ length: Math.min(28, Math.max(16, Math.floor(window.innerWidth / 90))) }, function() {
           return {
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-            radius: Math.random() * 1.8 + 0.4
+            vx: (Math.random() - 0.5) * 0.18,
+            vy: (Math.random() - 0.5) * 0.18,
+            radius: Math.random() * 1.4 + 0.5
           };
         });
       }
 
-      function draw() {
+      function draw(timestamp) {
+        if (document.hidden) {
+          window.requestAnimationFrame(draw);
+          return;
+        }
+
+        if (timestamp - lastFrameTime < 40) {
+          window.requestAnimationFrame(draw);
+          return;
+        }
+        lastFrameTime = timestamp;
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particles.length; i += 1) {
           const p = particles[i];
@@ -2073,7 +2116,7 @@
 
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(104, 232, 255, 0.55)";
+          ctx.fillStyle = "rgba(104, 232, 255, 0.42)";
           ctx.fill();
 
           for (let j = i + 1; j < particles.length; j += 1) {
@@ -2081,11 +2124,11 @@
             const dx = p.x - q.x;
             const dy = p.y - q.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
+            if (dist < 90) {
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(q.x, q.y);
-              ctx.strokeStyle = "rgba(104, 232, 255, " + (0.13 - dist / 1200) + ")";
+              ctx.strokeStyle = "rgba(104, 232, 255, " + Math.max(0, 0.08 - dist / 1400) + ")";
               ctx.lineWidth = 1;
               ctx.stroke();
             }
