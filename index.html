@@ -1,554 +1,2120 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<link rel="shortcut icon" href="myIcon.ico">
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Keming Wu, multimodal AI, image editing, reasoning, generative models">
+  <meta name="description" content="Keming Wu | Multimodal AI, generative models, evaluation, and reasoning">
+  <meta name="google-site-verification" content="yy_3iiS_X6pJdegdwitJMrH0LRLHXwpjrV9RKLXxKjg">
+  <link rel="shortcut icon" href="myIcon.ico">
+  <title>Keming Wu | Dark Tech Research Portfolio</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050816;
+      --bg-soft: rgba(10, 16, 36, 0.72);
+      --panel: rgba(13, 21, 45, 0.78);
+      --panel-strong: rgba(8, 13, 31, 0.92);
+      --line: rgba(127, 162, 255, 0.22);
+      --line-strong: rgba(104, 232, 255, 0.32);
+      --text: #eef3ff;
+      --muted: #9ca8cb;
+      --accent: #68e8ff;
+      --accent-2: #8b5cf6;
+      --accent-3: #22c55e;
+      --accent-4: #ff4d8d;
+      --glow: 0 0 0 1px rgba(104, 232, 255, 0.12), 0 18px 60px rgba(8, 13, 31, 0.55);
+      --radius: 24px;
+      --content-width: 1220px;
+    }
 
-<!--<meta name="keywords" content="Keming Wu, Tsinghua University">-->
-    <meta name="keywords" content="Keming Wu">
-<meta name="description" content="Keming Wu's home page">
-<meta name="google-site-verification" content="yy_3iiS_X6pJdegdwitJMrH0LRLHXwpjrV9RKLXxKjg" />
-<meta name="google-site-verification" content="yy_3iiS_X6pJdegdwitJMrH0LRLHXwpjrV9RKLXxKjg" />
-<link rel="stylesheet" href="jemdoc.css" type="text/css">
-<title>Keming Wu's homepage</title>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    * {
+      box-sizing: border-box;
+    }
 
-  ga('create', 'UA-87320911-1', 'auto');
-  ga('send', 'pageview');
-<style>
-  .left-align {
-    text-align: left;
-  }
-</style>
-	
-</script>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(104, 232, 255, 0.14), transparent 28%),
+        radial-gradient(circle at 80% 10%, rgba(139, 92, 246, 0.14), transparent 24%),
+        radial-gradient(circle at 50% 80%, rgba(34, 197, 94, 0.08), transparent 22%),
+        linear-gradient(180deg, #050816 0%, #040612 50%, #02040b 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      border: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    #particle-canvas,
+    .grid-overlay,
+    .cursor-glow,
+    .aurora {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+    }
+
+    .grid-overlay {
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1), transparent 80%);
+    }
+
+    .aurora {
+      z-index: -1;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(104, 232, 255, 0.18), transparent 32%),
+        radial-gradient(circle at 85% 18%, rgba(139, 92, 246, 0.16), transparent 30%),
+        radial-gradient(circle at 60% 70%, rgba(255, 77, 141, 0.12), transparent 28%);
+      filter: blur(28px);
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+
+    .cursor-glow {
+      z-index: 10;
+      background: radial-gradient(circle at center, rgba(104, 232, 255, 0.14), transparent 42%);
+      width: 300px;
+      height: 300px;
+      transform: translate(-50%, -50%);
+      opacity: 0.75;
+      border-radius: 50%;
+      mix-blend-mode: screen;
+      transition: transform 0.12s linear;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-4));
+      z-index: 40;
+      box-shadow: 0 0 24px rgba(104, 232, 255, 0.55);
+    }
+
+    .page-shell {
+      width: min(calc(100% - 32px), var(--content-width));
+      margin: 0 auto;
+      padding-bottom: 72px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(4, 7, 18, 0.55);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .site-header-inner {
+      width: min(calc(100% - 32px), var(--content-width));
+      margin: 0 auto;
+      padding: 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(104, 232, 255, 0.22), rgba(139, 92, 246, 0.2));
+      border: 1px solid rgba(104, 232, 255, 0.26);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      box-shadow: var(--glow);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-text strong {
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      border-color: rgba(104, 232, 255, 0.2);
+      background: rgba(104, 232, 255, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(104, 232, 255, 0.04);
+    }
+
+    main {
+      display: grid;
+      gap: 34px;
+      padding-top: 30px;
+    }
+
+    .section {
+      position: relative;
+      background: linear-gradient(180deg, rgba(10, 16, 36, 0.7), rgba(6, 10, 24, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 28px;
+      box-shadow: var(--glow);
+      overflow: hidden;
+      opacity: 0.72;
+      transform: translateY(28px) scale(0.988);
+      transition: transform 0.8s ease, opacity 0.8s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(104, 232, 255, 0.04), transparent 28%, transparent 70%, rgba(139, 92, 246, 0.05));
+      pointer-events: none;
+    }
+
+    .section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0%, rgba(104, 232, 255, 0.08) 40%, transparent 65%);
+      transform: translateX(-120%);
+      transition: transform 0.9s ease;
+      pointer-events: none;
+    }
+
+    .section.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .section.in-view::after {
+      transform: translateX(120%);
+    }
+
+    .section.is-current {
+      border-color: rgba(104, 232, 255, 0.16);
+      box-shadow: 0 0 0 1px rgba(104, 232, 255, 0.08), 0 24px 80px rgba(8, 13, 31, 0.62);
+    }
+
+    .section-inner {
+      position: relative;
+      padding: 30px;
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.8;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtitle {
+      margin: 12px 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    .hero {
+      min-height: calc(100vh - 100px);
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-panel {
+      position: relative;
+      z-index: 1;
+    }
+
+    .status-pill,
+    .meta-pill,
+    .filter-button,
+    .tag,
+    .news-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(104, 232, 255, 0.18);
+      background: rgba(104, 232, 255, 0.08);
+      padding: 8px 14px;
+      color: var(--text);
+      font-size: 0.86rem;
+    }
+
+    .meta-row,
+    .hero-links,
+    .hero-actions,
+    .chip-row,
+    .filter-row,
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-title {
+      margin: 18px 0 18px;
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--accent);
+      text-shadow: 0 0 22px rgba(104, 232, 255, 0.28);
+    }
+
+    .hero-summary {
+      max-width: 720px;
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.04rem;
+    }
+
+    .chip-row {
+      margin: 18px 0 24px;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(104, 232, 255, 0.2), rgba(139, 92, 246, 0.18));
+      border-color: rgba(104, 232, 255, 0.24);
+      box-shadow: 0 14px 44px rgba(9, 14, 32, 0.45);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+    }
+
+    .button:hover,
+    .filter-button:hover,
+    .social-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(4, 7, 18, 0.42);
+    }
+
+    .hero-links {
+      margin-top: 18px;
+    }
+
+    .social-link {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      display: inline-grid;
+      place-items: center;
+      transition: 0.25s ease;
+    }
+
+    .social-link img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      filter: saturate(1.1);
+    }
+
+    .signal-banner {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 77, 141, 0.12), rgba(104, 232, 255, 0.08));
+      border: 1px solid rgba(255, 77, 141, 0.18);
+      color: #ffd8e7;
+      line-height: 1.75;
+    }
+
+    .hero-panel {
+      display: grid;
+      gap: 18px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr 0.9fr;
+      gap: 18px;
+    }
+
+    .dashboard-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+
+    .dashboard-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(104, 232, 255, 0.09), transparent 34%);
+      pointer-events: none;
+    }
+
+    .dashboard-kpis {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .dashboard-kpi {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .dashboard-kpi span,
+    .dashboard-card small,
+    .mini-bar-label,
+    .hover-hint {
+      color: var(--muted);
+    }
+
+    .dashboard-kpi strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 2rem;
+      letter-spacing: -0.05em;
+    }
+
+    .bar-group {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .bar-item {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bar-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.94rem;
+    }
+
+    .mini-bar {
+      position: relative;
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .mini-bar > span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(104, 232, 255, 0.35);
+      transition: width 1s ease;
+    }
+
+    .signal-stack {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .signal-item {
+      padding: 15px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .signal-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .portrait-card,
+    .metric-grid,
+    .highlight-grid,
+    .project-grid,
+    .publication-grid,
+    .experience-grid,
+    .award-grid,
+    .contact-panel {
+      display: grid;
+      gap: 18px;
+    }
+
+    .portrait-card {
+      grid-template-columns: 1fr;
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(104, 232, 255, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
+      overflow: hidden;
+    }
+
+    .portrait-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1.08;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .portrait-card .portrait-meta {
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .metric-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .metric-card,
+    .highlight-card,
+    .timeline-card,
+    .project-card,
+    .publication-card,
+    .experience-card,
+    .award-card,
+    .contact-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
+      transform-style: preserve-3d;
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .metric-card:hover,
+    .highlight-card:hover,
+    .timeline-card:hover,
+    .project-card:hover,
+    .publication-card:hover,
+    .experience-card:hover,
+    .award-card:hover,
+    .contact-panel:hover {
+      border-color: rgba(104, 232, 255, 0.18);
+      box-shadow: 0 22px 64px rgba(3, 7, 18, 0.42);
+    }
+
+    .metric-card {
+      padding: 18px;
+      min-height: 132px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .metric-card strong {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.05em;
+    }
+
+    .metric-card span,
+    .metric-card small,
+    .publication-card p,
+    .timeline-card p,
+    .project-card p,
+    .experience-card p,
+    .award-card p,
+    .contact-panel p,
+    .meta-text {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .meta-text strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .live-clock {
+      margin-top: 6px;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .highlight-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .highlight-card,
+    .timeline-card,
+    .project-card,
+    .publication-card,
+    .experience-card,
+    .award-card,
+    .contact-panel {
+      padding: 20px;
+    }
+
+    .card-topline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.4;
+    }
+
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .text-link {
+      color: var(--accent);
+      font-size: 0.93rem;
+      letter-spacing: 0.02em;
+    }
+
+    .expand-card {
+      min-height: 250px;
+    }
+
+    .card-summary {
+      display: grid;
+      gap: 10px;
+    }
+
+    .card-hover {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(10px);
+      transition: max-height 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .expand-card:hover .card-hover,
+    .expand-card:focus-within .card-hover {
+      max-height: 180px;
+      opacity: 1;
+      transform: translateY(0);
+      margin-top: 10px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hover-hint {
+      margin-top: auto;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .timeline-list {
+      display: grid;
+      gap: 16px;
+      max-height: 540px;
+      overflow: auto;
+      padding-right: 6px;
+    }
+
+    .timeline-list::-webkit-scrollbar,
+    .publication-grid::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .timeline-list::-webkit-scrollbar-thumb,
+    .publication-grid::-webkit-scrollbar-thumb {
+      background: rgba(104, 232, 255, 0.18);
+      border-radius: 999px;
+    }
+
+    .news-date {
+      color: var(--accent);
+      background: rgba(104, 232, 255, 0.09);
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+
+    .publication-tools {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .filter-row {
+      align-items: center;
+    }
+
+    .filter-button {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      border-color: rgba(255, 255, 255, 0.08);
+      transition: 0.25s ease;
+    }
+
+    .filter-button.active {
+      color: var(--text);
+      background: rgba(104, 232, 255, 0.1);
+      border-color: rgba(104, 232, 255, 0.2);
+    }
+
+    .search-box {
+      width: min(420px, 100%);
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .search-box:focus {
+      border-color: rgba(104, 232, 255, 0.22);
+      box-shadow: 0 0 0 4px rgba(104, 232, 255, 0.08);
+    }
+
+    .publication-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-height: 980px;
+      overflow: auto;
+      padding-right: 6px;
+    }
+
+    .publication-card.hidden {
+      display: none;
+    }
+
+    .publication-card .authors,
+    .experience-card .meta-text,
+    .project-card .meta-text {
+      font-size: 0.95rem;
+    }
+
+    .venue {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-card img,
+    .experience-card img {
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin-bottom: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      object-fit: contain;
+    }
+
+    .experience-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .experience-card img {
+      height: 118px;
+      width: 100%;
+      padding: 12px;
+    }
+
+    .award-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+
+    .award-list {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .award-list li {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-panel {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: start;
+    }
+
+    .contact-grid {
+      align-items: stretch;
+    }
+
+    .contact-chip {
+      flex: 1 1 220px;
+      min-height: 84px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .contact-chip span {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 22px 8px 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tilt-card {
+      will-change: transform;
+    }
+
+    .pulse-dot {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-3);
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+      animation: pulse 2s infinite;
+    }
+
+    .mono {
+      font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      letter-spacing: 0.02em;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+      }
+      70% {
+        box-shadow: 0 0 0 14px rgba(34, 197, 94, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+      }
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(-2%, 0, 0) scale(1);
+      }
+      to {
+        transform: translate3d(2%, -3%, 0) scale(1.06);
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .dashboard-grid,
+      .highlight-grid,
+      .award-grid,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-grid,
+      .project-grid,
+      .experience-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-header-inner,
+      .page-shell {
+        width: min(calc(100% - 20px), var(--content-width));
+      }
+
+      .section-inner {
+        padding: 22px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.4rem, 14vw, 4rem);
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .contact-chip {
+        flex-basis: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
 <body>
-<div id="layout-content" style="margin-top:25px">
-<table>
-	<tbody>
-		<tr>
-			<td width="670">
-				<div id="toptitle">					
-					<h1><font face="Arial"> Keming Wu </font></h1>  <h1><font face="楷体"> 吴科明 </font></h1>
-				</div>
+  <canvas id="particle-canvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="aurora"></div>
+  <div class="cursor-glow" id="cursor-glow"></div>
+  <div class="scroll-progress" id="scroll-progress"></div>
 
-				<h3><font face="Arial"> Ph.D. Student, Tsinghua University </font></h3>
-				<p><font face="Arial">
-					Beijing, China <br>
-					Email: <a href="wukeming0608@gmail.com">wukeming0608@gmail.com</a> <a href="wukm25@mails.tsinghua.edu.cn">wukm25@mails.tsinghua.edu.cn</a><br>
-          <div style="display: flex; align-items: center;">
-          <a href="https://scholar.google.com/citations?user=cOzwZBMAAAAJ&hl=en"
-          target="_blank"><img src="./files/icon/google_scholar.png" height="30px" style="margin-bottom:-3px"></a>&nbsp;
-          <a href="https://www.semanticscholar.org/author/Keming-Wu/2383071656"
-          target="_blank"><img src="./files/icon/semantic.png" height="30px" style="margin-bottom:-3px"></a>&nbsp;
-          <a href="https://github.com/KemingWu" target="_blank"><img src="./files/icon/github_s.jpg" height="30px" style="margin-bottom:-3px"></a>&nbsp;
-          <a href="https://x.com/Keming_Charles" target="_blank"><img src="./files/icon/X_icon.png" height="30px" style="margin-bottom:-3px"></a>&nbsp;
-          <!-- <a href="./files/social/my_wechat.jpg" target="_blank"><img src="./files/icon/wechat.png" height="30px" style="margin-bottom:-3px"></a>&nbsp; -->
-          <!-- <a href="https://github.com/KemingWu">[Github]</a>
-          <a href="https://scholar.google.com/citations?user=cOzwZBMAAAAJ&hl=en">[Google Scholar]</a>
-          <a href="https://www.semanticscholar.org/author/Keming-Wu/2383071656">[Semantic Scholar]</a>
-          <a href="https://x.com/Keming_Charles">[Twitter]</a> -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="#home">
+        <div class="brand-badge">KW</div>
+        <div class="brand-text">
+          <strong>Keming Wu</strong>
+          <span>Dark-tech research portfolio</span>
+        </div>
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="#home">Home</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#contributions">Contributions</a>
+        <a href="#news">News</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <main>
+      <section class="section hero" id="home">
+        <div class="section-inner hero-grid">
+          <div class="hero-copy reveal">
+            <div class="status-pill"><span class="pulse-dot"></span> Open to research collaboration, RA, and internship opportunities</div>
+            <div class="meta-row" style="margin-top: 16px;">
+              <div class="meta-pill">Ph.D. Student, Tsinghua University</div>
+              <div class="meta-pill">Beijing, China</div>
+              <div class="meta-pill mono" id="beijing-time">Loading Beijing time...</div>
+            </div>
+            <h1 class="hero-title">Keming Wu<span>Research in multimodal generation, evaluation, and reasoning.</span></h1>
+            <p class="hero-summary">
+              I am a Ph.D. student at the <a href="https://www.thss.tsinghua.edu.cn/" target="_blank">School of Software</a>,
+              <a href="https://www.tsinghua.edu.cn/en/" target="_blank">Tsinghua University</a>. I was a research intern at the
+              <a href="https://www.microsoft.com/en-us/research/group/visual-computing/" target="_blank">Visual Computing Group</a>,
+              <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/" target="_blank">Microsoft Research Asia</a>
+              from September 2024 to April 2025. My research centers on deep generative models and their applications to computer vision and language models, with particular interest in image editing, multimodal evaluation, and multimodal reasoning.
+            </p>
+            <div class="chip-row">
+              <div class="tag">Multimodal Generation</div>
+              <div class="tag">Image Editing Reward Modeling</div>
+              <div class="tag">Multimodal Reasoning</div>
+              <div class="tag">Generative Evaluation</div>
+              <div class="tag">Long-video Understanding</div>
+            </div>
+            <div class="hero-actions">
+              <a class="button primary" href="#contributions">View Selected Contributions</a>
+              <a class="button secondary" href="#publications">Browse Publications</a>
+            </div>
+            <div class="hero-links">
+              <a class="social-link" href="mailto:wukeming0608@gmail.com" aria-label="Email">
+                <span class="mono">@</span>
+              </a>
+              <a class="social-link" href="https://scholar.google.com/citations?user=cOzwZBMAAAAJ&hl=en" target="_blank" aria-label="Google Scholar">
+                <img src="./files/icon/google_scholar.png" alt="Google Scholar">
+              </a>
+              <a class="social-link" href="https://www.semanticscholar.org/author/Keming-Wu/2383071656" target="_blank" aria-label="Semantic Scholar">
+                <img src="./files/icon/semantic.png" alt="Semantic Scholar">
+              </a>
+              <a class="social-link" href="https://github.com/KemingWu" target="_blank" aria-label="GitHub">
+                <img src="./files/icon/github_s.jpg" alt="GitHub">
+              </a>
+              <a class="social-link" href="https://x.com/Keming_Charles" target="_blank" aria-label="X">
+                <img src="./files/icon/X_icon.png" alt="X">
+              </a>
+            </div>
+            <div class="signal-banner">
+              I am open to collaboration, visiting research, and internship opportunities in multimodal generation, evaluation, and reasoning.
+            </div>
           </div>
-				</font></p>
-			</td>
-			<td>
-				<img src="./files/avatar/person11.jpg" border="0" width="250"><br>
-			</td>
-		</tr><tr>
-	</tr></tbody>
-</table>
 
-<h2><font face="Arial"> About </font></h2>
-<!--    , advised by Assoc. Prof. <a href="https://binwangthss.github.io/">Bin Wang</a>-->
-<!--    <p>-->
-  I am a Ph.D. student at the <a href="https://www.thss.tsinghua.edu.cn/">School of Software</a> at <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a>. I was a research intern at <a href="https://www.microsoft.com/en-us/research/group/visual-computing/">Visual Computing Group</a>, <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a> from September, 2024 to April, 2025. Currently, my research interest include topics on <strong>deep generative models</strong> and their applications in <strong>Computer Vision</strong> and <strong>Language Models</strong>.
-  <!-- I received my B.E. degree from the <a href="http://www.cse.cqu.edu.cn/">School of Big Data & Software Engineering</a>, Chongqing University in July, 2025 (<b>Ranking: 1/251</b>).  I am very fortunate to have been supervised by Prof. <a href="https://scholar.google.com/citations?user=U8ShbhUAAAAJ&hl=en">Wenhu Chen</a> at the University of Waterloo.
-  Previously,  -->
+          <div class="hero-panel reveal">
+            <div class="portrait-card tilt-card">
+              <img src="./files/avatar/person11.jpg" alt="Keming Wu portrait">
+              <div class="portrait-meta">
+                <div>
+                  <strong>Keming Wu</strong>
+                  <div class="meta-text">吴科明</div>
+                </div>
+                <div style="text-align:right;">
+                  <strong>Research Focus</strong>
+                  <div class="meta-text">Generation, evaluation, reasoning</div>
+                </div>
+              </div>
+            </div>
+            <div class="metric-grid">
+              <div class="metric-card tilt-card">
+                <span>Publications</span>
+                <strong data-counter="15">0</strong>
+                <small>Publications and technical reports spanning multimodal generation, evaluation, and reasoning.</small>
+              </div>
+              <div class="metric-card tilt-card">
+                <span>2026 Highlights</span>
+                <strong data-counter="4">0</strong>
+                <small>Highlighted 2026 papers listed on this page across CVPR and ICLR.</small>
+              </div>
+              <div class="metric-card tilt-card">
+                <span>Research Tracks</span>
+                <strong data-counter="4">0</strong>
+                <small>Core themes: generation, editing, evaluation, and multimodal reasoning.</small>
+              </div>
+              <div class="metric-card tilt-card">
+                <span>Beijing Time</span>
+                <div class="live-clock mono" id="live-status">UTC+8 | 00:00:00</div>
+                <small>I am based in Beijing, and this is my current local time.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- I am a Ph.D. student at the <a href="https://www.thss.tsinghua.edu.cn/">School of Software</a> at <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> and in close collaboration with Prof. <a href="https://wenhuchen.github.io/">Wenhu Chen</a> at the University of Waterloo. I received my B.E. degree from the <a href="http://www.cse.cqu.edu.cn/">School of Big Data & Software Engineering</a>, Chongqing University in July, 2025 (<b>Ranking: 1/251</b>). -->
-<!--    </p>-->
-<!--    <p>-->
-<!--       I received my B.E. degree from <a href="http://www.cse.cqu.edu.cn/">School of Big Data & Software Engineering</a>, Chongqing University in July, 2025 (<b>Ranking: 1/251</b>).-->
-<!--    </p>-->
-<p class="left-align";>
-    
-    <p style="color: red;"> <strong>I’m currently actively seeking for Research Assistant, or internship positions related to any of the above topics. I’m also open to any possible discussions or collaborate opportunities. please feel free to contact me for further discussion and potential collaboration! </strong> </p>
-      
-    <!-- <p style="color: red;"> <strong> I’m also open to any possible discussions or collaborate opportunities. please feel free to contact me for further discussion and potential collaboration!
-        </strong></p> -->
+      <section class="section" id="dashboard">
+        <div class="section-inner">
+          <div class="section-header reveal">
+            <div>
+              <div class="eyebrow">Research Dashboard</div>
+              <h2 class="section-title">A concise quantitative view of my current research profile.</h2>
+              <p class="section-subtitle">
+                Here I summarize my publications, research directions, and current academic activity in a compact, data-oriented view.
+              </p>
+            </div>
+          </div>
+          <div class="dashboard-grid">
+            <div class="dashboard-card reveal tilt-card">
+              <div class="card-topline">
+                <div class="status-pill">Profile Snapshot</div>
+              </div>
+              <h3 class="card-title">Selected indicators</h3>
+              <div class="dashboard-kpis">
+                <div class="dashboard-kpi">
+                  <span>Selected publications</span>
+                  <strong data-counter="6">0</strong>
+                </div>
+                <div class="dashboard-kpi">
+                  <span>Other publications</span>
+                  <strong data-counter="9">0</strong>
+                </div>
+                <div class="dashboard-kpi">
+                  <span>Open-source projects</span>
+                  <strong data-counter="2">0</strong>
+                </div>
+                <div class="dashboard-kpi">
+                  <span>Reviewer service</span>
+                  <strong data-counter="2">0</strong>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-card reveal tilt-card">
+              <div class="card-topline">
+                <div class="status-pill">Research Distribution</div>
+              </div>
+              <h3 class="card-title">Primary research directions represented on this page</h3>
+              <div class="bar-group">
+                <div class="bar-item">
+                  <div class="bar-head"><span class="mini-bar-label">Generation / Editing</span><strong>6</strong></div>
+                  <div class="mini-bar"><span data-bar-width="100%"></span></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bar-head"><span class="mini-bar-label">Evaluation</span><strong>6</strong></div>
+                  <div class="mini-bar"><span data-bar-width="100%"></span></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bar-head"><span class="mini-bar-label">Reasoning</span><strong>5</strong></div>
+                  <div class="mini-bar"><span data-bar-width="83%"></span></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bar-head"><span class="mini-bar-label">Other foundations</span><strong>5</strong></div>
+                  <div class="mini-bar"><span data-bar-width="83%"></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-card reveal tilt-card">
+              <div class="card-topline">
+                <div class="status-pill">Current Signals</div>
+              </div>
+              <h3 class="card-title">What the portfolio emphasizes</h3>
+              <div class="signal-stack">
+                <div class="signal-item">
+                  <strong>Contribution-first narrative</strong>
+                <small>I highlight flagship papers and systems before the full publication list.</small>
+                </div>
+                <div class="signal-item">
+                  <strong>Formal academic tone</strong>
+                  <small>I use a more formal tone here to keep the site closer to an academic homepage.</small>
+                </div>
+                <div class="signal-item">
+                  <strong>Interactive inspection</strong>
+                  <small>I use hover states and section transitions to show more context without making the default view too dense.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-</font></p>
+      <section class="section" id="contributions">
+        <div class="section-inner">
+          <div class="section-header reveal">
+            <div>
+              <div class="eyebrow">Core Contributions</div>
+              <h2 class="section-title">Selected contributions at the intersection of generation, evaluation, and reasoning.</h2>
+              <p class="section-subtitle">
+                I highlight a few representative papers and systems here, with each card giving a short summary and additional context on hover.
+              </p>
+            </div>
+          </div>
+          <div class="highlight-grid" id="highlight-grid"></div>
+        </div>
+      </section>
 
-	
-<!--<font color="red">Currently, I am working on domain generalization for semantic segmentation and object detection. I am looking for undergraduate or master students to engage in ongoing research papers. Don't hesitate to email me if you are interested.</font> <br><br>-->
-	
-<h2><font face="Arial"> News </h2>
-<font size = "3"></font>
-    <div style="height: 200px; overflow: auto;">
-    <ul>
-      <li> 2026.02 Two papers got accepted by <b>CVPR 2026</b>.</li>
-      <li> 2026.01 Two papers got accepted by <b>ICLR 2026</b>.</li>
-      <li> 2026.01 One paper is released: <b>DeepResearchEval</b>.</li>
-      <li> 2025.11 Two papers are released: <b>OpenMMReasoner</b>, and the other <b>LongVT</b>.</li>
-      <li> 2025.10 One paper is released: Focusing on <b>generative image evaluation</b>.</li>
-      <li> 2025.09 Two papers are released: one focusing on <b>image editing reward model</b>, and the other on <b>generative video evaluation</b>.</li>
-      <li> 2025.08 One paper got accepted by <b>ACM MM 2025 Brave New Ideas Track (Oral)</b>.</li>
-      <li> 2025.06 One paper about layout to image generation got accepted by <b>ICCV 2025</b> (<b>First Author</b>).</li>
-      <li> 2025.05 One paper about multi-layer image generation is released.</li>
-      <!-- <li> 2025.05 One paper got accepted by <b>ICML 2025</b>.</li> -->
-<!--&lt;!&ndash;      <li> <p style="color: red;">2025.02  <strong> I have joined Shandong University as an Associate Researcher in C-FAIR.  </strong></p>&ndash;&gt; </li>-->
-      <li> 2025.02 One paper got accepted by <b>CVPR 2025</b>.</li>
-      <li> 2024.10 One paper about information fusion got accepted by IEEE Transactions on Systems, Man and Cybernetics: Systems (<b>CCF-B journal, First Author</b>).</li>
-      <li> 2024.07 One paper got accepted by ACM MM 2024 (My first <b>CCF-A</b> conference paper, First Author. Congratulations!).</li>
-      <li> 2024.01 One paper got accepted by Information Sciences (<b>CCF-B journal, First Author</b>).</li>
-      <!-- <li> 2023.01 One paper got accepted by <strong>SDM 2023 </strong> -->
-<!--         <li> 2022.12 One paper got accepted by <strong>AAAI 2023</strong> -->
-<!--         <li> 2022.06 One paper got accepted by <strong>ECML-PKDD 2022</strong>
-        <li> 2021.12 One paper got accepted by <strong>AAAI 2022</strong> -->
-        <!-- <li> 2021.09 I have been awarded a student travel grant of CIKM 2021</li> -->
-        <!-- <li> 2021.09 I have been selected as a PC member of AAAI 2022</li> -->
-        <!-- <li> 2021.08 Two papers got accepted by <strong> CIKM 2021 </strong></li>
-        <li> 2021.05 One paper got accepted by <strong> ICMR 2021 </strong></li>
-        <li> 2021.03 One paper got accepted by <strong> IDA journal 2021 </strong></li>
-        <li> 2021.01 Four papers got accepted by <strong> DASFAA 2021 </strong></li> -->
-      <!--   <li> 2020.06 One paper got accepted by <strong> ECML-PKDD 2020 </strong></li> -->
-      </ul>
-</div>
-<!--<p><font face="Arial"><a href="https://scholar.google.com/citations?user=1ogwTXkAAAAJ&hl=zh-CN">[Google Scholar]</a></font></p>-->
+      <section class="section" id="news">
+        <div class="section-inner">
+          <div class="section-header reveal">
+            <div>
+              <div class="eyebrow">Research Timeline</div>
+              <h2 class="section-title">Recent research updates and publication milestones.</h2>
+              <p class="section-subtitle">
+                I use this timeline to keep a compact record of recent papers, releases, and milestones.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-list" id="news-list"></div>
+        </div>
+      </section>
 
-<h2><font face="Arial"> Selected Publications </font></h2>
-<font size = "2"></font>
-(* equal contribution)
+      <section class="section" id="publications">
+        <div class="section-inner">
+          <div class="section-header reveal">
+            <div>
+              <div class="eyebrow">Publication Explorer</div>
+              <h2 class="section-title">Publications and preprints in a searchable, filterable view.</h2>
+              <p class="section-subtitle">
+                Here you can browse my full publication list by venue, topic, and research direction.
+              </p>
+            </div>
+          </div>
+          <div class="publication-tools reveal">
+            <div class="filter-row" id="publication-filters">
+              <button class="filter-button active" data-filter="all" type="button">All</button>
+              <button class="filter-button" data-filter="selected" type="button">Selected</button>
+              <button class="filter-button" data-filter="other" type="button">Other</button>
+              <button class="filter-button" data-filter="generation" type="button">Generation / Editing</button>
+              <button class="filter-button" data-filter="reasoning" type="button">Reasoning</button>
+              <button class="filter-button" data-filter="evaluation" type="button">Evaluation</button>
+            </div>
+            <input id="publication-search" class="search-box" type="text" placeholder="Search title, venue, topic, or author">
+          </div>
+          <div class="publication-grid" id="publication-grid"></div>
+        </div>
+      </section>
 
-<!-- Image Generation & Editing -->
-<h3 style="margin-top: 20px; margin-bottom: 10px; color: #2c3e50; border-left: 4px solid #e74c3c; padding-left: 10px;">
-  <font face="Arial">Multi-modality AIGC & Evaluation</font>
-</h3>
-<ul>
-    <li>
-    <p>
-      <strong>	EditReward: A Human-Aligned Reward Model for Instruction-Guided Image Editing </strong>
-<!--      <a href="https://arxiv.org/abs/2503.20672" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>-->
-        [<a href="https://tiger-ai-lab.github.io/EditReward" target="_blank" style= "color:blue; text-decoration:none;">WebPage</a>]
-        [<a href="https://github.com/TIGER-AI-Lab/EditReward" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-    <p>
-        <b>Keming Wu</b>, Sicong Jiang, Max Ku, Ping Nie, Minghao Liu, Wenhu Chen
-    </p>
-    <p>
-     <strong>  <p style="color: red;">ICLR 2026 </p>  </strong>
-    </p>
-</li>
+      <section class="section" id="projects">
+        <div class="section-inner">
+          <div class="section-header reveal">
+            <div>
+              <div class="eyebrow">Open Source</div>
+              <h2 class="section-title">Open-source systems and research infrastructure.</h2>
+              <p class="section-subtitle">
+                I include open-source projects here as part of my research infrastructure and engineering contributions.
+              </p>
+            </div>
+          </div>
+          <div class="project-grid" id="project-grid"></div>
+        </div>
+      </section>
 
-    <li>
-    <p>
-      <strong>	Hybrid Layout Control for Diffusion Transformer: Fewer Annotations, Superior Aesthetics </strong>
-<!--      <a href="https://arxiv.org/abs/2503.20672" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>-->
-        [<a href="https://hybrid-layout-msra.github.io/" target="_blank" style= "color:blue; text-decoration:none;">WebPage</a>]
-        [<a href="https://github.com/KemingWu/HybridLayout" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-    <p>
-        <b>Keming Wu</b>, Junwen Chen, Zhanhao Liang, Yinuo Wang, Ji Li, Chao Zhang, Bin Wang, Yuhui Yuan
-    </p>
-    <p>
-     <strong>  <p style="color: red;">ICCV 2025</p>  </strong>
-    </p>
-</li>
+      <section class="section" id="experience">
+        <div class="section-inner">
+          <div class="section-header reveal">
+            <div>
+              <div class="eyebrow">Experience Map</div>
+              <h2 class="section-title">Academic training, research appointments, and visiting experiences.</h2>
+              <p class="section-subtitle">
+                Here I summarize my academic training, research appointments, advisors, and major topics over time.
+              </p>
+            </div>
+          </div>
+          <div class="experience-grid" id="experience-grid"></div>
+        </div>
+      </section>
 
-  <li>
-    <p>
-      <strong>	BizGen: Advancing Article-level Visual Text Rendering for Infographics Generation </strong>
-      <a href="https://arxiv.org/abs/2503.20672" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-        [<a href="https://bizgen-msra.github.io/" target="_blank" style= "color:blue; text-decoration:none;">WebPage</a>]
-        [<a href="https://github.com/1230young/bizgen" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-    <p>
-      Yuyang Peng, Shishi Xiao, <b>Keming Wu</b>, Qisheng Liao, Bohan Chen, Kevin Lin, Danqing Huang, Ji Li, Yuhui Yuan
-    </p>
-    <p>
-     <strong>  <p style="color: red;">CVPR 2025</p>  </strong>
-    </p>
-</li>
+      <section class="section" id="awards">
+        <div class="section-inner">
+          <div class="section-header reveal">
+            <div>
+              <div class="eyebrow">Recognition</div>
+              <h2 class="section-title">Honors, reviewing, and academic service.</h2>
+              <p class="section-subtitle">
+                I also list selected honors, reviewing, and academic service here.
+              </p>
+            </div>
+          </div>
+          <div class="award-grid">
+            <div class="award-card reveal tilt-card">
+              <div class="card-topline">
+                <div class="status-pill">Honors & Awards</div>
+              </div>
+              <h3 class="card-title">National Scholarship</h3>
+              <p>Awarded <strong>three times</strong>.</p>
+            </div>
+            <div class="award-card reveal tilt-card">
+              <div class="card-topline">
+                <div class="status-pill">Professional Activities</div>
+              </div>
+              <ul class="award-list">
+                <li><strong>Journal Reviewer</strong></li>
+                <li><strong>Conference Reviewer</strong>: CVPR 2026, ICLR 2026</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<li>
-  <p>
-    <strong>	PrismLayers: Open Data for High-Quality Multi-Layer Transparent Image Generative Models </strong>
-    <a href="https://arxiv.org/abs/2505.22523" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-      [<a href="https://prism-layers.github.io/" target="_blank" style= "color:blue; text-decoration:none;">WebPage</a>]
-<!--        [<a href="https://huggingface.co/datasets/artplus/PrismLayersPro" target="_blank" style= "color:blue; text-decoration:none;">Dataset</a>]-->
-  <p>
-      Junwen Chen*, Heyang Jiang*, <b>Keming Wu*</b>, Yanbin Wang*, Ji Li, Chao Zhang, Keiji Yanai, Dong Chen, Yuhui Yuan
-  </p>
-  <p>
-    <strong>  <p style="color: black;">Technical Report </p>  </strong>
-   </p>
-</li>
-</ul>
+      <section class="section" id="contact">
+        <div class="section-inner">
+          <div class="section-header reveal">
+            <div>
+              <div class="eyebrow">Connect</div>
+              <h2 class="section-title">Open to collaboration on multimodal generation, evaluation, and reasoning.</h2>
+              <p class="section-subtitle">
+                I keep my contact information here and briefly note the kinds of collaborations I am most interested in.
+              </p>
+            </div>
+          </div>
+          <div class="contact-panel reveal tilt-card">
+            <div>
+              <p>
+                If your work intersects with multimodal generation, image editing reward modeling, evaluation, or multimodal reasoning,
+                I would be glad to discuss collaboration, research assistant opportunities, and internship projects.
+              </p>
+              <div class="contact-grid">
+                <a class="contact-chip" href="mailto:wukeming0608@gmail.com">
+                  <span>Email</span>
+                  <strong>wukeming0608@gmail.com</strong>
+                </a>
+                <a class="contact-chip" href="mailto:wukm25@mails.tsinghua.edu.cn">
+                  <span>Tsinghua Email</span>
+                  <strong>wukm25@mails.tsinghua.edu.cn</strong>
+                </a>
+                <a class="contact-chip" href="https://github.com/KemingWu" target="_blank">
+                  <span>GitHub</span>
+                  <strong>github.com/KemingWu</strong>
+                </a>
+                <a class="contact-chip" href="https://scholar.google.com/citations?user=cOzwZBMAAAAJ&hl=en" target="_blank">
+                  <span>Scholar</span>
+                  <strong>Google Scholar profile</strong>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div class="metric-card" style="height: 100%;">
+                <span>Last updated</span>
+                <strong class="mono" style="font-size: 1.5rem;">2026/01/26</strong>
+                <small>I keep the original content here, but present it in a more interactive and academically focused way.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-<!-- Multimodal Understanding & Reasoning -->
-<h3 style="margin-top: 20px; margin-bottom: 10px; color: #2c3e50; border-left: 4px solid #3498db; padding-left: 10px;">
-  <font face="Arial">Multi-modality Understanding & Reasoning</font>
-</h3>
-<ul>
-  <li>
-    <p>
-      <strong>	OpenMMReasoner: Pushing the Frontiers for Multimodal Reasoning with an Open and General Recipe  </strong>
-     <a href="https://arxiv.org/abs/2511.16334" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-        [<a href="https://evolvinglmms-lab.github.io/OpenMMReasoner/" target="_blank" style= "color:blue; text-decoration:none;">WebPage</a>]
-        [<a href="https://github.com/EvolvingLMMs-Lab/OpenMMReasoner" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-        [<a href="https://huggingface.co/papers/2511.16334" target="_blank" style= "color:blue; text-decoration:none;">Daily Paper</a>]
-    <p>
-      Kaichen Zhang*, <b>Keming Wu*</b>, Zuhao Yang, Bo Li, Kairui Hu, Bin Wang, Ziwei Liu, Xingxuan Li, Lidong Bing
-    </p>
-    <p>
-     <strong>  <p>
-      <span style="color: red;">CVPR 2026</span>
-      &nbsp;&nbsp; 
-      <span style="color: red;">🏆 Top #1 Paper of the day at HuggingFace Daily Papers</span>
-    </p>    
-    </strong>
-</li>
+    <footer class="footer">
+      <span>&copy; Keming Wu</span>
+      <span>Interactive academic homepage</span>
+    </footer>
+  </div>
 
-<li>
-  <p>
-    <strong>	LongVT: Incentivizing "Thinking with Long Videos" via Native Tool Calling  </strong>
-   <a href="https://arxiv.org/abs/2511.20785" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-      [<a href="https://evolvinglmms-lab.github.io/LongVT/" target="_blank" style= "color:blue; text-decoration:none;">WebPage</a>]
-      [<a href="https://github.com/EvolvingLMMs-Lab/LongVT" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-      [<a href="https://huggingface.co/papers/2511.20785" target="_blank" style= "color:blue; text-decoration:none;">Daily Paper</a>]
-  <p>
-    Zuhao Yang*, Sudong Wang*, Kaichen Zhang*, <b>Keming Wu</b>, Sicong Leng, Yifan Zhang, Bo Li, Chengwei Qin, Shijian Lu, Xingxuan Li, Lidong Bing
-  </p>
-  <p>
-   <strong>  <p>
-    <span style="color: red;">CVPR 2026</span>
-    &nbsp;&nbsp; 
-    <span style="color: red;">🏆 Top #2 Paper of the day at HuggingFace Daily Papers</span>
-  </p>
-  </strong>
-  </p>
-</li>
-</ul>
-<!--</div>-->
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i["GoogleAnalyticsObject"] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments);
+      };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m);
+    })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
 
-<h2>Open-Source Projects</h2>
-<table style="border-spacing:2px; font-size: 15px;">
+    ga("create", "UA-87320911-1", "auto");
+    ga("send", "pageview");
 
-    <tbody>
-        <tr>
-            <td width="400px" style="vertical-align: top;">
-                <img src="./files/open-source-proj/lmms-engine-logo.png" width="350px" style="margin-left: 25px; margin-top: 0px; display: block;">
-            </td>
-            <td style="font-size: 15px; vertical-align: top;">
-                <b style="font-size: 15px;">LMMs-Engine <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/EvolvingLMMs-Lab/lmms-engine" style="height: 18px;"></b>
-                <div style="font-size: 14px; margin-top: 4px;">A simple, unified multimodal models training engine. Lean, flexible, and built for hacking at scale.</div>
+    const highlights = [
+      {
+        tag: "Image Editing Reward",
+        title: "EditReward",
+        text: "A human-aligned reward model for instruction-guided image editing, positioned as a flagship contribution in multimodal generative evaluation.",
+        detail: "This work emphasizes alignment between model scoring and human preference in image editing, highlighting both evaluation rigor and practical editing quality.",
+        venue: "ICLR 2026",
+        links: [
+          { label: "WebPage", href: "https://tiger-ai-lab.github.io/EditReward" },
+          { label: "Code", href: "https://github.com/TIGER-AI-Lab/EditReward" }
+        ]
+      },
+      {
+        tag: "Controllable Generation",
+        title: "Hybrid Layout Control",
+        text: "A first-author ICCV 2025 paper on layout-aware diffusion transformers with an emphasis on stronger aesthetics under weaker supervision.",
+        detail: "The project reflects a broader interest in controllable generation, balancing annotation efficiency with visual quality and compositional control.",
+        venue: "ICCV 2025",
+        links: [
+          { label: "WebPage", href: "https://hybrid-layout-msra.github.io/" },
+          { label: "Code", href: "https://github.com/KemingWu/HybridLayout" }
+        ]
+      },
+      {
+        tag: "Multimodal Reasoning",
+        title: "OpenMMReasoner",
+        text: "An open and general recipe for multimodal reasoning that reached the Top #1 position on HuggingFace Daily Papers.",
+        detail: "This contribution broadens the portfolio from generative modeling into reasoning-centric multimodal systems with strong open-community impact.",
+        venue: "CVPR 2026",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2511.16334" },
+          { label: "Code", href: "https://github.com/EvolvingLMMs-Lab/OpenMMReasoner" }
+        ]
+      },
+      {
+        tag: "Long Video Reasoning",
+        title: "LongVT",
+        text: "A native tool-calling framework that encourages long-video reasoning and reached the Top #2 position on HuggingFace Daily Papers.",
+        detail: "The work demonstrates an interest in temporal multimodal reasoning, tool use, and longer-horizon perception beyond standard short-context benchmarks.",
+        venue: "CVPR 2026",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2511.20785" },
+          { label: "Code", href: "https://github.com/EvolvingLMMs-Lab/LongVT" }
+        ]
+      }
+    ];
 
-                <div style="height: 8px;"></div>
-                <i>Contributor</i>
-                <div style="height: 8px;"></div>
-                Project Link: <a href="https://github.com/EvolvingLMMs-Lab/lmms-engine">https://github.com/EvolvingLMMs-Lab/lmms-engine</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    const newsItems = [
+      { date: "2026.02", text: "Two papers got accepted by CVPR 2026." },
+      { date: "2026.01", text: "Two papers got accepted by ICLR 2026." },
+      { date: "2026.01", text: "One paper is released: DeepResearchEval." },
+      { date: "2025.11", text: "Two papers are released: OpenMMReasoner and LongVT." },
+      { date: "2025.10", text: "One paper is released focusing on generative image evaluation." },
+      { date: "2025.09", text: "Two papers are released: one on image editing reward models and one on generative video evaluation." },
+      { date: "2025.08", text: "One paper got accepted by ACM MM 2025 Brave New Ideas Track (Oral)." },
+      { date: "2025.06", text: "One paper about layout-to-image generation got accepted by ICCV 2025 as first author." },
+      { date: "2025.05", text: "One paper about multi-layer image generation is released." },
+      { date: "2025.02", text: "One paper got accepted by CVPR 2025." },
+      { date: "2024.10", text: "One paper about information fusion got accepted by IEEE Transactions on Systems, Man and Cybernetics: Systems as first author." },
+      { date: "2024.07", text: "One paper got accepted by ACM MM 2024, the first CCF-A conference paper as first author." },
+      { date: "2024.01", text: "One paper got accepted by Information Sciences as first author." }
+    ];
 
-<table style="border-spacing:2px; font-size: 15px; margin-top: 20px;">
+    const publications = [
+      {
+        type: "selected",
+        topics: ["generation", "evaluation"],
+        title: "EditReward: A Human-Aligned Reward Model for Instruction-Guided Image Editing",
+        venue: "ICLR 2026",
+        authors: "Keming Wu, Sicong Jiang, Max Ku, Ping Nie, Minghao Liu, Wenhu Chen",
+        note: "Flagship work on reward modeling for instruction-guided image editing.",
+        detail: "Focus: aligning reward signals with human preference for practical image editing evaluation and optimization.",
+        links: [
+          { label: "WebPage", href: "https://tiger-ai-lab.github.io/EditReward" },
+          { label: "Code", href: "https://github.com/TIGER-AI-Lab/EditReward" }
+        ]
+      },
+      {
+        type: "selected",
+        topics: ["generation"],
+        title: "Hybrid Layout Control for Diffusion Transformer: Fewer Annotations, Superior Aesthetics",
+        venue: "ICCV 2025",
+        authors: "Keming Wu, Junwen Chen, Zhanhao Liang, Yinuo Wang, Ji Li, Chao Zhang, Bin Wang, Yuhui Yuan",
+        note: "First-author work on controllable image generation with stronger visual quality.",
+        detail: "Focus: controllable layout-to-image generation with improved aesthetics under reduced supervision.",
+        links: [
+          { label: "WebPage", href: "https://hybrid-layout-msra.github.io/" },
+          { label: "Code", href: "https://github.com/KemingWu/HybridLayout" }
+        ]
+      },
+      {
+        type: "selected",
+        topics: ["generation"],
+        title: "BizGen: Advancing Article-level Visual Text Rendering for Infographics Generation",
+        venue: "CVPR 2025",
+        authors: "Yuyang Peng, Shishi Xiao, Keming Wu, Qisheng Liao, Bohan Chen, Kevin Lin, Danqing Huang, Ji Li, Yuhui Yuan",
+        note: "Generative infographic work focused on article-level visual text rendering.",
+        detail: "Focus: rendering-rich infographic synthesis that combines layout, content, and visual clarity at article scale.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2503.20672" },
+          { label: "WebPage", href: "https://bizgen-msra.github.io/" },
+          { label: "Code", href: "https://github.com/1230young/bizgen" }
+        ]
+      },
+      {
+        type: "selected",
+        topics: ["generation"],
+        title: "PrismLayers: Open Data for High-Quality Multi-Layer Transparent Image Generative Models",
+        venue: "Technical Report",
+        authors: "Junwen Chen*, Heyang Jiang*, Keming Wu*, Yanbin Wang*, Ji Li, Chao Zhang, Keiji Yanai, Dong Chen, Yuhui Yuan",
+        note: "Open data contribution for multi-layer transparent image generation.",
+        detail: "Focus: building data resources that support high-quality transparent and layered image generation.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2505.22523" },
+          { label: "WebPage", href: "https://prism-layers.github.io/" }
+        ]
+      },
+      {
+        type: "selected",
+        topics: ["reasoning"],
+        title: "OpenMMReasoner: Pushing the Frontiers for Multimodal Reasoning with an Open and General Recipe",
+        venue: "CVPR 2026 | Top #1 HuggingFace Daily Papers",
+        authors: "Kaichen Zhang*, Keming Wu*, Zuhao Yang, Bo Li, Kairui Hu, Bin Wang, Ziwei Liu, Xingxuan Li, Lidong Bing",
+        note: "A major multimodal reasoning contribution with strong community traction.",
+        detail: "Focus: open multimodal reasoning recipes that generalize across tasks while maintaining strong community visibility.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2511.16334" },
+          { label: "WebPage", href: "https://evolvinglmms-lab.github.io/OpenMMReasoner/" },
+          { label: "Code", href: "https://github.com/EvolvingLMMs-Lab/OpenMMReasoner" },
+          { label: "Daily Paper", href: "https://huggingface.co/papers/2511.16334" }
+        ]
+      },
+      {
+        type: "selected",
+        topics: ["reasoning"],
+        title: "LongVT: Incentivizing \"Thinking with Long Videos\" via Native Tool Calling",
+        venue: "CVPR 2026 | Top #2 HuggingFace Daily Papers",
+        authors: "Zuhao Yang*, Sudong Wang*, Kaichen Zhang*, Keming Wu, Sicong Leng, Yifan Zhang, Bo Li, Chengwei Qin, Shijian Lu, Xingxuan Li, Lidong Bing",
+        note: "A long-video multimodal reasoning system built around native tool use.",
+        detail: "Focus: long-context video reasoning with native tool-calling support and stronger temporal deliberation.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2511.20785" },
+          { label: "WebPage", href: "https://evolvinglmms-lab.github.io/LongVT/" },
+          { label: "Code", href: "https://github.com/EvolvingLMMs-Lab/LongVT" },
+          { label: "Daily Paper", href: "https://huggingface.co/papers/2511.20785" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["evaluation", "reasoning"],
+        title: "DeepResearchEval: An Automated Framework for Deep Research Task Construction and Agentic Evaluation",
+        venue: "Technical Report",
+        authors: "Yibo Wang, Lei Wang, Yue Deng, Keming Wu, Yao Xiao, Huanjin Yao, Liwei Kang, Hai Ye, Yongcheng Jing, Lidong Bing",
+        note: "Automated framework for deep research task construction and agentic evaluation.",
+        detail: "Focus: benchmarking research-style agents through automated task construction and evaluation pipelines.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2601.09688" },
+          { label: "Code", href: "https://github.com/Infinity-AILab/DeepResearchEval" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["evaluation", "generation"],
+        title: "ImagenWorld: Stress-Testing Image Generation Models with Explainable Human Evaluation on Open-ended Real-World Tasks",
+        venue: "ICLR 2026",
+        authors: "Samin Mahdizadeh Sani, Max Ku, ..., Keming Wu, ..., Wenhu Chen",
+        note: "Human-centered and explainable evaluation for open-ended real-world image generation tasks.",
+        detail: "Focus: explainable and human-grounded evaluation protocols for challenging real-world generation scenarios.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2601.09688" },
+          { label: "Code", href: "https://github.com/Infinity-AILab/DeepResearchEval" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["evaluation", "reasoning"],
+        title: "A Rigorous Benchmark with Multidimensional Evaluation for Deep Research Agents: From Answers to Reports",
+        venue: "Technical Report",
+        authors: "Yang Yao, Yixu Wang, Yuxuan Zhang, Yi Lu, Tianle Gu, Lingyu Li, Dingyi Zhao, Keming Wu, Haozhe Wang, Ping Nie, Yan Teng, Yingchun Wang",
+        note: "Benchmarking deep research agents with multidimensional report-level evaluation.",
+        detail: "Focus: evaluation beyond final answers, including report quality, structure, and multidimensional research performance.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2510.02190" },
+          { label: "WebPage", href: "https://github.com/EVIGBYEN/RigorousBench" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["evaluation"],
+        title: "VideoScore2: Think before You Score in Generative Video Evaluation",
+        venue: "Technical Report",
+        authors: "Xuan He, Dongfu Jiang, Ping Nie, Minghao Liu, Zhengxuan Jiang, Mingyi Su, Wentao Ma, Junru Lin, Chun Ye, Yi Lu, Keming Wu, Benjamin Schneider, Quy Duc Do, Zhuofeng Li, Yiming Jia + 9 more authors",
+        note: "Generative video evaluation with a stronger reasoning-before-scoring perspective.",
+        detail: "Focus: more deliberate scoring strategies for generative video evaluation, integrating reasoning before judgment.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2509.22799" },
+          { label: "WebPage", href: "https://tiger-ai-lab.github.io/VideoScore2/" },
+          { label: "Code", href: "https://github.com/TIGER-AI-Lab/VideoScore2" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["other"],
+        title: "Physics-Informed Representation Alignment for Sparse Radio-Map Reconstruction",
+        venue: "ACM MM 2025 Brave New Ideas Track (Oral)",
+        authors: "Haozhe Jia, Wenshuo Chen, Zhihui Huang, Lei Wang, Hongru Xiao, Nanqian Jia, Keming Wu, Songning Lai, Bowen Tian, Yutao Yue",
+        note: "Cross-domain representation learning for sparse radio-map reconstruction.",
+        detail: "Focus: representation alignment with physics priors for sparse sensing and reconstruction tasks.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2501.19160" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["other"],
+        title: "Free-T2M: Frequency Enhanced Text-to-Motion Diffusion Model With Consistency Loss",
+        venue: "Technical Report",
+        authors: "Wenshuo Chen, Haozhe Jia, Songning Lai, Keming Wu, Hongru Xiao, Lijie Hu, Yutao Yue",
+        note: "Text-to-motion diffusion work with frequency enhancement and consistency loss.",
+        detail: "Focus: text-to-motion diffusion with consistency-aware frequency modeling.",
+        links: [
+          { label: "PDF", href: "https://arxiv.org/abs/2501.18232" },
+          { label: "Code", href: "https://github.com/Hxxxz0/Free-T2m" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["other"],
+        title: "RSC-SNN: Exploring the Trade-off Between Adversarial Robustness and Accuracy in Spiking Neural Networks via Randomized Smoothing Coding",
+        venue: "ACM MM 2024",
+        authors: "Keming Wu*, Man Yao*, Yuhong Chou, Xuerui Qiu, Rui Yang, Bo Xu, Guoqi Li",
+        note: "First-author spiking neural network work on robustness and accuracy trade-offs.",
+        detail: "Focus: balancing adversarial robustness and predictive accuracy in spiking neural networks.",
+        links: [
+          { label: "PDF", href: "https://dl.acm.org/doi/abs/10.1145/3664647.3680639" },
+          { label: "Code", href: "https://github.com/KemingWu/RSC-SNN" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["other"],
+        title: "A Fractal-based Complex Belief Entropy for Uncertainty Measure in Complex Evidence Theory",
+        venue: "IEEE Transactions on Systems, Man and Cybernetics: Systems 2024",
+        authors: "Keming Wu, Fuyuan Xiao, Yi Zhang",
+        note: "First-author journal publication on uncertainty measurement in complex evidence theory.",
+        detail: "Focus: uncertainty quantification in complex evidence theory using fractal-based entropy formulations.",
+        links: [
+          { label: "PDF", href: "https://ieeexplore.ieee.org/abstract/document/10770823/" }
+        ]
+      },
+      {
+        type: "other",
+        topics: ["other"],
+        title: "A Novel Quantum Belief Entropy for Uncertainty Measure in Complex Evidence Theory",
+        venue: "Information Sciences 2024",
+        authors: "Keming Wu, Fuyuan Xiao",
+        note: "First-author journal work on quantum belief entropy.",
+        detail: "Focus: quantum-inspired uncertainty measures for complex evidence theory.",
+        links: [
+          { label: "PDF", href: "https://www.sciencedirect.com/science/article/abs/pii/S0020025523013294" }
+        ]
+      }
+    ];
 
-  <tbody>
-      <tr>
-          <td width="400px" style="vertical-align: top;">
-              <img src="./files/open-source-proj/lmms-eval-logo.png" width="350px" style="margin-left: 25px; margin-top: 0px; display: block;">
-          </td>
-          <td style="font-size: 15px; vertical-align: top;">
-              <b style="font-size: 15px;">LMMs-Eval <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/EvolvingLMMs-Lab/lmms-eval" style="height: 16px;"></b>
-              <div style="font-size: 14px; margin-top: 4px;">Accelerating the development of large multimodal models (LMMs) with lmms-eval. We support most text, image, video and audio tasks..</div>
+    const projects = [
+      {
+        title: "LMMs-Engine",
+        image: "./files/open-source-proj/lmms-engine-logo.png",
+        desc: "A unified multimodal model training engine designed to remain lean, flexible, and practical for large-scale experimentation.",
+        role: "Contributor",
+        link: "https://github.com/EvolvingLMMs-Lab/lmms-engine"
+      },
+      {
+        title: "LMMs-Eval",
+        image: "./files/open-source-proj/lmms-eval-logo.png",
+        desc: "An evaluation toolkit covering text, image, video, and audio benchmarks for large multimodal models.",
+        role: "Contributor",
+        link: "https://github.com/EvolvingLMMs-Lab/lmms-eval"
+      }
+    ];
 
-              <div style="height: 8px;"></div>
-              <i>Contributor</i>
-              <div style="height: 8px;"></div>
-              Project Link: <a href="https://github.com/EvolvingLMMs-Lab/lmms-eval">https://github.com/EvolvingLMMs-Lab/lmms-eval</a>
-          </td>
-      </tr>
-  </tbody>
-</table>
+    const experiences = [
+      {
+        title: "Microsoft Research Asia",
+        subtitle: "Visual Computing Group",
+        image: "./files/experience/industrial/msra.png",
+        role: "Research Intern",
+        period: "Sep. 2024 - Apr. 2025",
+        text: "Supervised by Senior Researcher Yuhui Yuan and Principal Research Manager Dong Chen.",
+        topic: "Topic: Controllable Image Generation & Multi-Layer Image Generation",
+        url: "https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/",
+        suburl: "https://www.microsoft.com/en-us/research/group/visual-computing/"
+      },
+      {
+        title: "University of Waterloo",
+        subtitle: "TIGER Lab",
+        image: "./files/experience/education/UniversityOfWaterloo_logo_horiz_rgb.png",
+        role: "Research Intern",
+        period: "Apr. 2025 - Current",
+        text: "Research collaboration with Prof. Wenhu Chen.",
+        topic: "Topic: Image Editing & Multi-Modal AIGC Evaluation",
+        url: "https://uwaterloo.ca/",
+        suburl: "https://wenhuchen.github.io/lab"
+      },
+      {
+        title: "Tsinghua University",
+        subtitle: "School of Software",
+        image: "./files/experience/education/thu.png",
+        role: "Ph.D. Student of Software Engineering",
+        period: "Aug. 2025 - Current",
+        text: "Current doctoral affiliation and primary academic base.",
+        topic: "Topic: Multi-modality AIGC & Reasoning",
+        url: "https://www.tsinghua.edu.cn/en/",
+        suburl: "https://www.thss.tsinghua.edu.cn/"
+      },
+      {
+        title: "Institute of Automation, Chinese Academy of Sciences",
+        subtitle: "Brain-inspired computing lab",
+        image: "./files/experience/education/casia.png",
+        role: "Research Intern",
+        period: "Apr. 2023 - Jan. 2024",
+        text: "Supervised by Prof. Guoqi Li.",
+        topic: "Topic: Brain-inspired Computing & Spiking Neural Network",
+        url: "https://www.ia.cas.cn/",
+        suburl: "https://github.com/BICLab"
+      }
+    ];
 
-<h2><font face="Arial"> Other Publications </font></h2>
-<font size = "3">
-    (* equal contribution)
-<div style="height: 200px; overflow: auto;">
-<ul>
-  <li>
-    <p>
-      <strong>	DeepResearchEval: An Automated Framework for Deep Research Task Construction and Agentic Evaluation </strong>
-      <a href="https://arxiv.org/abs/2601.09688" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-        [<a href="https://github.com/Infinity-AILab/DeepResearchEval" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-    <p>
-      Yibo Wang, Lei Wang, Yue Deng, <b>Keming Wu</b>, Yao Xiao, Huanjin Yao, Liwei Kang, Hai Ye, Yongcheng Jing, Lidong Bing
-    </p>
-    <p>
-      <strong>  <p style="color: black;">Technical Report </p>  </strong>
-     </p>
-</li>
-<li>
-  <p>
-    <strong>	ImagenWorld: Stress-Testing Image Generation Models with Explainable Human Evaluation on Open-ended Real-World Tasks </strong>
-    <a href="https://arxiv.org/abs/2601.09688" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-      [<a href="https://github.com/Infinity-AILab/DeepResearchEval" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-  <p>
-    Samin Mahdizadeh Sani, Max Ku, ..., <b>Keming Wu</b>, ..., Wenhu Chen
-  </p>
-  <p>
-    <strong>  <p style="color: red;">ICLR 2026 </p>  </strong>
-   </p>
-</li>
-  <li>
-    <p>
-      <strong>	A Rigorous Benchmark with Multidimensional Evaluation for Deep Research Agents: From Answers to Reports </strong>
-      <a href="https://arxiv.org/abs/2510.02190" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-        [<a href="https://github.com/EVIGBYEN/RigorousBench" target="_blank" style= "color:blue; text-decoration:none;">WebPage</a>]
-    <p>
-      Yang Yao, Yixu Wang, Yuxuan Zhang, Yi Lu, Tianle Gu, Lingyu Li, Dingyi Zhao, <b>Keming Wu</b>, Haozhe Wang, Ping Nie, Yan Teng, Yingchun Wang
-    </p>
-    <p>
-      <strong>  <p style="color: black;">Technical Report </p>  </strong>
-     </p>
-</li>
+    const highlightGrid = document.getElementById("highlight-grid");
+    const newsList = document.getElementById("news-list");
+    const publicationGrid = document.getElementById("publication-grid");
+    const projectGrid = document.getElementById("project-grid");
+    const experienceGrid = document.getElementById("experience-grid");
+    const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
+    const searchInput = document.getElementById("publication-search");
+    const beijingTime = document.getElementById("beijing-time");
+    const liveStatus = document.getElementById("live-status");
 
-    <li>
-    <p>
-      <strong>	VideoScore2: Think before You Score in Generative Video Evaluation </strong>
-      <a href="https://arxiv.org/abs/2509.22799" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-        [<a href="https://tiger-ai-lab.github.io/VideoScore2/" target="_blank" style= "color:blue; text-decoration:none;">WebPage</a>]
-        [<a href="https://github.com/TIGER-AI-Lab/VideoScore2" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-    <p>
-        Xuan He, Dongfu Jiang, Ping Nie, Minghao Liu, Zhengxuan Jiang, Mingyi Su, Wentao Ma, Junru Lin, Chun Ye, Yi Lu, <b>Keming Wu</b>, Benjamin Schneider, Quy Duc Do, Zhuofeng Li, Yiming Jia + 9 more authors
-    </p>
-    <p>
-      <strong>  <p style="color: black;">Technical Report </p>  </strong>
-     </p>
-</li>
+    function escapeAttribute(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
 
-<li>
-  <p>
-    <strong>	Physics-Informed Representation Alignment for Sparse Radio-Map Reconstruction </strong>
-    <a href="https://arxiv.org/abs/2501.19160" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-  <p>
-      Haozhe Jia, Wenshuo Chen, Zhihui Huang, Lei Wang, Hongru Xiao, Nanqian Jia, <b>Keming Wu</b>, Songning Lai, Bowen Tian, Yutao Yue
-  </p>
-   <p style="color: red;">
-    <strong>ACM MM 2025 Brave New Ideas Track（Oral）</strong>
-  </p>
-</li>
+    function createLinks(links) {
+      return links.map(function(link) {
+        return '<a class="text-link" href="' + link.href + '" target="_blank">' + link.label + "</a>";
+      }).join("");
+    }
 
-<!-- <li>
-  <p>
-    <strong>	Modeling All-Atom Glycan Structures via Hierarchical Message Passing and Multi-Scale Pre-training </strong>
-    <a href="https://arxiv.org/abs/2506.01376" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-      [<a href="https://github.com/kasawa1234/GlycanAA" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-  <p>
-   Minghao Xu, Jiaze Song, <b>Keming Wu</b>, Xiangxin Zhou, Bin CUI, Wentao Zhang
-  </p>
-  <p>
-   <strong>  <p style="color: red;">ICML 2025</p>  </strong>
-  </p>
-</li> -->
+    function renderHighlights() {
+      highlightGrid.innerHTML = highlights.map(function(item) {
+        return (
+          '<article class="highlight-card expand-card reveal tilt-card">' +
+            '<div class="card-topline">' +
+              '<div class="status-pill">' + item.tag + "</div>" +
+              '<div class="venue">' + item.venue + "</div>" +
+            "</div>" +
+            '<div class="card-summary">' +
+              '<h3 class="card-title">' + item.title + "</h3>" +
+              "<p>" + item.text + "</p>" +
+            "</div>" +
+            '<div class="card-hover"><p>' + item.detail + "</p></div>" +
+            '<div class="hover-hint">Hover to inspect</div>' +
+            '<div class="card-links">' + createLinks(item.links) + "</div>" +
+          "</article>"
+        );
+      }).join("");
+    }
 
-    <li>
-    <p>
-      <strong>	Free-T2M: Frequency Enhanced Text-to-Motion Diffusion Model With Consistency Loss </strong>
-      <a href="https://arxiv.org/abs/2501.18232" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-        [<a href="https://github.com/Hxxxz0/Free-T2m" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-    <p>
-        Wenshuo Chen, Haozhe Jia, Songning Lai, <b>Keming Wu</b>, Hongru Xiao, Lijie Hu, Yutao Yue
-    </p>
-    <p>
-      <strong>  <p style="color: black;">Technical Report </p>  </strong>
-     </p>
-</li>
+    function renderNews() {
+      newsList.innerHTML = newsItems.map(function(item) {
+        return (
+          '<article class="timeline-card reveal tilt-card">' +
+            '<div class="news-date mono">' + item.date + "</div>" +
+            "<p>" + item.text + "</p>" +
+          "</article>"
+        );
+      }).join("");
+    }
 
-<li>
-  <p>
-    <strong>	RSC-SNN: Exploring the Trade-off Between Adversarial Robustness and Accuracy in Spiking Neural Networks via Randomized Smoothing Coding </strong>
-    <a href="https://dl.acm.org/doi/abs/10.1145/3664647.3680639" target="_blank" style= "color:blue; text-decoration:none;">[PDF]</a>
-      [<a href="https://github.com/KemingWu/RSC-SNN" target="_blank" style= "color:blue; text-decoration:none;">Code</a>]
-  <p>
-    <b>Keming Wu*</b>, Man Yao*, Yuhong Chou, Xuerui Qiu, Rui Yang, Bo Xu, Guoqi Li
-  </p>
-  <p>
-   <strong>  <p style="color: red;">ACM MM 2024</p>  </strong>
-  </p>
-</li>
+    function renderPublications() {
+      publicationGrid.innerHTML = publications.map(function(item) {
+        const tags = item.topics.map(function(topic) {
+          return '<span class="tag">' + topic + "</span>";
+        }).join("");
+        return (
+          '<article class="publication-card expand-card reveal tilt-card" data-type="' + item.type + '" data-topics="' + item.topics.join(" ") + '" data-search="' + escapeAttribute([item.title, item.authors, item.venue, item.note, item.detail || "", item.topics.join(" ")].join(" ").toLowerCase()) + '">' +
+            '<div class="card-topline">' +
+              '<div class="status-pill">' + (item.type === "selected" ? "Selected Publication" : "Other Publication") + "</div>" +
+              '<div class="venue">' + item.venue + "</div>" +
+            "</div>" +
+            '<div class="card-summary">' +
+              '<h3 class="card-title">' + item.title + "</h3>" +
+              '<p class="authors">' + item.authors + "</p>" +
+              "<p>" + item.note + "</p>" +
+            "</div>" +
+            '<div class="card-hover"><p>' + (item.detail || "") + "</p></div>" +
+            '<div class="chip-row" style="margin: 14px 0 0;">' + tags + "</div>" +
+            '<div class="hover-hint">Hover to expand</div>' +
+            '<div class="card-links">' + createLinks(item.links) + "</div>" +
+          "</article>"
+        );
+      }).join("");
+    }
 
-<li>
-  <p>
-    <strong>A Fractal-based Complex Belief Entropy for Uncertainty Measure in Complex Evidence Theory</strong>
-    [<a href="https://ieeexplore.ieee.org/abstract/document/10770823/" target="_blank" style= "color:blue; text-decoration:none;">PDF</a>]
-  </p>
-  <p>
-    <b>Keming Wu</b>, Fuyuan Xiao, Yi Zhang
-  </p>
-  <p style="color: red;">
-    <strong>IEEE Transactions on Systems, Man and Cybernetics: Systems 2024</strong>
-  </p>
-</li>
+    function renderProjects() {
+      projectGrid.innerHTML = projects.map(function(item) {
+        return (
+          '<article class="project-card reveal tilt-card">' +
+            '<img src="' + item.image + '" alt="' + item.title + ' logo">' +
+            '<div class="card-topline">' +
+              '<h3 class="card-title">' + item.title + "</h3>" +
+              '<div class="status-pill">' + item.role + "</div>" +
+            "</div>" +
+            "<p>" + item.desc + "</p>" +
+            '<div class="card-links"><a class="text-link" href="' + item.link + '" target="_blank">' + item.link + "</a></div>" +
+          "</article>"
+        );
+      }).join("");
+    }
 
-<li>
-  <p> 
-    <strong>A Novel Quantum Belief Entropy for Uncertainty Measure in Complex Evidence Theory</strong>
-    [<a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025523013294" target="_blank" style= "color:blue; text-decoration:none;">PDF</a>]
-  </p>
-  <p>
-    <b>Keming Wu</b>, Fuyuan Xiao
-  </p>
-  <p style="color: red;">
-    <strong>Information Sciences 2024</strong>
-  </p>
-</li>
+    function renderExperiences() {
+      experienceGrid.innerHTML = experiences.map(function(item) {
+        return (
+          '<article class="experience-card reveal tilt-card">' +
+            '<img src="' + item.image + '" alt="' + item.title + ' logo">' +
+            '<div class="card-topline">' +
+              '<div>' +
+                '<h3 class="card-title"><a href="' + item.url + '" target="_blank">' + item.title + "</a></h3>" +
+                '<p class="meta-text"><a href="' + item.suburl + '" target="_blank"><strong>' + item.subtitle + "</strong></a></p>" +
+              "</div>" +
+              '<div class="status-pill">' + item.period + "</div>" +
+            "</div>" +
+            "<p><strong>" + item.role + "</strong></p>" +
+            "<p>" + item.text + "</p>" +
+            '<p class="meta-text">' + item.topic + "</p>" +
+          "</article>"
+        );
+      }).join("");
+    }
 
-</ul>
-</div>
+    function updateClock() {
+      const formatter = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Shanghai",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      });
+      const time = formatter.format(new Date());
+      beijingTime.textContent = "Beijing | " + time;
+      liveStatus.textContent = "UTC+8 | " + time.split(", ")[1];
+    }
 
-<h2><font face="Arial"> Honors &amp; Awards </h2>
-	
-<ul style="list-style-type:none">
-<p style="line-height: 120%; margin-left: 0px; margin-top: 8pt; margin-bottom: 8pt;"> <font face="Arial" size="3">
+    function filterPublications() {
+      const active = document.querySelector(".filter-button.active").dataset.filter;
+      const keyword = searchInput.value.trim().toLowerCase();
+      document.querySelectorAll(".publication-card").forEach(function(card) {
+        const type = card.dataset.type;
+        const topics = card.dataset.topics.split(" ");
+        const matchesKeyword = !keyword || card.dataset.search.indexOf(keyword) !== -1;
+        let matchesFilter = active === "all";
 
-    <!-- <li>Candidate for Person of the Year (<b>20/26,000+</b>,Highest honor for undergraduate students in CQU), China, Oct, 2024</li> -->
-    <li>National Scholarship (<b>Three times</b>)</li>
-    <!-- <li>National Scholarship (<b>Award Rate: 0.2% national-wide</b>) Ministry of Education, China, Oct, 2023</li> -->
-    <!-- <li>National Scholarship (<b>Award Rate: 0.2% national-wide</b>) Ministry of Education, China, Oct, 2022</li> -->
-    <!-- <li>National Scholarship for Encouragement, from NEU, October 2015,2016,2017</li> -->
+        if (active === "selected" || active === "other") {
+          matchesFilter = type === active;
+        } else if (active !== "all") {
+          matchesFilter = topics.indexOf(active) !== -1;
+        }
 
-</p>
-</ul>
+        card.classList.toggle("hidden", !(matchesKeyword && matchesFilter));
+      });
+    }
 
-<h2><font face="Arial"> Industrial Experience </h2>
-  <table id="tbPublications" width="100%">
-    <tbody>
-        <tr>
-            <td width="320">
-                <img src="../files/experience/industrial/msra.png" width="250px" style="margin-left: 20px">
-            </td>
-            <td>
-                <p><b><a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a></b>
-                    <br><b style="font-size: 14px;"><a href="https://www.microsoft.com/en-us/research/group/visual-computing/">Visual Computing Group</a></b></p>
-                <div>Research Intern, supervised by Senior Researcher <a href="https://scholar.google.com/citations?user=PzyvzksAAAAJ&hl=en">Yuhui Yuan</a> and Principal Research Manager <a href="https://scholar.google.com/citations?hl=en&user=_fKSYOwAAAAJ">Dong Chen</a>.</div>
-                <div>Sep. 2024 - Apr. 2025</div>
+    function setupFilters() {
+      filterButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+          filterButtons.forEach(function(item) {
+            item.classList.remove("active");
+          });
+          button.classList.add("active");
+          filterPublications();
+        });
+      });
 
-                <em>Topic: Controllable Image Generation & Multi-Layer Image Generation</em>
-            </td>
-        </tr>
-    </tbody>
-</table>
-  
+      searchInput.addEventListener("input", filterPublications);
+    }
 
-<h2>Education & Visiting</h2>
-  <table id="tbPublications" width="100%">
-    <tbody>
-        <tr>
-            <td width="320">
-                <img src="./files/experience/education/UniversityOfWaterloo_logo_horiz_rgb.png" width="260px" style="margin-left: 20px">
-            </td>
-            <td>
-                <p><b><a href="https://uwaterloo.ca/">University of Waterloo</a></b>
-                    <br><b style="font-size: 14px;"><a href="https://wenhuchen.github.io/lab">TIGER Lab</a></b></p>
-                <div>Research Intern, supervised by Prof. <a href="https://scholar.google.com/citations?user=U8ShbhUAAAAJ&hl=en">Wenhu Chen</a>.</div>
-                <div>Apr. 2025 - Current</div>
-                <em>Topic: Image Editing & Multi-Modal AIGC Evaluation</em>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    function setupReveal() {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
 
-<table id="tbPublications" width="100%" style="margin-top: 20px">
-  <tbody>
-      <tr>
-          <td width="320">
-              <img src="./files/experience/education/thu.png" width="280px" style="margin-left: 10px">
-          </td>
-          <td>
-              <p><b><a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a></b><br><b style="font-size: 14px;"><a href="https://www.thss.tsinghua.edu.cn/">School of Software</a></b></p>
-              <div>Ph.D. student of Software Engineering.</div>
-              <div>Aug. 2025 - Current</div>
-              <em>Topic: Multi-modality AIGC & Reasoning</em>
-          </td>
-      </tr>
-  </tbody>
-</table>
+      document.querySelectorAll(".reveal").forEach(function(el) {
+        observer.observe(el);
+      });
+    }
 
-<table id="tbPublications" width="100%" style="margin-top: 20px">
-    <tbody>
-        <tr>
-            <td width="320">
-                <img src="./files/experience/education/casia.png" width="280px" style="margin-left: 10px">
-            </td>
-            <td>
-                <p><b><a href="https://www.ia.cas.cn/">Institute of Automation, Chinese Academy of Sciences</a></b><br><b style="font-size: 14px;"><a href="https://github.com/BICLab">Brain-inspired computing lab</a></b></p>
-                <div>Research Intern, supervised by Prof. <a href="https://scholar.google.com/citations?user=qCfE--MAAAAJ&hl=en">Guoqi Li</a>.</div>
-                <div>Apr. 2023 - Jan. 2024</div>
-                <em>Topic: Brain-inspired Computing & Spiking Neural Network</em>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    function setupCounters() {
+      const counters = document.querySelectorAll("[data-counter]");
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          const target = entry.target;
+          const total = Number(target.dataset.counter);
+          let current = 0;
+          const step = Math.max(1, Math.ceil(total / 40));
+          const timer = setInterval(function() {
+            current += step;
+            if (current >= total) {
+              current = total;
+              clearInterval(timer);
+            }
+            target.textContent = current + "+";
+          }, 28);
+          observer.unobserve(target);
+        });
+      }, { threshold: 0.7 });
 
-<h2><font face="Arial"> Professional Activities </font></h2>
-<ul style="list-style:none; padding-left:0; font-family:Arial;">
-  <li><strong>Journal Reviewer</strong></li>
-  <li><strong>Conference Reviewer</strong>
-    <ul style="list-style:none; padding-left:18px; margin-top:4px;">
-      <li style="position:relative; padding-left:14px; font-weight:normal; font-size:16px;">
-        <span style="position:absolute; left:0; top:7px; width:5px; height:5px; background:#007acc; border-radius:50%;"></span>
-        CVPR 2026, ICLR 2026
-      </li>
-      <!-- 后续直接复制 <li> 即可 -->
-      <!--
-      <li style="position:relative; padding-left:14px; font-weight:normal; font-size:14px;">
-        <span style="position:absolute; left:0; top:7px; width:5px; height:5px; background:#007acc; border-radius:50%;"></span>
-        NeurIPS 2026
-      </li>
-      -->
-    </ul>
-  </li>
-</ul>
+      counters.forEach(function(counter) {
+        observer.observe(counter);
+      });
+    }
 
-<!--<h2><font face="Arial"> Professional Activities </font></h2>-->
-<!--<ul style="list-style-type:none"> -->
-<!--	 <li> <p style="margin-left: 0px; line-height: 120%; margin-top: 8px; margin-bottom: 8px;"><font face="Arial" size="3"><meta charset="utf-8">-->
-<!--     <strong> Journal Reviewer </strong> <br> </font> </p>-->
-<!--     <strong> Conference Reviewer </strong> <br> </font> </p>-->
-<!--&lt;!&ndash;     ICLR 2026&ndash;&gt;-->
-<!--&lt;!&ndash;   <li> <p style="margin-left: 10px; line-height: 150%; margin-top: -6px; margin-bottom: -6px;">&ndash;&gt;-->
-<!--&lt;!&ndash;        The Conference on Neural Information Processing Systems (NeurIPS) 2024 </p></li>&ndash;&gt;-->
-<!--&lt;!&ndash;    <li> <p style="margin-left: 10px; line-height: 150%; margin-top: -6px; margin-bottom: -6px;">&ndash;&gt;-->
-<!--&lt;!&ndash;        International Conference on Learning Representations (ICLR) 2024 </p></li>&ndash;&gt;-->
-<!--&lt;!&ndash;    <li> <p style="margin-left: 10px; line-height: 150%; margin-top: -6px; margin-bottom: -6px;">&ndash;&gt;-->
-<!--&lt;!&ndash;        IEEE International Conference on Computer Vision (ICCV) 2023, 2021 </p></li>&ndash;&gt;-->
-<!--&lt;!&ndash;    <li> <p style="margin-left: 10px; line-height: 150%; margin-top: -6px; margin-bottom: -6px;">&ndash;&gt;-->
-<!--&lt;!&ndash;        European Conference on Computer Vision (ECCV) 2024, 2022 </p></li>&ndash;&gt;-->
-<!--&lt;!&ndash;    <li> <p style="margin-left: 10px; line-height: 150%; margin-top: -6px; margin-bottom: -6px;">&ndash;&gt;-->
-<!--&lt;!&ndash;        IEEE Conference on Computer Vision and Pattern Recognition (CVPR) 2022, 2023 </p></li>&ndash;&gt;-->
-<!--&lt;!&ndash;    <li> <p style="margin-left: 10px; line-height: 150%; margin-top: -6px; margin-bottom: -6px;">&ndash;&gt;-->
-<!--&lt;!&ndash;        AAAI Conference on Artificial Intelligence (AAAI) 2022, 2023, 2024 </p></li>&ndash;&gt;-->
-<!--&lt;!&ndash;    <li> <p style="margin-left: 10px; line-height: 150%; margin-top: -6px; margin-bottom: -6px;">&ndash;&gt;-->
-<!--&lt;!&ndash;        ACM International Conference on Multimedia (ACM MM) 2021, 2023 </p></li>&ndash;&gt;-->
-<!--</ul>-->
-<!--		-->
+    function setupBars() {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          entry.target.style.width = entry.target.dataset.barWidth;
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.6 });
 
-<div id="footer">
-	<div id="footer-text"></div>
-</div>
+      document.querySelectorAll("[data-bar-width]").forEach(function(bar) {
+        observer.observe(bar);
+      });
+    }
 
-<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=487&t=tt&d=cKc7Wx7G5hG6Og0yBAYJLS_gR5Sc2FMlfnB9zn0pRhE&co=7897ae&ct=ffffff&cmo=3be39e&cmn=ff5353'></script>
+    function setupTilt() {
+      document.querySelectorAll(".tilt-card").forEach(function(card) {
+        card.addEventListener("mousemove", function(event) {
+          const rect = card.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+          const rotateX = ((y / rect.height) - 0.5) * -6;
+          const rotateY = ((x / rect.width) - 0.5) * 8;
+          card.style.transform = "perspective(1200px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-2px)";
+        });
+        card.addEventListener("mouseleave", function() {
+          card.style.transform = "";
+        });
+      });
+    }
 
-<!--	<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=777777&w=487&t=tt&d=xeJu_Kwek6AfO5eDCKFQ1iDWjzFQPLT_dNcYY3WLmrY&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=5b1717'></script>-->
-<p></p><center>
-<br>
-    © Keming Wu | Last updated: 2026/01/26
-</center><p></p>
-<!--</b></b></b></div><b><b><b>-->
+    function setupScrollEffects() {
+      const progress = document.getElementById("scroll-progress");
+      const sections = Array.from(document.querySelectorAll("main section[id]"));
+      const navLinks = Array.from(document.querySelectorAll("#nav-links a"));
+      const visibilityObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          entry.target.classList.toggle("in-view", entry.isIntersecting);
+        });
+      }, { threshold: 0.18 });
 
-</b></b></b></body></html>
+      const currentObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          entry.target.classList.toggle("is-current", entry.isIntersecting);
+        });
+      }, { threshold: 0.52 });
+
+      sections.forEach(function(section) {
+        visibilityObserver.observe(section);
+        currentObserver.observe(section);
+      });
+
+      function onScroll() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progress.style.width = percent + "%";
+
+        let current = sections[0] ? sections[0].id : "";
+        sections.forEach(function(section) {
+          const top = section.offsetTop - 180;
+          if (scrollTop >= top) {
+            current = section.id;
+          }
+        });
+        navLinks.forEach(function(link) {
+          const isActive = link.getAttribute("href") === "#" + current;
+          link.classList.toggle("active", isActive);
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
+
+    function setupCursorGlow() {
+      const glow = document.getElementById("cursor-glow");
+      window.addEventListener("mousemove", function(event) {
+        glow.style.transform = "translate(" + (event.clientX - 150) + "px, " + (event.clientY - 150) + "px)";
+      });
+    }
+
+    function setupParticles() {
+      const canvas = document.getElementById("particle-canvas");
+      const ctx = canvas.getContext("2d");
+      let particles = [];
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        particles = Array.from({ length: Math.min(90, Math.floor(window.innerWidth / 18)) }, function() {
+          return {
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            radius: Math.random() * 1.8 + 0.4
+          };
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i += 1) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(104, 232, 255, 0.55)";
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j += 1) {
+            const q = particles[j];
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.strokeStyle = "rgba(104, 232, 255, " + (0.13 - dist / 1200) + ")";
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+        window.requestAnimationFrame(draw);
+      }
+
+      window.addEventListener("resize", resize);
+      resize();
+      draw();
+    }
+
+    renderHighlights();
+    renderNews();
+    renderPublications();
+    renderProjects();
+    renderExperiences();
+    updateClock();
+    filterPublications();
+    setupFilters();
+    setupReveal();
+    setupCounters();
+    setupBars();
+    setupTilt();
+    setupScrollEffects();
+    setupCursorGlow();
+    setupParticles();
+    window.setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
