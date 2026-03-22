@@ -65,44 +65,16 @@
       font: inherit;
     }
 
-    #particle-canvas,
-    .grid-overlay,
-    .cursor-glow,
-    .aurora {
+    .grid-overlay {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: -3;
-    }
-
-    .grid-overlay {
       z-index: -2;
       background-image:
         linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 44px 44px;
       mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1), transparent 80%);
-    }
-
-    .aurora {
-      z-index: -1;
-      background:
-        radial-gradient(circle at 10% 20%, rgba(104, 232, 255, 0.18), transparent 32%),
-        radial-gradient(circle at 85% 18%, rgba(139, 92, 246, 0.16), transparent 30%),
-        radial-gradient(circle at 60% 70%, rgba(255, 77, 141, 0.12), transparent 28%);
-      filter: blur(18px);
-      animation: drift 26s ease-in-out infinite alternate;
-    }
-
-    .cursor-glow {
-      z-index: 10;
-      background: radial-gradient(circle at center, rgba(104, 232, 255, 0.14), transparent 42%);
-      width: 220px;
-      height: 220px;
-      transform: translate(-50%, -50%);
-      opacity: 0.28;
-      border-radius: 50%;
-      transition: transform 0.08s linear;
     }
 
     .scroll-progress {
@@ -113,7 +85,6 @@
       width: 0;
       background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-4));
       z-index: 40;
-      box-shadow: 0 0 24px rgba(104, 232, 255, 0.55);
     }
 
     .page-shell {
@@ -126,7 +97,6 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      backdrop-filter: blur(10px);
       background: rgba(4, 7, 18, 0.55);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
@@ -158,7 +128,7 @@
       place-items: center;
       font-weight: 700;
       letter-spacing: 0.08em;
-      box-shadow: var(--glow);
+      box-shadow: 0 12px 36px rgba(8, 13, 31, 0.24);
     }
 
     .brand-text {
@@ -212,11 +182,10 @@
       background: linear-gradient(180deg, rgba(10, 16, 36, 0.7), rgba(6, 10, 24, 0.9));
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 28px;
-      box-shadow: var(--glow);
       overflow: hidden;
       opacity: 1;
       transform: none;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: border-color 0.2s ease;
     }
 
     .section::before {
@@ -229,7 +198,6 @@
 
     .section.is-current {
       border-color: rgba(104, 232, 255, 0.12);
-      box-shadow: 0 0 0 1px rgba(104, 232, 255, 0.05), 0 18px 56px rgba(8, 13, 31, 0.46);
     }
 
     .section-inner {
@@ -372,7 +340,6 @@
     .button.primary {
       background: linear-gradient(135deg, rgba(104, 232, 255, 0.2), rgba(139, 92, 246, 0.18));
       border-color: rgba(104, 232, 255, 0.24);
-      box-shadow: 0 10px 28px rgba(9, 14, 32, 0.32);
     }
 
     .button.secondary {
@@ -385,7 +352,6 @@
     .filter-button:hover,
     .social-link:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 26px rgba(4, 7, 18, 0.28);
     }
 
     .hero-links {
@@ -510,7 +476,6 @@
       height: 100%;
       border-radius: inherit;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 18px rgba(104, 232, 255, 0.35);
       transition: width 1s ease;
     }
 
@@ -589,8 +554,7 @@
       border: 1px solid rgba(255, 255, 255, 0.07);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
       transform-style: preserve-3d;
-      transition: transform 0.18s ease, border-color 0.22s ease, box-shadow 0.22s ease;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      transition: border-color 0.2s ease, background 0.2s ease;
     }
 
     .metric-card:hover,
@@ -602,7 +566,6 @@
     .award-card:hover,
     .contact-panel:hover {
       border-color: rgba(104, 232, 255, 0.18);
-      box-shadow: 0 14px 36px rgba(3, 7, 18, 0.28);
     }
 
     .metric-card {
@@ -783,7 +746,6 @@
 
     .search-box:focus {
       border-color: rgba(104, 232, 255, 0.22);
-      box-shadow: 0 0 0 4px rgba(104, 232, 255, 0.08);
     }
 
     .publication-grid {
@@ -897,14 +859,9 @@
     }
 
     .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.45s ease, transform 0.45s ease;
-    }
-
-    .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
+      transition: none;
     }
 
     .tilt-card {
@@ -912,39 +869,15 @@
     }
 
     .pulse-dot {
-      position: relative;
       width: 10px;
       height: 10px;
       border-radius: 50%;
       background: var(--accent-3);
-      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
-      animation: pulse 2s infinite;
     }
 
     .mono {
       font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
       letter-spacing: 0.02em;
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
-      }
-      70% {
-        box-shadow: 0 0 0 14px rgba(34, 197, 94, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-      }
-    }
-
-    @keyframes drift {
-      from {
-        transform: translate3d(-2%, 0, 0) scale(1);
-      }
-      to {
-        transform: translate3d(2%, -3%, 0) scale(1.06);
-      }
     }
 
     @media (max-width: 1080px) {
@@ -985,11 +918,6 @@
         display: none;
       }
 
-      .cursor-glow,
-      #particle-canvas {
-        display: none;
-      }
-
       .contact-chip {
         flex-basis: 100%;
       }
@@ -1015,10 +943,7 @@
   </style>
 </head>
 <body>
-  <canvas id="particle-canvas"></canvas>
   <div class="grid-overlay"></div>
-  <div class="aurora"></div>
-  <div class="cursor-glow" id="cursor-glow"></div>
   <div class="scroll-progress" id="scroll-progress"></div>
 
   <header class="site-header">
@@ -1902,61 +1827,20 @@
     }
 
     function setupReveal() {
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-
       document.querySelectorAll(".reveal").forEach(function(el) {
-        observer.observe(el);
+        el.classList.add("visible");
       });
     }
 
     function setupCounters() {
-      const counters = document.querySelectorAll("[data-counter]");
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-          const target = entry.target;
-          const total = Number(target.dataset.counter);
-          let current = 0;
-          const step = Math.max(1, Math.ceil(total / 40));
-          const timer = setInterval(function() {
-            current += step;
-            if (current >= total) {
-              current = total;
-              clearInterval(timer);
-            }
-            target.textContent = current + "+";
-          }, 28);
-          observer.unobserve(target);
-        });
-      }, { threshold: 0.7 });
-
-      counters.forEach(function(counter) {
-        observer.observe(counter);
+      document.querySelectorAll("[data-counter]").forEach(function(counter) {
+        counter.textContent = counter.dataset.counter + "+";
       });
     }
 
     function setupBars() {
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-          entry.target.style.width = entry.target.dataset.barWidth;
-          observer.unobserve(entry.target);
-        });
-      }, { threshold: 0.6 });
-
       document.querySelectorAll("[data-bar-width]").forEach(function(bar) {
-        observer.observe(bar);
+        bar.style.width = bar.dataset.barWidth;
       });
     }
 
@@ -1964,58 +1848,12 @@
       document.querySelectorAll(".tilt-card").forEach(function(card) {
         card.classList.remove("tilt-card");
       });
-
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-          !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
-          window.innerWidth < 1100) {
-        return;
-      }
-
-      document.querySelectorAll(".portrait-card, .metric-card, .dashboard-card").forEach(function(card) {
-        let rafId = null;
-        let nextTransform = "";
-
-        card.addEventListener("mousemove", function(event) {
-          const rect = card.getBoundingClientRect();
-          const x = event.clientX - rect.left;
-          const y = event.clientY - rect.top;
-          const rotateX = ((y / rect.height) - 0.5) * -3;
-          const rotateY = ((x / rect.width) - 0.5) * 4;
-          nextTransform = "perspective(1200px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-1px)";
-
-          if (rafId) {
-            return;
-          }
-
-          rafId = window.requestAnimationFrame(function() {
-            card.style.transform = nextTransform;
-            rafId = null;
-          });
-        });
-
-        card.addEventListener("mouseleave", function() {
-          if (rafId) {
-            window.cancelAnimationFrame(rafId);
-            rafId = null;
-          }
-          card.style.transform = "";
-        });
-      });
     }
 
     function setupScrollEffects() {
       const progress = document.getElementById("scroll-progress");
       const sections = Array.from(document.querySelectorAll("main section[id]"));
       const navLinks = Array.from(document.querySelectorAll("#nav-links a"));
-      const currentObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          entry.target.classList.toggle("is-current", entry.isIntersecting);
-        });
-      }, { threshold: 0.52 });
-
-      sections.forEach(function(section) {
-        currentObserver.observe(section);
-      });
 
       function onScroll() {
         const scrollTop = window.scrollY;
@@ -2029,6 +1867,7 @@
           if (scrollTop >= top) {
             current = section.id;
           }
+          section.classList.toggle("is-current", current === section.id);
         });
         navLinks.forEach(function(link) {
           const isActive = link.getAttribute("href") === "#" + current;
@@ -2038,108 +1877,6 @@
 
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
-    }
-
-    function setupCursorGlow() {
-      const glow = document.getElementById("cursor-glow");
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-          !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
-          window.innerWidth < 1100) {
-        glow.style.display = "none";
-        return;
-      }
-
-      let rafId = null;
-      let mouseX = 0;
-      let mouseY = 0;
-
-      window.addEventListener("mousemove", function(event) {
-        mouseX = event.clientX - 110;
-        mouseY = event.clientY - 110;
-
-        if (rafId) {
-          return;
-        }
-
-        rafId = window.requestAnimationFrame(function() {
-          glow.style.transform = "translate(" + mouseX + "px, " + mouseY + "px)";
-          rafId = null;
-        });
-      }, { passive: true });
-    }
-
-    function setupParticles() {
-      const canvas = document.getElementById("particle-canvas");
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || window.innerWidth < 1100) {
-        canvas.style.display = "none";
-        return;
-      }
-
-      const ctx = canvas.getContext("2d");
-      let particles = [];
-      let lastFrameTime = 0;
-
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        particles = Array.from({ length: Math.min(28, Math.max(16, Math.floor(window.innerWidth / 90))) }, function() {
-          return {
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.18,
-            vy: (Math.random() - 0.5) * 0.18,
-            radius: Math.random() * 1.4 + 0.5
-          };
-        });
-      }
-
-      function draw(timestamp) {
-        if (document.hidden) {
-          window.requestAnimationFrame(draw);
-          return;
-        }
-
-        if (timestamp - lastFrameTime < 40) {
-          window.requestAnimationFrame(draw);
-          return;
-        }
-        lastFrameTime = timestamp;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i += 1) {
-          const p = particles[i];
-          p.x += p.vx;
-          p.y += p.vy;
-
-          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(104, 232, 255, 0.42)";
-          ctx.fill();
-
-          for (let j = i + 1; j < particles.length; j += 1) {
-            const q = particles[j];
-            const dx = p.x - q.x;
-            const dy = p.y - q.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 90) {
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(q.x, q.y);
-              ctx.strokeStyle = "rgba(104, 232, 255, " + Math.max(0, 0.08 - dist / 1400) + ")";
-              ctx.lineWidth = 1;
-              ctx.stroke();
-            }
-          }
-        }
-        window.requestAnimationFrame(draw);
-      }
-
-      window.addEventListener("resize", resize);
-      resize();
-      draw();
     }
 
     renderHighlights();
@@ -2155,8 +1892,6 @@
     setupBars();
     setupTilt();
     setupScrollEffects();
-    setupCursorGlow();
-    setupParticles();
     window.setInterval(updateClock, 1000);
   </script>
 </body>
