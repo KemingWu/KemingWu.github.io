@@ -7,7 +7,7 @@
   <meta name="description" content="Keming Wu's academic homepage — Ph.D. Student at Tsinghua University working on Multimodal Large Language Models, Reinforcement Learning, Agentic RL, and Reward Modeling." />
   <meta name="google-site-verification" content="yy_3iiS_X6pJdegdwitJMrH0LRLHXwpjrV9RKLXxKjg" />
   <link rel="shortcut icon" href="myIcon.ico" />
-  <link rel="stylesheet" href="jemdoc.css?v=202611" type="text/css" />
+  <link rel="stylesheet" href="jemdoc.css?v=20261119" type="text/css" />
   <title>Keming Wu | Tsinghua University</title>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -20,10 +20,17 @@
 </head>
 <body>
 
+  <!-- Animated background decor -->
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
   <!-- Top Navigation -->
   <nav class="site-nav" aria-label="Primary Navigation">
     <div class="nav-inner">
-      <a href="#top" class="nav-brand">Keming Wu</a>
+      <a href="#top" class="nav-brand"><span class="brand-mark">KW</span>Keming Wu</a>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#research">Research</a>
@@ -33,6 +40,7 @@
         <a href="#background">Education &amp; Service</a>
       </div>
     </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
   </nav>
 
   <main id="top" class="page-container">
@@ -40,12 +48,20 @@
     <!-- Hero / Profile -->
     <header class="hero">
       <div class="hero-info">
+        <a class="hero-eyebrow" href="mailto:wukeming0608@gmail.com">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Open to research collaborations
+        </a>
         <div class="hero-name-row">
           <h1 class="hero-name">Keming Wu</h1>
           <span class="hero-name-cn">吴科明</span>
         </div>
         <div class="hero-role">
           Ph.D. Student, <a href="https://www.thss.tsinghua.edu.cn/" target="_blank" rel="noopener">School of Software</a>, <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener">Tsinghua University</a>
+        </div>
+        <div class="hero-typed">
+          Building multimodal agents that
+          <span class="typed-word" data-words='["reason &amp; act with tools", "learn from human-aligned rewards", "verify what they generate", "model the physical world"]'>reason &amp; act with tools</span><span class="typed-caret" aria-hidden="true"></span>
         </div>
         <div class="hero-meta">
           <span>Beijing, China</span>
@@ -80,6 +96,14 @@
             <img src="./files/icon/X_icon.png" alt="X" />
             <span>X / Twitter</span>
           </a>
+        </div>
+
+        <!-- Numbers are recomputed from the publication list by the script below -->
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num" data-stat="total">22</span><span class="stat-label">Publications</span></div>
+          <div class="stat"><span class="stat-num" data-stat="first">10</span><span class="stat-label">First / Co-First</span></div>
+          <div class="stat"><span class="stat-num" data-stat="neurips">4</span><span class="stat-label">NeurIPS 2026</span></div>
+          <div class="stat"><span class="stat-num" data-stat="y2026">9</span><span class="stat-label">Accepted in 2026</span></div>
         </div>
       </div>
 
@@ -118,8 +142,11 @@
       </p>
 
       <div class="roadmap-grid">
-        <div class="roadmap-card thread-1">
-          <div class="roadmap-step">01 &middot; Policy &amp; Reasoning</div>
+        <div class="roadmap-card thread-1" data-thread="rl">
+          <div class="roadmap-head">
+            <span class="roadmap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+            <div class="roadmap-step">01 &middot; Policy &amp; Reasoning</div>
+          </div>
           <h3>Multimodal Post-Training &amp; Agentic RL</h3>
           <p>
             Designing open and effective post-training recipes for MLLMs&mdash;spanning SFT-to-RL pre-alignment via on-policy distillation, native and parallel tool calling over long videos, and spatio-temporal cue gating for streaming video understanding.
@@ -132,10 +159,14 @@
             <span class="mini-chip">StreamOPD</span>
             <span class="mini-chip">TaskGround</span>
           </div>
+          <a class="roadmap-more" href="#publications" data-filter-target="rl">View papers <span>&rarr;</span></a>
         </div>
 
-        <div class="roadmap-card thread-2">
-          <div class="roadmap-step">02 &middot; Feedback &amp; Verification</div>
+        <div class="roadmap-card thread-2" data-thread="eval">
+          <div class="roadmap-head">
+            <span class="roadmap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <div class="roadmap-step">02 &middot; Feedback &amp; Verification</div>
+          </div>
           <h3>Reward Modeling &amp; Agentic Evaluation</h3>
           <p>
             RL and post-training are bounded by the fidelity of their rewards and verifiers. I build human-aligned reward models, think-before-scoring video evaluators, world-state reasoning benchmarks, and automated testbeds for deep-research &amp; coding agents.
@@ -148,10 +179,14 @@
             <span class="mini-chip">DeepResearchEval</span>
             <span class="mini-chip">WideSWE</span>
           </div>
+          <a class="roadmap-more" href="#publications" data-filter-target="eval">View papers <span>&rarr;</span></a>
         </div>
 
-        <div class="roadmap-card thread-3">
-          <div class="roadmap-step">03 &middot; Synthesis &amp; Simulation</div>
+        <div class="roadmap-card thread-3" data-thread="gen">
+          <div class="roadmap-head">
+            <span class="roadmap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
+            <div class="roadmap-step">03 &middot; Synthesis &amp; Simulation</div>
+          </div>
           <h3>Visual Generation &amp; World Modeling</h3>
           <p>
             Advancing controllable Diffusion Transformers across fine-grained layouts, article-level visual text, and transparent multi-layer synthesis&mdash;and charting the evolution from atomic visual mapping toward agentic world modeling.
@@ -162,11 +197,42 @@
             <span class="mini-chip">BizGen</span>
             <span class="mini-chip">PrismLayers</span>
           </div>
+          <a class="roadmap-more" href="#publications" data-filter-target="gen">View papers <span>&rarr;</span></a>
         </div>
       </div>
 
-      <div class="roadmap-flow-note">
-        <strong>Unified Loop:</strong> Generative World Models &amp; Multimodal Representations &nbsp;&rarr;&nbsp; Human-Aligned Rewards &amp; Verifiers &nbsp;&rarr;&nbsp; Multimodal RL &amp; Agentic Tool-Use Policies
+      <!-- Unified Loop: world models -> rewards & verifiers -> RL policies -> back to world models -->
+      <div class="loop" role="group" aria-label="Unified research loop">
+        <div class="loop-head">
+          <span class="loop-kicker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>Unified Loop</span>
+          <span class="loop-desc">Each thread supplies the next &mdash; and the loop closes back on itself</span>
+        </div>
+        <div class="loop-track">
+          <a class="loop-node n-gen" href="#publications" data-filter-target="gen">
+            <span class="loop-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
+            <span class="loop-node-verb">Simulate &amp; Represent</span>
+            <span class="loop-node-title">Generative World Models &amp; Multimodal Representations</span>
+            <span class="loop-node-hint">See papers &rarr;</span>
+          </a>
+          <div class="loop-link l1" aria-hidden="true"><span class="loop-dot"></span></div>
+          <a class="loop-node n-rew" href="#publications" data-filter-target="eval">
+            <span class="loop-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <span class="loop-node-verb">Judge &amp; Verify</span>
+            <span class="loop-node-title">Human-Aligned Rewards &amp; Verifiers</span>
+            <span class="loop-node-hint">See papers &rarr;</span>
+          </a>
+          <div class="loop-link l2" aria-hidden="true"><span class="loop-dot"></span></div>
+          <a class="loop-node n-rl" href="#publications" data-filter-target="rl">
+            <span class="loop-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+            <span class="loop-node-verb">Act &amp; Improve</span>
+            <span class="loop-node-title">Multimodal RL &amp; Agentic Tool-Use Policies</span>
+            <span class="loop-node-hint">See papers &rarr;</span>
+          </a>
+        </div>
+        <div class="loop-return">
+          <span class="loop-return-dot" aria-hidden="true"></span>
+          <span class="loop-return-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>Policy rollouts feed back as new experience for world modeling</span>
+        </div>
       </div>
     </section>
 
@@ -177,9 +243,9 @@
       </div>
       <div class="news-box">
         <ul class="news-list">
-          <li class="news-item">
+          <li class="news-item is-new">
             <span class="news-date">2026.09</span>
-            <span class="news-content">Four papers got accepted by <strong>NeurIPS 2026</strong>: <strong>WorldReasonBench</strong> (First Author), <strong>ParaVT</strong>, <strong>Beyond SFT-to-RL</strong>, and <strong>TaskGround</strong>!</span>
+            <span class="news-content"><span class="new-tag">NEW</span>Four papers got accepted by <strong>NeurIPS 2026</strong>: <strong>WorldReasonBench</strong> (First Author), <strong>ParaVT</strong>, <strong>Beyond SFT-to-RL</strong>, and <strong>TaskGround</strong>!</span>
           </li>
           <li class="news-item">
             <span class="news-date">2026.08</span>
@@ -702,33 +768,191 @@
 
   </main>
 
+  <button class="back-to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </button>
+
   <script>
     (function () {
-      var buttons = document.querySelectorAll('.filter-btn');
-      var groups = document.querySelectorAll('.pub-group');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var items = document.querySelectorAll('.pub-item');
 
+      /* ---------- Publication filter ---------- */
+      var buttons = document.querySelectorAll('.filter-btn');
+      var groups = document.querySelectorAll('.pub-group');
+
+      function matches(item, filter) {
+        return filter === 'all' ||
+               (filter === 'first' && item.getAttribute('data-first') === 'true') ||
+               item.getAttribute('data-cat') === filter;
+      }
+
       buttons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var filter = btn.getAttribute('data-filter');
-          buttons.forEach(function (b) { b.classList.remove('active'); });
-          btn.classList.add('active');
+        var filter = btn.getAttribute('data-filter');
+        var count = Array.prototype.filter.call(items, function (it) { return matches(it, filter); }).length;
+        var badge = document.createElement('span');
+        badge.className = 'filter-count';
+        badge.textContent = count;
+        btn.appendChild(badge);
+      });
 
-          items.forEach(function (item) {
-            var cat = item.getAttribute('data-cat');
-            var isFirst = item.getAttribute('data-first') === 'true';
-            var show = (filter === 'all') ||
-                       (filter === 'first' && isFirst) ||
-                       (filter === cat);
-            item.classList.toggle('hidden', !show);
-          });
+      function applyFilter(filter) {
+        buttons.forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-filter') === filter);
+        });
+        var shown = 0;
+        items.forEach(function (item) {
+          var show = matches(item, filter);
+          item.classList.toggle('hidden', !show);
+          item.classList.remove('pop', 'reveal', 'in');
+          if (show && !reduceMotion) {
+            void item.offsetWidth; // restart the animation
+            item.style.animationDelay = Math.min(shown, 10) * 40 + 'ms';
+            item.classList.add('pop');
+            shown++;
+          }
+        });
+        groups.forEach(function (group) {
+          var visibleCount = group.querySelectorAll('.pub-item:not(.hidden)').length;
+          group.classList.toggle('hidden', visibleCount === 0);
+        });
+      }
 
-          groups.forEach(function (group) {
-            var visibleCount = group.querySelectorAll('.pub-item:not(.hidden)').length;
-            group.classList.toggle('hidden', visibleCount === 0);
-          });
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () { applyFilter(btn.getAttribute('data-filter')); });
+      });
+
+      /* Research cards & loop nodes jump to their publication group */
+      document.querySelectorAll('[data-filter-target]').forEach(function (el) {
+        el.addEventListener('click', function () { applyFilter(el.getAttribute('data-filter-target')); });
+      });
+
+      /* Hovering a loop node highlights the matching research card */
+      document.querySelectorAll('.loop-node').forEach(function (node) {
+        var card = document.querySelector('.roadmap-card[data-thread="' + node.getAttribute('data-filter-target') + '"]');
+        if (!card) return;
+        node.addEventListener('mouseenter', function () { card.classList.add('is-linked'); });
+        node.addEventListener('mouseleave', function () { card.classList.remove('is-linked'); });
+      });
+
+      /* Spotlight that follows the cursor on research cards */
+      document.querySelectorAll('.roadmap-card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
         });
       });
+
+      /* ---------- Hero stats (derived from the publication list) ---------- */
+      function isAccepted2026(item) {
+        return Array.prototype.some.call(item.querySelectorAll('.badge-top, .badge-journal'), function (b) {
+          return /2026$/.test(b.textContent.trim());
+        });
+      }
+      var stats = {
+        total: items.length,
+        first: document.querySelectorAll('.pub-item[data-first="true"]').length,
+        neurips: Array.prototype.filter.call(document.querySelectorAll('.pub-item .badge-top'), function (b) {
+          return b.textContent.trim() === 'NeurIPS 2026';
+        }).length,
+        y2026: Array.prototype.filter.call(items, isAccepted2026).length
+      };
+      var statEls = document.querySelectorAll('.stat-num[data-stat]');
+      statEls.forEach(function (el) { el.textContent = stats[el.getAttribute('data-stat')]; });
+
+      function countUp(el) {
+        var target = stats[el.getAttribute('data-stat')];
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / 1100, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      /* ---------- Typing effect ---------- */
+      var typed = document.querySelector('.typed-word');
+      if (typed && !reduceMotion) {
+        var words = JSON.parse(typed.getAttribute('data-words'));
+        var wi = 0, ci = words[0].length, deleting = false;
+        (function tick() {
+          var word = words[wi];
+          var delay;
+          if (!deleting && ci === word.length) { deleting = true; delay = 2200; }
+          else if (deleting && ci === 0) { deleting = false; wi = (wi + 1) % words.length; delay = 300; }
+          else { ci += deleting ? -1 : 1; delay = deleting ? 28 : 55; }
+          typed.textContent = words[wi].slice(0, ci);
+          setTimeout(tick, delay);
+        })();
+      }
+
+      /* ---------- Nav: scroll progress, shadow, scrollspy, back-to-top ---------- */
+      var nav = document.querySelector('.site-nav');
+      var progress = document.querySelector('.scroll-progress');
+      var toTop = document.querySelector('.back-to-top');
+      var navLinks = document.querySelectorAll('.nav-links a');
+      var sections = Array.prototype.map.call(navLinks, function (a) {
+        return document.querySelector(a.getAttribute('href'));
+      });
+      var ticking = false;
+
+      function onScroll() {
+        var y = window.scrollY;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+        nav.classList.toggle('scrolled', y > 8);
+        toTop.classList.toggle('show', y > 600);
+
+        var current = -1;
+        sections.forEach(function (sec, i) {
+          if (sec && sec.getBoundingClientRect().top <= 120) current = i;
+        });
+        if (max - y < 4) current = sections.length - 1;
+        navLinks.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+      }, { passive: true });
+      onScroll();
+
+      toTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+
+      /* ---------- Scroll reveal ---------- */
+      if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+      document.documentElement.classList.add('js-reveal');
+      var targets = document.querySelectorAll(
+        '.section-header, .about-text, .research-intro, .roadmap-card, .loop, .news-box, ' +
+        '.pub-filters, .pub-group-header, .pub-item, .oss-card, .edu-card, .info-panel, .hero-stats'
+      );
+      targets.forEach(function (el) { el.classList.add('reveal'); });
+
+      var io = new IntersectionObserver(function (entries) {
+        var batch = 0;
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          io.unobserve(el);
+          var delay = Math.min(batch++, 6) * 70;
+          el.style.transitionDelay = delay + 'ms';
+          el.classList.add('in');
+          if (el.classList.contains('hero-stats')) statEls.forEach(countUp);
+          // Drop the reveal classes afterwards so hover transforms work normally
+          setTimeout(function () {
+            el.style.transitionDelay = '';
+            el.classList.remove('reveal', 'in');
+          }, 800 + delay);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      targets.forEach(function (el) { io.observe(el); });
     })();
   </script>
 </body>
