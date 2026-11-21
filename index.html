@@ -2,12 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="keywords" content="Keming Wu, Tsinghua University, Multimodal Large Language Model, MLLM, Reinforcement Learning, Agentic RL, Reward Modeling, World Modeling" />
   <meta name="description" content="Keming Wu's academic homepage — Ph.D. Student at Tsinghua University working on Multimodal Large Language Models, Reinforcement Learning, Agentic RL, and Reward Modeling." />
   <meta name="google-site-verification" content="yy_3iiS_X6pJdegdwitJMrH0LRLHXwpjrV9RKLXxKjg" />
+  <meta name="theme-color" content="#04060d" />
+  <meta property="og:title" content="Keming Wu" />
+  <meta property="og:description" content="Ph.D. student at Tsinghua University. Multimodal LLMs, reinforcement learning, agentic RL, reward modeling and world models." />
   <link rel="shortcut icon" href="myIcon.ico" />
-  <link rel="stylesheet" href="jemdoc.css?v=20261119c" type="text/css" />
+  <link rel="preload" href="files/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="files/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="jemdoc.css?v=20261121" type="text/css" />
   <title>Keming Wu | Tsinghua University</title>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -20,973 +25,665 @@
 </head>
 <body>
 
-  <!-- Animated background decor -->
-  <div class="bg-decor" aria-hidden="true">
-    <span class="blob b1"></span>
-    <span class="blob b2"></span>
-    <span class="blob b3"></span>
-  </div>
+  <!-- Night sky: CSS nebula underneath, WebGL stars on top. Each .slot below is an empty
+       box where the stars gather into a figure: a globe, the research loop, and a KW monogram. -->
+  <div class="nebula" aria-hidden="true"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
 
-  <!-- Top Navigation -->
-  <nav class="site-nav" aria-label="Primary Navigation">
-    <div class="nav-inner">
-      <a href="#top" class="nav-brand"><span class="brand-mark">KW</span>Keming Wu</a>
+  <nav class="nav" aria-label="Primary Navigation">
+    <div class="nav-inner wrap">
+      <a href="#about" class="brand">Keming <em>Wu</em></a>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#research">Research</a>
         <a href="#news">News</a>
-        <a href="#publications">Publications</a>
-        <a href="#open-source">Open Source</a>
-        <a href="#background">Education &amp; Service</a>
+        <a href="#papers">Papers</a>
+        <a href="#labs">Labs</a>
+        <a href="#background">Service</a>
       </div>
     </div>
-    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="nav-progress" aria-hidden="true"></div>
   </nav>
 
-  <main id="top" class="page-container">
+  <main>
 
-    <!-- Hero / Profile -->
-    <header class="hero">
-      <div class="hero-info">
-        <a class="hero-eyebrow" href="mailto:wukeming0608@gmail.com">
-          <span class="pulse-dot" aria-hidden="true"></span>
-          Open to research collaborations
-        </a>
-        <div class="hero-name-row">
-          <h1 class="hero-name">Keming Wu</h1>
-          <span class="hero-name-cn">吴科明</span>
-        </div>
-        <div class="hero-role">
-          Ph.D. Student, <a href="https://www.thss.tsinghua.edu.cn/" target="_blank" rel="noopener">School of Software</a>, <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener">Tsinghua University</a>
-        </div>
-        <div class="hero-typed">
-          Building multimodal agents that
-          <span class="typed-word" data-words='["reason &amp; act with tools", "learn from human-aligned rewards", "verify what they generate", "model the physical world"]'>reason &amp; act with tools</span><span class="typed-caret" aria-hidden="true"></span>
-        </div>
-        <div class="hero-meta">
-          <span>Beijing, China</span>
-          <span>&middot;</span>
-          <a href="mailto:wukeming0608@gmail.com">wukeming0608@gmail.com</a>
-          <span>&middot;</span>
-          <a href="mailto:wukm25@mails.tsinghua.edu.cn">wukm25@mails.tsinghua.edu.cn</a>
-        </div>
+    <!-- ===================== Hero / About ===================== -->
+    <section id="about" class="hero wrap" data-sky="aurora">
+      <div class="hero-text">
+        <div class="avatar rise"><img src="./files/avatar/person11.jpg" alt="Keming Wu" /></div>
+        <p class="kicker rise">Ph.D. Student &middot; Tsinghua University</p>
+        <h1 class="hero-name rise">Keming <em>Wu</em><span class="cn">吴科明</span></h1>
+        <p class="tagline rise">teaching multimodal models to <span class="w-world">see</span>, <span class="w-reward">judge</span>, and <span class="w-rl">act</span>.</p>
+        <p class="lede rise">
+          I am a Ph.D. student at the <a href="https://www.thss.tsinghua.edu.cn/" target="_blank" rel="noopener">School of Software</a>, <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener">Tsinghua University</a>, advancing <strong>Multimodal Large Language Models</strong> through <strong>Reinforcement Learning</strong>, <strong>Agentic RL</strong>, <strong>Reward Modeling</strong>, and <strong>Visual Generation &amp; World Modeling</strong>&mdash;moving multimodal models beyond passive perception toward <em>active reasoning, tool use, verifiable feedback, and physical-world understanding</em>.
+        </p>
 
-        <div class="hero-tags">
-          <span class="topic-pill">Multimodal LLMs</span>
-          <span class="topic-pill">Reinforcement Learning</span>
-          <span class="topic-pill">Agentic RL</span>
-          <span class="topic-pill purple">Reward Modeling &amp; Eval</span>
-          <span class="topic-pill teal">Visual &amp; World Modeling</span>
-        </div>
+        <dl class="facts rise">
+          <div class="fact">
+            <dt>Education</dt>
+            <dd>Ph.D. Student, <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener">Tsinghua University</a><span class="sub">School of Software &middot; Aug. 2025 &ndash; Present</span></dd>
+          </div>
+          <div class="fact">
+            <dt>Labs</dt>
+            <dd>
+              Member of <a href="https://github.com/UniX-AI-Lab" target="_blank" rel="noopener">UniX AI Lab</a> &middot;
+              Contributor to <a href="https://github.com/EvolvingLMMs-Lab" target="_blank" rel="noopener">LMMs-Lab</a> &middot;
+              Collaborator with <a href="https://github.com/TIGER-AI-Lab" target="_blank" rel="noopener">TIGER Lab</a>
+            </dd>
+          </div>
+          <div class="fact">
+            <dt>Contact</dt>
+            <dd>
+              <span class="contact-line"><a href="mailto:wukeming0608@gmail.com">wukeming0608@gmail.com</a><button class="copy-btn" type="button" data-copy="wukeming0608@gmail.com">Copy</button></span>
+              <span class="contact-line"><a href="mailto:wukm25@mails.tsinghua.edu.cn">wukm25@mails.tsinghua.edu.cn</a><button class="copy-btn" type="button" data-copy="wukm25@mails.tsinghua.edu.cn">Copy</button></span>
+              <span class="contact-links">
+                <a href="https://scholar.google.com/citations?user=cOzwZBMAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar&nbsp;&#8599;</a>
+                <a href="https://www.semanticscholar.org/author/Keming-Wu/2383071656" target="_blank" rel="noopener">Semantic Scholar&nbsp;&#8599;</a>
+                <a href="https://github.com/KemingWu" target="_blank" rel="noopener">GitHub&nbsp;&#8599;</a>
+                <a href="https://x.com/Keming_Charles" target="_blank" rel="noopener">X&nbsp;&#8599;</a>
+              </span>
+              <span class="sub">Open to collaborations on MLLM post-training, RL, agentic RL, reward modeling, and world models&mdash;feel free to reach out.</span>
+            </dd>
+          </div>
+        </dl>
 
-        <div class="social-links">
-          <a class="social-btn" href="https://scholar.google.com/citations?user=cOzwZBMAAAAJ&hl=en" target="_blank" rel="noopener">
-            <img src="./files/icon/google_scholar.png" alt="Google Scholar" />
-            <span>Google Scholar</span>
-          </a>
-          <a class="social-btn" href="https://www.semanticscholar.org/author/Keming-Wu/2383071656" target="_blank" rel="noopener">
-            <img src="./files/icon/semantic.png" alt="Semantic Scholar" />
-            <span>Semantic Scholar</span>
-          </a>
-          <a class="social-btn" href="https://github.com/KemingWu" target="_blank" rel="noopener">
-            <img src="./files/icon/github_s.jpg" alt="GitHub" />
-            <span>GitHub</span>
-          </a>
-          <a class="social-btn" href="https://x.com/Keming_Charles" target="_blank" rel="noopener">
-            <img src="./files/icon/X_icon.png" alt="X" />
-            <span>X / Twitter</span>
-          </a>
-        </div>
-
-        <!-- Numbers are recomputed from the publication list by the script below -->
-        <div class="hero-stats">
-          <div class="stat"><span class="stat-num" data-stat="total">22</span><span class="stat-label">Publications</span></div>
+        <!-- Numbers are recomputed from the paper list by main.js -->
+        <div class="stats rise">
+          <div class="stat"><span class="stat-num" data-stat="total">22</span><span class="stat-label">Papers</span></div>
           <div class="stat"><span class="stat-num" data-stat="first">10</span><span class="stat-label">First / Co-First</span></div>
           <div class="stat"><span class="stat-num" data-stat="neurips">4</span><span class="stat-label">NeurIPS 2026</span></div>
           <div class="stat"><span class="stat-num" data-stat="y2026">9</span><span class="stat-label">Accepted in 2026</span></div>
         </div>
+
+        <a class="scroll-cue rise" href="#research"><span class="cue-line"></span>Scroll, and the world becomes a loop</a>
       </div>
 
-      <div class="hero-avatar">
-        <img src="./files/avatar/person11.jpg" alt="Keming Wu" />
+      <div class="slot slot-globe" data-shape="0" tabindex="0" role="img" aria-label="Stars forming a rotating globe, a nod to world modeling. Drag or use arrow keys to rotate.">
+        <span class="slot-hint">drag to rotate</span>
       </div>
-    </header>
+    </section>
 
-    <!-- About -->
-    <section id="about" class="section">
-      <div class="section-header">
-        <h2 class="section-title">About</h2>
-      </div>
-      <div class="about-text">
-        <p>
-          I am a Ph.D. student at the <a href="https://www.thss.tsinghua.edu.cn/" target="_blank" rel="noopener">School of Software</a>, <a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener">Tsinghua University</a>.
-          My research centers on advancing <strong>Multimodal Large Language Models (MLLMs)</strong> through <strong>Reinforcement Learning (RL)</strong>, <strong>Agentic RL</strong>, <strong>Reward Modeling</strong>, and <strong>Visual Generation &amp; World Modeling</strong>.
+    <!-- ===================== Research: the unified loop ===================== -->
+    <section id="research" class="section wrap" data-sky="nebula">
+      <header class="section-head center reveal">
+        <p class="kicker">Research</p>
+        <h2 class="display">One unified <em>loop</em></h2>
+        <p class="section-sub">
+          My work follows a single trajectory: generative models that <strong>simulate</strong> the world, human-aligned rewards that <strong>judge</strong> it, and multimodal RL policies that <strong>act</strong> in it&mdash;each thread feeding the next.
         </p>
-        <p>
-          Specifically, I am interested in how multimodal foundation models can move beyond passive perception and static generation toward <em>active reasoning, tool use, verifiable feedback, and physical world understanding</em>&mdash;closing the loop between multimodal post-training, human-aligned reward signals, and generative world modeling.
-        </p>
-        <p>
-          I am a member of <a href="https://github.com/UniX-AI-Lab" target="_blank" rel="noopener">UniX AI Lab</a>, a contributor to <a href="https://github.com/EvolvingLMMs-Lab" target="_blank" rel="noopener">LMMs-Lab</a>, and work closely with <a href="https://github.com/TIGER-AI-Lab" target="_blank" rel="noopener">TIGER Lab</a>&mdash;where much of my work on multimodal reasoning, agentic video RL, world-state reasoning, and human-aligned reward modeling has been developed.
-        </p>
-        <div class="collab-grid">
-          <a class="collab-card c-unix" href="https://github.com/UniX-AI-Lab" target="_blank" rel="noopener">
-            <span class="collab-mark" aria-hidden="true">UX</span>
-            <span class="collab-body">
-              <span class="collab-name">UniX AI Lab <span class="collab-role">Member</span> <span class="collab-arrow">&nearr;</span></span>
-              <span class="collab-desc">Open research collective &middot; Towards Real-World Perception and Modeling</span>
-              <span class="collab-works">WorldReasonBench &middot; StreamOPD &middot; Visual Gen in New Era</span>
-            </span>
-          </a>
-          <a class="collab-card c-lmms" href="https://github.com/EvolvingLMMs-Lab" target="_blank" rel="noopener">
-            <span class="collab-mark" aria-hidden="true">LM</span>
-            <span class="collab-body">
-              <span class="collab-name">LMMs-Lab <span class="collab-role">Contributor</span> <span class="collab-arrow">&nearr;</span></span>
-              <span class="collab-desc">Open large multimodal models, training recipes &amp; evaluation tools</span>
-              <span class="collab-works">OpenMMReasoner &middot; LongVT &middot; ParaVT &middot; LMMs-Eval</span>
-            </span>
-          </a>
-          <a class="collab-card c-tiger" href="https://github.com/TIGER-AI-Lab" target="_blank" rel="noopener">
-            <span class="collab-mark" aria-hidden="true">TG</span>
-            <span class="collab-body">
-              <span class="collab-name">TIGER Lab <span class="collab-role">Collaborator</span> <span class="collab-arrow">&nearr;</span></span>
-              <span class="collab-desc">University of Waterloo &middot; Text and Image Generative Research</span>
-              <span class="collab-works">EditReward &middot; VideoScore2 &middot; ImagenWorld</span>
-            </span>
-          </a>
+      </header>
+
+      <div class="loop-grid">
+        <div class="slot slot-loop" data-shape="1" tabindex="0" role="img" aria-label="Stars forming a three-lobed trefoil knot: one lobe per research thread, joined in a single loop. Drag or use arrow keys to rotate.">
+          <span class="slot-hint">drag to rotate &middot; hover a thread</span>
         </div>
-        <div class="callout-box">
-          <strong>Open to Collaboration:</strong> I am always happy to discuss ideas and explore collaborations on MLLM post-training, Reinforcement Learning, Agentic RL, Reward Modeling, and World Models. Feel free to reach out via email!
+
+        <ol class="threads">
+          <li class="thread t-world reveal" data-lobe="0">
+            <div class="thread-head"><span class="thread-num">01</span><span class="thread-verb">Simulate &amp; Represent</span></div>
+            <h3>Visual Generation &amp; World Modeling</h3>
+            <p>Advancing controllable Diffusion Transformers across fine-grained layouts, article-level visual text, and transparent multi-layer synthesis&mdash;and charting the evolution from atomic visual mapping toward agentic world modeling.</p>
+            <p class="thread-papers">Visual Gen in the New Era &middot; HybridLayout &middot; BizGen &middot; PrismLayers</p>
+            <a class="thread-more" href="#papers" data-filter-target="gen">View papers &rarr;</a>
+          </li>
+          <li class="thread t-reward reveal" data-lobe="1">
+            <div class="thread-head"><span class="thread-num">02</span><span class="thread-verb">Judge &amp; Verify</span></div>
+            <h3>Reward Modeling &amp; Agentic Evaluation</h3>
+            <p>RL and post-training are bounded by the fidelity of their rewards and verifiers. I build human-aligned reward models, think-before-scoring video evaluators, world-state reasoning benchmarks, and automated testbeds for deep-research &amp; coding agents.</p>
+            <p class="thread-papers">WorldReasonBench &middot; EditReward &middot; VideoScore2 &middot; ImagenWorld &middot; DeepResearchEval &middot; WideSWE</p>
+            <a class="thread-more" href="#papers" data-filter-target="eval">View papers &rarr;</a>
+          </li>
+          <li class="thread t-rl reveal" data-lobe="2">
+            <div class="thread-head"><span class="thread-num">03</span><span class="thread-verb">Act &amp; Improve</span></div>
+            <h3>Multimodal Post-Training &amp; Agentic RL</h3>
+            <p>Designing open and effective post-training recipes for MLLMs&mdash;spanning SFT-to-RL pre-alignment via on-policy distillation, native and parallel tool calling over long videos, and spatio-temporal cue gating for streaming video understanding.</p>
+            <p class="thread-papers">OpenMMReasoner &middot; LongVT &middot; ParaVT &middot; Beyond SFT-to-RL &middot; StreamOPD &middot; TaskGround</p>
+            <a class="thread-more" href="#papers" data-filter-target="rl">View papers &rarr;</a>
+          </li>
+        </ol>
+      </div>
+
+      <p class="loop-return reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg><span>Policy rollouts feed back as new experience for world modeling&mdash;and the loop begins again.</span></p>
+    </section>
+
+    <!-- ===================== News ===================== -->
+    <section id="news" class="section wrap narrow" data-sky="indigo">
+      <header class="section-head reveal">
+        <p class="kicker">News</p>
+        <h2 class="display">Latest <em>news</em></h2>
+      </header>
+      <ul class="news-list reveal">
+        <li class="news-row is-new">
+          <span class="news-date">2026.11</span>
+          <span class="news-text"><span class="new-tag">New</span><strong>DeepResearchEval</strong> got accepted by <strong>EACL 2027</strong>!</span>
+        </li>
+        <li class="news-row">
+          <span class="news-date">2026.09</span>
+          <span class="news-text">Four papers got accepted by <strong>NeurIPS 2026</strong>: <strong>WorldReasonBench</strong> (First Author), <strong>ParaVT</strong>, <strong>Beyond SFT-to-RL</strong>, and <strong>TaskGround</strong>!</span>
+        </li>
+        <li class="news-row">
+          <span class="news-date">2026.08</span>
+          <span class="news-text">Released <strong>StreamOPD</strong>, a post-training recipe with spatio-temporal cue gating for streaming video understanding.</span>
+        </li>
+        <li class="news-row">
+          <span class="news-date">2026.05</span>
+          <span class="news-text"><strong>VideoScore2</strong> got accepted by <strong>TMLR 2026</strong>; released <strong>WorldReasonBench</strong>, <strong>ParaVT</strong>, and our perspective paper <strong>Visual Generation in the New Era</strong>.</span>
+        </li>
+        <li class="news-row">
+          <span class="news-date">2026.02</span>
+          <span class="news-text">Two papers got accepted by <strong>CVPR 2026</strong>: <strong>OpenMMReasoner</strong> (Co-First, HF Daily Papers #1) and <strong>LongVT</strong> (HF Daily Papers #2).</span>
+        </li>
+        <li class="news-row">
+          <span class="news-date">2026.01</span>
+          <span class="news-text">Two papers got accepted by <strong>ICLR 2026</strong>: <strong>EditReward</strong> (First Author) and <strong>ImagenWorld</strong>; released <strong>DeepResearchEval</strong>.</span>
+        </li>
+        <li class="news-row extra">
+          <span class="news-date">2025.08</span>
+          <span class="news-text">One paper got accepted by <strong>ACM MM 2025</strong> Brave New Ideas Track (<strong>Oral</strong>).</span>
+        </li>
+        <li class="news-row extra">
+          <span class="news-date">2025.06</span>
+          <span class="news-text"><strong>HybridLayout</strong> (First Author) got accepted by <strong>ICCV 2025</strong>.</span>
+        </li>
+        <li class="news-row extra">
+          <span class="news-date">2025.05</span>
+          <span class="news-text">One paper got accepted by <strong>ICML 2025</strong>; released <strong>PrismLayers</strong> (Co-First Author).</span>
+        </li>
+        <li class="news-row extra">
+          <span class="news-date">2025.02</span>
+          <span class="news-text"><strong>BizGen</strong> got accepted by <strong>CVPR 2025</strong>.</span>
+        </li>
+        <li class="news-row extra">
+          <span class="news-date">2024.10</span>
+          <span class="news-text">One first-author paper got accepted by <strong>IEEE TSMC: Systems</strong> (CCF-B).</span>
+        </li>
+        <li class="news-row extra">
+          <span class="news-date">2024.07</span>
+          <span class="news-text"><strong>RSC-SNN</strong> (Co-First Author) got accepted by <strong>ACM MM 2024</strong>.</span>
+        </li>
+        <li class="news-row extra">
+          <span class="news-date">2024.01</span>
+          <span class="news-text">One first-author paper got accepted by <strong>Information Sciences</strong> (CCF-B).</span>
+        </li>
+      </ul>
+      <button class="text-btn news-toggle" type="button" aria-expanded="false" data-more="Show 7 earlier updates" data-less="Show less">Show 7 earlier updates</button>
+    </section>
+
+    <!-- ===================== Papers ===================== -->
+    <section id="papers" class="section wrap" data-sky="amber">
+      <header class="section-head center reveal">
+        <p class="kicker">Papers</p>
+        <h2 class="display">Selected <em>papers</em></h2>
+        <p class="section-sub">Newest first. * Equal contribution. Full list on <a href="https://scholar.google.com/citations?user=cOzwZBMAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+      </header>
+
+      <div class="tabs reveal" role="tablist" aria-label="Filter papers">
+        <button class="tab active" data-filter="all" type="button">All</button>
+        <button class="tab" data-filter="first" type="button">&#10022; First Author</button>
+        <button class="tab" data-filter="rl" type="button">Agentic RL</button>
+        <button class="tab" data-filter="eval" type="button">Reward &amp; Eval</button>
+        <button class="tab" data-filter="gen" type="button">Gen &amp; World Models</button>
+        <button class="tab" data-filter="earlier" type="button">Earlier</button>
+      </div>
+
+      <div class="paper-list">
+      <div class="year-group">
+        <div class="year">2027</div>
+        <div class="year-papers">
+          <article class="paper t-reward" data-cat="eval" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2601.09688" target="_blank" rel="noopener">DeepResearchEval: An Automated Framework for Deep Research Task Construction and Agentic Evaluation</a></h3>
+              <div class="paper-meta"><span class="venue">EACL 2027</span></div>
+              <p class="paper-authors">Yibo Wang, Lei Wang, Yue Deng, <span class="me">Keming Wu</span>, Yao Xiao, Huanjin Yao, Liwei Kang, Hai Ye, Yongcheng Jing, Lidong Bing</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Reward &amp; Eval</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2601.09688" target="_blank" rel="noopener">PDF</a>
+              <a href="https://github.com/Infinity-AILab/DeepResearchEval" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
         </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year">2026</div>
+        <div class="year-papers">
+          <article class="paper t-rl" data-cat="rl" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2511.16334" target="_blank" rel="noopener">OpenMMReasoner: Pushing the Frontiers for Multimodal Reasoning with an Open and General Recipe</a></h3>
+              <div class="paper-meta"><span class="venue">CVPR 2026</span><span class="role">&#10022; Co-First Author</span><span class="award">HF Daily Papers #1</span></div>
+              <p class="paper-authors">Kaichen Zhang*, <span class="me">Keming Wu*</span>, Zuhao Yang, Bo Li, Kairui Hu, Bin Wang, Ziwei Liu, Xingxuan Li, Lidong Bing</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Agentic RL</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2511.16334" target="_blank" rel="noopener">PDF</a>
+              <a href="https://evolvinglmms-lab.github.io/OpenMMReasoner/" target="_blank" rel="noopener">Page</a>
+              <a href="https://github.com/EvolvingLMMs-Lab/OpenMMReasoner" target="_blank" rel="noopener">Code</a>
+              <a href="https://huggingface.co/papers/2511.16334" target="_blank" rel="noopener">HF Daily</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-rl" data-cat="rl" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2608.16320" target="_blank" rel="noopener">StreamOPD: A Post-Training Recipe with Spatio-Temporal Cue Gating for Streaming Video Understanding</a></h3>
+              <div class="paper-meta"><span class="venue pre">Under Review</span><span class="role">&#10022; First Author</span></div>
+              <p class="paper-authors"><span class="me">Keming Wu</span>, Baoyi Wang, Kaichen Zhang, Xiang An, Zuhao Yang, Sudong Wang, Haowei Zhu, Tingxuan Huang, Hongcheng Gao, Bin Wang</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Agentic RL</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2608.16320" target="_blank" rel="noopener">PDF</a>
+              <a href="https://unix-ai-lab.github.io/StreamOPD/" target="_blank" rel="noopener">Page</a>
+              <a href="https://github.com/UniX-AI-Lab/StreamOPD" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-reward" data-cat="eval" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2605.10434" target="_blank" rel="noopener">WorldReasonBench: Human-Aligned Stress Testing of Video Generators as Future World-State Predictors</a></h3>
+              <div class="paper-meta"><span class="venue">NeurIPS 2026</span><span class="role">&#10022; First Author</span></div>
+              <p class="paper-authors"><span class="me">Keming Wu</span>, Yijing Cui, Wenhan Xue, Qijie Wang, Xuan Luo, Zhiyuan Feng, Zuhao Yang, Sudong Wang, Sicong Jiang, Haowei Zhu, Zihan Wang, Ping Nie, Wenhu Chen, Bin Wang</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Reward &amp; Eval</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2605.10434" target="_blank" rel="noopener">PDF</a>
+              <a href="https://unix-ai-lab.github.io/WorldReasonBench/" target="_blank" rel="noopener">Page</a>
+              <a href="https://github.com/UniX-AI-Lab/WorldReasonBench/" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-reward" data-cat="eval" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2509.26346" target="_blank" rel="noopener">EditReward: A Human-Aligned Reward Model for Instruction-Guided Image Editing</a></h3>
+              <div class="paper-meta"><span class="venue">ICLR 2026</span><span class="role">&#10022; First Author</span></div>
+              <p class="paper-authors"><span class="me">Keming Wu</span>, Sicong Jiang, Max Ku, Ping Nie, Minghao Liu, Wenhu Chen</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Reward &amp; Eval</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2509.26346" target="_blank" rel="noopener">PDF</a>
+              <a href="https://tiger-ai-lab.github.io/EditReward" target="_blank" rel="noopener">Page</a>
+              <a href="https://github.com/TIGER-AI-Lab/EditReward" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-world" data-cat="gen" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2604.28185" target="_blank" rel="noopener">Visual Generation in the New Era: An Evolution from Atomic Mapping to Agentic World Modeling</a></h3>
+              <div class="paper-meta"><span class="venue pre">Preprint</span><span class="role">&#10022; First Author</span></div>
+              <p class="paper-authors"><span class="me">Keming Wu</span>, Zuhao Yang, Kaichen Zhang, Shizun Wang, Haowei Zhu, Sicong Leng, Zhongyu Yang, Qijie Wang, &hellip;, Xiaojuan Qi, Shijian Lu, Bin Wang</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Gen &amp; World Models</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2604.28185" target="_blank" rel="noopener">PDF</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-rl" data-cat="rl" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2605.20342" target="_blank" rel="noopener">ParaVT: Taming the Tool Prior Paradox for Parallel Tool Use in Agentic Video Reinforcement Learning</a></h3>
+              <div class="paper-meta"><span class="venue">NeurIPS 2026</span></div>
+              <p class="paper-authors">Zuhao Yang, Kaichen Zhang, Sudong Wang, <span class="me">Keming Wu</span>, Zhongyu Yang, Bo Li, Xiaojuan Qi, Shijian Lu, Xingxuan Li, Lidong Bing</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Agentic RL</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2605.20342" target="_blank" rel="noopener">PDF</a>
+              <a href="https://evolvinglmms-lab.github.io/ParaVT/" target="_blank" rel="noopener">Page</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-rl" data-cat="rl" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2604.28123" target="_blank" rel="noopener">Beyond SFT-to-RL: Pre-alignment via Black-Box On-Policy Distillation for Multimodal RL</a></h3>
+              <div class="paper-meta"><span class="venue">NeurIPS 2026</span></div>
+              <p class="paper-authors">Sudong Wang, Weiquan Huang, Xiaomin Yu, Zuhao Yang, Hehai Lin, <span class="me">Keming Wu</span>, Chaojun Xiao, Chen Chen, Wenxuan Wang, Beier Zhu, Yunjian Zhang, Chengwei Qin</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Agentic RL</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2604.28123" target="_blank" rel="noopener">PDF</a>
+              <a href="https://github.com/XIAO4579/PRISM" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-rl" data-cat="rl" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2605.18109" target="_blank" rel="noopener">TaskGround: Structured Executable Task Inference for Full-Scene Household Reasoning</a></h3>
+              <div class="paper-meta"><span class="venue">NeurIPS 2026</span></div>
+              <p class="paper-authors">ZhiYuan Feng, Yu Deng, Ruichuan An, Zhenhua Liu, Qixiu Li, <span class="me">Keming Wu</span>, Zhiying Du, Weijie Wang, Haoxiao Wang, Shuang Chen, Sicheng Xu, Yaobo Liang, Jiaolong Yang, Baining Guo</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Agentic RL</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2605.18109" target="_blank" rel="noopener">PDF</a>
+              <a href="https://aaronfengzy.github.io/TaskGround/" target="_blank" rel="noopener">Page</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-rl" data-cat="rl" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2511.20785" target="_blank" rel="noopener">LongVT: Incentivizing &ldquo;Thinking with Long Videos&rdquo; via Native Tool Calling</a></h3>
+              <div class="paper-meta"><span class="venue">CVPR 2026</span><span class="award">HF Daily Papers #2</span></div>
+              <p class="paper-authors">Zuhao Yang*, Sudong Wang*, Kaichen Zhang*, <span class="me">Keming Wu</span>, Sicong Leng, Yifan Zhang, Bo Li, Chengwei Qin, Shijian Lu, Xingxuan Li, Lidong Bing</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Agentic RL</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2511.20785" target="_blank" rel="noopener">PDF</a>
+              <a href="https://evolvinglmms-lab.github.io/LongVT/" target="_blank" rel="noopener">Page</a>
+              <a href="https://github.com/EvolvingLMMs-Lab/LongVT" target="_blank" rel="noopener">Code</a>
+              <a href="https://huggingface.co/papers/2511.20785" target="_blank" rel="noopener">HF Daily</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-reward" data-cat="eval" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2603.27862" target="_blank" rel="noopener">ImagenWorld: Stress-Testing Image Generation Models with Explainable Human Evaluation on Open-ended Real-World Tasks</a></h3>
+              <div class="paper-meta"><span class="venue">ICLR 2026</span></div>
+              <p class="paper-authors">Samin Mahdizadeh Sani, Max Ku, &hellip;, <span class="me">Keming Wu</span>, &hellip;, Wenhu Chen</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Reward &amp; Eval</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2603.27862" target="_blank" rel="noopener">PDF</a>
+              <a href="https://openreview.net/forum?id=bld9g6jFh9" target="_blank" rel="noopener">OpenReview</a>
+              <a href="https://github.com/TIGER-AI-Lab/ImagenWorld" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-reward" data-cat="eval" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2509.22799" target="_blank" rel="noopener">VideoScore2: Think before You Score in Generative Video Evaluation</a></h3>
+              <div class="paper-meta"><span class="venue">TMLR 2026</span></div>
+              <p class="paper-authors">Xuan He, Dongfu Jiang, Ping Nie, Minghao Liu, Zhengxuan Jiang, Mingyi Su, Wentao Ma, Junru Lin, Chun Ye, Yi Lu, <span class="me">Keming Wu</span>, &hellip;, Wenhu Chen</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Reward &amp; Eval</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2509.22799" target="_blank" rel="noopener">PDF</a>
+              <a href="https://tiger-ai-lab.github.io/VideoScore2/" target="_blank" rel="noopener">Page</a>
+              <a href="https://github.com/TIGER-AI-Lab/VideoScore2" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-reward" data-cat="eval" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2609.33382" target="_blank" rel="noopener">WideSWE: Can Coding Agents Coordinate Changes Across Repositories?</a></h3>
+              <div class="paper-meta"><span class="venue pre">Preprint</span></div>
+              <p class="paper-authors">Baoyi Wang, Xingliang Wang, Jinyang Wu, <span class="me">Keming Wu</span>, Chen Zhi, Jianwei Yin</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Reward &amp; Eval</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2609.33382" target="_blank" rel="noopener">PDF</a>
+              <a href="https://github.com/ZJU-ACES-ISE/WideSWE" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year">2025</div>
+        <div class="year-papers">
+          <article class="paper t-world" data-cat="gen" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://hybrid-layout-msra.github.io/" target="_blank" rel="noopener">Hybrid Layout Control for Diffusion Transformer: Fewer Annotations, Superior Aesthetics</a></h3>
+              <div class="paper-meta"><span class="venue">ICCV 2025</span><span class="role">&#10022; First Author</span></div>
+              <p class="paper-authors"><span class="me">Keming Wu</span>, Junwen Chen, Zhanhao Liang, Yinuo Wang, Ji Li, Chao Zhang, Bin Wang, Yuhui Yuan</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Gen &amp; World Models</span>
+              <div class="paper-links">
+              <a href="https://hybrid-layout-msra.github.io/" target="_blank" rel="noopener">Page</a>
+              <a href="https://github.com/KemingWu/HybridLayout" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-world" data-cat="gen" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2505.22523" target="_blank" rel="noopener">PrismLayers: Open Data for High-Quality Multi-Layer Transparent Image Generative Models</a></h3>
+              <div class="paper-meta"><span class="venue pre">Under Review</span><span class="role">&#10022; Co-First Author</span></div>
+              <p class="paper-authors">Junwen Chen*, Heyang Jiang*, <span class="me">Keming Wu*</span>, Yanbin Wang*, Ji Li, Chao Zhang, Keiji Yanai, Dong Chen, Yuhui Yuan</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Gen &amp; World Models</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2505.22523" target="_blank" rel="noopener">PDF</a>
+              <a href="https://prism-layers.github.io/" target="_blank" rel="noopener">Page</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-reward" data-cat="eval" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2510.02190" target="_blank" rel="noopener">A Rigorous Benchmark with Multidimensional Evaluation for Deep Research Agents: From Answers to Reports</a></h3>
+              <div class="paper-meta"><span class="venue pre">Under Review</span></div>
+              <p class="paper-authors">Yang Yao, Yixu Wang, Yuxuan Zhang, Yi Lu, Tianle Gu, Lingyu Li, Dingyi Zhao, <span class="me">Keming Wu</span>, Haozhe Wang, Ping Nie, Yan Teng, Yingchun Wang</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Reward &amp; Eval</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2510.02190" target="_blank" rel="noopener">PDF</a>
+              <a href="https://github.com/EVIGBYEN/RigorousBench" target="_blank" rel="noopener">Page</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-world" data-cat="gen" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2503.20672" target="_blank" rel="noopener">BizGen: Advancing Article-level Visual Text Rendering for Infographics Generation</a></h3>
+              <div class="paper-meta"><span class="venue">CVPR 2025</span></div>
+              <p class="paper-authors">Yuyang Peng, Shishi Xiao, <span class="me">Keming Wu</span>, Qisheng Liao, Bohan Chen, Kevin Lin, Danqing Huang, Ji Li, Yuhui Yuan</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Gen &amp; World Models</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2503.20672" target="_blank" rel="noopener">PDF</a>
+              <a href="https://bizgen-msra.github.io/" target="_blank" rel="noopener">Page</a>
+              <a href="https://github.com/1230young/bizgen" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-old" data-cat="earlier" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2506.01376" target="_blank" rel="noopener">Modeling All-Atom Glycan Structures via Hierarchical Message Passing and Multi-Scale Pre-training</a></h3>
+              <div class="paper-meta"><span class="venue">ICML 2025</span></div>
+              <p class="paper-authors">Minghao Xu, Jiaze Song, <span class="me">Keming Wu</span>, Xiangxin Zhou, Bin Cui, Wentao Zhang</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Earlier Work</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2506.01376" target="_blank" rel="noopener">PDF</a>
+              <a href="https://github.com/kasawa1234/GlycanAA" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-old" data-cat="earlier" data-first="false">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://arxiv.org/abs/2501.19160" target="_blank" rel="noopener">Physics-Informed Representation Alignment for Sparse Radio-Map Reconstruction</a></h3>
+              <div class="paper-meta"><span class="venue">ACM MM 2025</span><span class="award">Brave New Ideas (Oral)</span></div>
+              <p class="paper-authors">Haozhe Jia, Wenshuo Chen, Zhihui Huang, Lei Wang, Hongru Xiao, Nanqian Jia, <span class="me">Keming Wu</span>, Songning Lai, Bowen Tian, Yutao Yue</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Earlier Work</span>
+              <div class="paper-links">
+              <a href="https://arxiv.org/abs/2501.19160" target="_blank" rel="noopener">PDF</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year">2024</div>
+        <div class="year-papers">
+          <article class="paper t-old" data-cat="earlier" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://dl.acm.org/doi/abs/10.1145/3664647.3680639" target="_blank" rel="noopener">RSC-SNN: Exploring the Trade-off Between Adversarial Robustness and Accuracy in Spiking Neural Networks via Randomized Smoothing Coding</a></h3>
+              <div class="paper-meta"><span class="venue">ACM MM 2024</span><span class="role">&#10022; Co-First Author</span></div>
+              <p class="paper-authors"><span class="me">Keming Wu*</span>, Man Yao*, Yuhong Chou, Xuerui Qiu, Rui Yang, Bo Xu, Guoqi Li</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Earlier Work</span>
+              <div class="paper-links">
+              <a href="https://dl.acm.org/doi/abs/10.1145/3664647.3680639" target="_blank" rel="noopener">PDF</a>
+              <a href="https://github.com/KemingWu/RSC-SNN" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-old" data-cat="earlier" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://ieeexplore.ieee.org/abstract/document/10770823/" target="_blank" rel="noopener">A Fractal-based Complex Belief Entropy for Uncertainty Measure in Complex Evidence Theory</a></h3>
+              <div class="paper-meta"><span class="venue">IEEE TSMC: Systems 2024</span><span class="role">&#10022; First Author</span></div>
+              <p class="paper-authors"><span class="me">Keming Wu</span>, Fuyuan Xiao, Yi Zhang</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Earlier Work</span>
+              <div class="paper-links">
+              <a href="https://ieeexplore.ieee.org/abstract/document/10770823/" target="_blank" rel="noopener">PDF</a>
+              </div>
+            </div>
+          </article>
+          <article class="paper t-old" data-cat="earlier" data-first="true">
+            <div class="paper-main">
+              <h3 class="paper-title"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025523013294" target="_blank" rel="noopener">A Novel Quantum Belief Entropy for Uncertainty Measure in Complex Evidence Theory</a></h3>
+              <div class="paper-meta"><span class="venue">Information Sciences 2024</span><span class="role">&#10022; First Author</span></div>
+              <p class="paper-authors"><span class="me">Keming Wu</span>, Fuyuan Xiao</p>
+            </div>
+            <div class="paper-side">
+              <span class="thread-tag">Earlier Work</span>
+              <div class="paper-links">
+              <a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025523013294" target="_blank" rel="noopener">PDF</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
       </div>
     </section>
 
-    <!-- Research Storyline -->
-    <section id="research" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Research Thread</h2>
-        <span class="section-note">Connecting MLLMs, RL, Agentic Reasoning, Rewards &amp; World Modeling</span>
-      </div>
-      <p class="research-intro">
-        My work follows a unified trajectory: building <strong>agentic multimodal models</strong> that reason and act through RL, grounded by <strong>human-aligned reward models &amp; benchmarks</strong>, and connected to <strong>controllable visual generation &amp; world modeling</strong>.
-      </p>
+    <!-- ===================== Labs & Open Source ===================== -->
+    <section id="labs" class="section wrap" data-sky="jade">
+      <header class="section-head center reveal">
+        <p class="kicker">Labs &amp; Open Source</p>
+        <h2 class="display">Where the work <em>happens</em></h2>
+      </header>
 
-      <div class="roadmap-grid">
-        <div class="roadmap-card thread-1" data-thread="rl">
-          <div class="roadmap-head">
-            <span class="roadmap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
-            <div class="roadmap-step">01 &middot; Policy &amp; Reasoning</div>
-          </div>
-          <h3>Multimodal Post-Training &amp; Agentic RL</h3>
-          <p>
-            Designing open and effective post-training recipes for MLLMs&mdash;spanning SFT-to-RL pre-alignment via on-policy distillation, native and parallel tool calling over long videos, and spatio-temporal cue gating for streaming video understanding.
-          </p>
-          <div class="roadmap-papers">
-            <span class="mini-chip">OpenMMReasoner</span>
-            <span class="mini-chip">LongVT</span>
-            <span class="mini-chip">ParaVT</span>
-            <span class="mini-chip">Beyond SFT-to-RL</span>
-            <span class="mini-chip">StreamOPD</span>
-            <span class="mini-chip">TaskGround</span>
-          </div>
-          <a class="roadmap-more" href="#publications" data-filter-target="rl">View papers <span>&rarr;</span></a>
-        </div>
-
-        <div class="roadmap-card thread-2" data-thread="eval">
-          <div class="roadmap-head">
-            <span class="roadmap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
-            <div class="roadmap-step">02 &middot; Feedback &amp; Verification</div>
-          </div>
-          <h3>Reward Modeling &amp; Agentic Evaluation</h3>
-          <p>
-            RL and post-training are bounded by the fidelity of their rewards and verifiers. I build human-aligned reward models, think-before-scoring video evaluators, world-state reasoning benchmarks, and automated testbeds for deep-research &amp; coding agents.
-          </p>
-          <div class="roadmap-papers">
-            <span class="mini-chip">WorldReasonBench</span>
-            <span class="mini-chip">EditReward</span>
-            <span class="mini-chip">VideoScore2</span>
-            <span class="mini-chip">ImagenWorld</span>
-            <span class="mini-chip">DeepResearchEval</span>
-            <span class="mini-chip">WideSWE</span>
-          </div>
-          <a class="roadmap-more" href="#publications" data-filter-target="eval">View papers <span>&rarr;</span></a>
-        </div>
-
-        <div class="roadmap-card thread-3" data-thread="gen">
-          <div class="roadmap-head">
-            <span class="roadmap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
-            <div class="roadmap-step">03 &middot; Synthesis &amp; Simulation</div>
-          </div>
-          <h3>Visual Generation &amp; World Modeling</h3>
-          <p>
-            Advancing controllable Diffusion Transformers across fine-grained layouts, article-level visual text, and transparent multi-layer synthesis&mdash;and charting the evolution from atomic visual mapping toward agentic world modeling.
-          </p>
-          <div class="roadmap-papers">
-            <span class="mini-chip">Visual Gen in New Era</span>
-            <span class="mini-chip">HybridLayout</span>
-            <span class="mini-chip">BizGen</span>
-            <span class="mini-chip">PrismLayers</span>
-          </div>
-          <a class="roadmap-more" href="#publications" data-filter-target="gen">View papers <span>&rarr;</span></a>
-        </div>
+      <div class="labs-grid">
+        <a class="lab-card t-reward reveal" href="https://github.com/UniX-AI-Lab" target="_blank" rel="noopener">
+          <span class="lab-role">Member</span>
+          <h3>UniX AI Lab <span class="arrow">&#8599;</span></h3>
+          <p class="lab-desc">Open research collective &middot; Towards Real-World Perception and Modeling</p>
+          <p class="lab-works">WorldReasonBench &middot; StreamOPD &middot; Visual Gen in the New Era</p>
+        </a>
+        <a class="lab-card t-world reveal" href="https://github.com/EvolvingLMMs-Lab" target="_blank" rel="noopener">
+          <span class="lab-role">Contributor</span>
+          <h3>LMMs-Lab <span class="arrow">&#8599;</span></h3>
+          <p class="lab-desc">Open large multimodal models, training recipes &amp; evaluation tools</p>
+          <p class="lab-works">OpenMMReasoner &middot; LongVT &middot; ParaVT &middot; LMMs-Eval</p>
+        </a>
+        <a class="lab-card t-amber reveal" href="https://github.com/TIGER-AI-Lab" target="_blank" rel="noopener">
+          <span class="lab-role">Collaborator</span>
+          <h3>TIGER Lab <span class="arrow">&#8599;</span></h3>
+          <p class="lab-desc">University of Waterloo &middot; Text and Image Generative Research</p>
+          <p class="lab-works">EditReward &middot; VideoScore2 &middot; ImagenWorld</p>
+        </a>
       </div>
 
-      <!-- Unified Loop: world models -> rewards & verifiers -> RL policies -> back to world models -->
-      <div class="loop" role="group" aria-label="Unified research loop">
-        <div class="loop-head">
-          <span class="loop-kicker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>Unified Loop</span>
-          <span class="loop-desc">Each thread supplies the next &mdash; and the loop closes back on itself</span>
-        </div>
-        <div class="loop-track">
-          <a class="loop-node n-gen" href="#publications" data-filter-target="gen">
-            <span class="loop-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
-            <span class="loop-node-verb">Simulate &amp; Represent</span>
-            <span class="loop-node-title">Generative World Models &amp; Multimodal Representations</span>
-            <span class="loop-node-hint">See papers &rarr;</span>
-          </a>
-          <div class="loop-link l1" aria-hidden="true"><span class="loop-dot"></span></div>
-          <a class="loop-node n-rew" href="#publications" data-filter-target="eval">
-            <span class="loop-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
-            <span class="loop-node-verb">Judge &amp; Verify</span>
-            <span class="loop-node-title">Human-Aligned Rewards &amp; Verifiers</span>
-            <span class="loop-node-hint">See papers &rarr;</span>
-          </a>
-          <div class="loop-link l2" aria-hidden="true"><span class="loop-dot"></span></div>
-          <a class="loop-node n-rl" href="#publications" data-filter-target="rl">
-            <span class="loop-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
-            <span class="loop-node-verb">Act &amp; Improve</span>
-            <span class="loop-node-title">Multimodal RL &amp; Agentic Tool-Use Policies</span>
-            <span class="loop-node-hint">See papers &rarr;</span>
-          </a>
-        </div>
-        <div class="loop-return">
-          <span class="loop-return-dot" aria-hidden="true"></span>
-          <span class="loop-return-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>Policy rollouts feed back as new experience for world modeling</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- News -->
-    <section id="news" class="section">
-      <div class="section-header">
-        <h2 class="section-title">News</h2>
-      </div>
-      <div class="news-box">
-        <ul class="news-list">
-          <li class="news-item is-new">
-            <span class="news-date">2026.11</span>
-            <span class="news-content"><span class="new-tag">NEW</span><strong>DeepResearchEval</strong> got accepted by <strong>EACL 2027</strong>!</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2026.09</span>
-            <span class="news-content">Four papers got accepted by <strong>NeurIPS 2026</strong>: <strong>WorldReasonBench</strong> (First Author), <strong>ParaVT</strong>, <strong>Beyond SFT-to-RL</strong>, and <strong>TaskGround</strong>!</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2026.08</span>
-            <span class="news-content">Released <strong>StreamOPD</strong>, a post-training recipe with spatio-temporal cue gating for streaming video understanding.</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2026.05</span>
-            <span class="news-content"><strong>VideoScore2</strong> got accepted by <strong>TMLR 2026</strong>; released <strong>WorldReasonBench</strong>, <strong>ParaVT</strong>, and our perspective paper <strong>Visual Generation in the New Era</strong>.</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2026.02</span>
-            <span class="news-content">Two papers got accepted by <strong>CVPR 2026</strong>: <strong>OpenMMReasoner</strong> (Co-First, 🏆 HF Daily Papers #1) and <strong>LongVT</strong> (🏆 HF Daily Papers #2).</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2026.01</span>
-            <span class="news-content">Two papers got accepted by <strong>ICLR 2026</strong>: <strong>EditReward</strong> (First Author) and <strong>ImagenWorld</strong>; released <strong>DeepResearchEval</strong>.</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2025.08</span>
-            <span class="news-content">One paper got accepted by <strong>ACM MM 2025</strong> Brave New Ideas Track (<strong>Oral</strong>).</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2025.06</span>
-            <span class="news-content"><strong>HybridLayout</strong> (First Author) got accepted by <strong>ICCV 2025</strong>.</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2025.05</span>
-            <span class="news-content">One paper got accepted by <strong>ICML 2025</strong>; released <strong>PrismLayers</strong> (Co-First Author).</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2025.02</span>
-            <span class="news-content"><strong>BizGen</strong> got accepted by <strong>CVPR 2025</strong>.</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2024.10</span>
-            <span class="news-content">One first-author paper got accepted by <strong>IEEE TSMC: Systems</strong> (CCF-B).</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2024.07</span>
-            <span class="news-content"><strong>RSC-SNN</strong> (Co-First Author) got accepted by <strong>ACM MM 2024</strong>.</span>
-          </li>
-          <li class="news-item">
-            <span class="news-date">2024.01</span>
-            <span class="news-content">One first-author paper got accepted by <strong>Information Sciences</strong> (CCF-B).</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Publications -->
-    <section id="publications" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Publications</h2>
-        <span class="section-note">* Equal contribution &middot; Full list on <a href="https://scholar.google.com/citations?user=cOzwZBMAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></span>
-      </div>
-
-      <!-- Interactive Filter Bar -->
-      <div class="pub-filters" role="tablist" aria-label="Filter publications">
-        <button class="filter-btn active" data-filter="all" type="button">All</button>
-        <button class="filter-btn" data-filter="first" type="button">First / Co-First Author</button>
-        <button class="filter-btn" data-filter="rl" type="button">MLLM &amp; Agentic RL</button>
-        <button class="filter-btn" data-filter="eval" type="button">Reward &amp; Evaluation</button>
-        <button class="filter-btn" data-filter="gen" type="button">Visual Gen &amp; World Models</button>
-        <button class="filter-btn" data-filter="earlier" type="button">Earlier Works</button>
-      </div>
-
-      <!-- Group 1: Multimodal Post-Training, RL & Agentic Reasoning -->
-      <div class="pub-group" data-group="rl">
-        <div class="pub-group-header t1">
-          <h3 class="pub-group-title">Multimodal Post-Training, RL &amp; Agentic Reasoning</h3>
-          <span class="pub-group-sub">MLLMs &middot; On-Policy Distillation &middot; Tool-Use &amp; Streaming Video RL</span>
-        </div>
-        <ul class="pub-list">
-
-          <li class="pub-item" data-cat="rl" data-first="true">
-            <div class="pub-title">OpenMMReasoner: Pushing the Frontiers for Multimodal Reasoning with an Open and General Recipe</div>
-            <div class="pub-authors">Kaichen Zhang*, <span class="me">Keming Wu*</span>, Zuhao Yang, Bo Li, Kairui Hu, Bin Wang, Ziwei Liu, Xingxuan Li, Lidong Bing</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">CVPR 2026</span>
-                <span class="badge badge-role">Co-First Author</span>
-                <span class="badge badge-award">🏆 HF Daily Papers #1</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2511.16334" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://evolvinglmms-lab.github.io/OpenMMReasoner/" target="_blank" rel="noopener">WebPage</a>
-                <a class="link-pill" href="https://github.com/EvolvingLMMs-Lab/OpenMMReasoner" target="_blank" rel="noopener">Code</a>
-                <a class="link-pill" href="https://huggingface.co/papers/2511.16334" target="_blank" rel="noopener">HF Daily</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="rl" data-first="true">
-            <div class="pub-title">StreamOPD: A Post-Training Recipe with Spatio-Temporal Cue Gating for Streaming Video Understanding</div>
-            <div class="pub-authors"><span class="me">Keming Wu</span>, Baoyi Wang, Kaichen Zhang, Xiang An, Zuhao Yang, Sudong Wang, Haowei Zhu, Tingxuan Huang, Hongcheng Gao, Bin Wang</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-preprint">Under Review</span>
-                <span class="badge badge-role">First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2608.16320" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://unix-ai-lab.github.io/StreamOPD/" target="_blank" rel="noopener">WebPage</a>
-                <a class="link-pill" href="https://github.com/UniX-AI-Lab/StreamOPD" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="rl" data-first="false">
-            <div class="pub-title">ParaVT: Taming the Tool Prior Paradox for Parallel Tool Use in Agentic Video Reinforcement Learning</div>
-            <div class="pub-authors">Zuhao Yang, Kaichen Zhang, Sudong Wang, <span class="me">Keming Wu</span>, Zhongyu Yang, Bo Li, Xiaojuan Qi, Shijian Lu, Xingxuan Li, Lidong Bing</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">NeurIPS 2026</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2605.20342" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://evolvinglmms-lab.github.io/ParaVT/" target="_blank" rel="noopener">WebPage</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="rl" data-first="false">
-            <div class="pub-title">Beyond SFT-to-RL: Pre-alignment via Black-Box On-Policy Distillation for Multimodal RL</div>
-            <div class="pub-authors">Sudong Wang, Weiquan Huang, Xiaomin Yu, Zuhao Yang, Hehai Lin, <span class="me">Keming Wu</span>, Chaojun Xiao, Chen Chen, Wenxuan Wang, Beier Zhu, Yunjian Zhang, Chengwei Qin</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">NeurIPS 2026</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2604.28123" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://github.com/XIAO4579/PRISM" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="rl" data-first="false">
-            <div class="pub-title">TaskGround: Structured Executable Task Inference for Full-Scene Household Reasoning</div>
-            <div class="pub-authors">ZhiYuan Feng, Yu Deng, Ruichuan An, Zhenhua Liu, Qixiu Li, <span class="me">Keming Wu</span>, Zhiying Du, Weijie Wang, Haoxiao Wang, Shuang Chen, Sicheng Xu, Yaobo Liang, Jiaolong Yang, Baining Guo</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">NeurIPS 2026</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2605.18109" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://aaronfengzy.github.io/TaskGround/" target="_blank" rel="noopener">WebPage</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="rl" data-first="false">
-            <div class="pub-title">LongVT: Incentivizing &ldquo;Thinking with Long Videos&rdquo; via Native Tool Calling</div>
-            <div class="pub-authors">Zuhao Yang*, Sudong Wang*, Kaichen Zhang*, <span class="me">Keming Wu</span>, Sicong Leng, Yifan Zhang, Bo Li, Chengwei Qin, Shijian Lu, Xingxuan Li, Lidong Bing</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">CVPR 2026</span>
-                <span class="badge badge-award">🏆 HF Daily Papers #2</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2511.20785" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://evolvinglmms-lab.github.io/LongVT/" target="_blank" rel="noopener">WebPage</a>
-                <a class="link-pill" href="https://github.com/EvolvingLMMs-Lab/LongVT" target="_blank" rel="noopener">Code</a>
-                <a class="link-pill" href="https://huggingface.co/papers/2511.20785" target="_blank" rel="noopener">HF Daily</a>
-              </div>
-            </div>
-          </li>
-
-        </ul>
-      </div>
-
-      <!-- Group 2: Reward Modeling, Evaluation & Agentic Benchmarks -->
-      <div class="pub-group" data-group="eval">
-        <div class="pub-group-header t2">
-          <h3 class="pub-group-title">Reward Modeling, Evaluation &amp; Agentic Benchmarks</h3>
-          <span class="pub-group-sub">Human-Aligned Rewards &middot; World-State &amp; Agentic Stress Testing</span>
-        </div>
-        <ul class="pub-list">
-
-          <li class="pub-item" data-cat="eval" data-first="true">
-            <div class="pub-title">WorldReasonBench: Human-Aligned Stress Testing of Video Generators as Future World-State Predictors</div>
-            <div class="pub-authors"><span class="me">Keming Wu</span>, Yijing Cui, Wenhan Xue, Qijie Wang, Xuan Luo, Zhiyuan Feng, Zuhao Yang, Sudong Wang, Sicong Jiang, Haowei Zhu, Zihan Wang, Ping Nie, Wenhu Chen, Bin Wang</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">NeurIPS 2026</span>
-                <span class="badge badge-role">First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2605.10434" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://unix-ai-lab.github.io/WorldReasonBench/" target="_blank" rel="noopener">WebPage</a>
-                <a class="link-pill" href="https://github.com/UniX-AI-Lab/WorldReasonBench/" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="eval" data-first="true">
-            <div class="pub-title">EditReward: A Human-Aligned Reward Model for Instruction-Guided Image Editing</div>
-            <div class="pub-authors"><span class="me">Keming Wu</span>, Sicong Jiang, Max Ku, Ping Nie, Minghao Liu, Wenhu Chen</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">ICLR 2026</span>
-                <span class="badge badge-role">First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2509.26346" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://tiger-ai-lab.github.io/EditReward" target="_blank" rel="noopener">WebPage</a>
-                <a class="link-pill" href="https://github.com/TIGER-AI-Lab/EditReward" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="eval" data-first="false">
-            <div class="pub-title">ImagenWorld: Stress-Testing Image Generation Models with Explainable Human Evaluation on Open-ended Real-World Tasks</div>
-            <div class="pub-authors">Samin Mahdizadeh Sani, Max Ku, &hellip;, <span class="me">Keming Wu</span>, &hellip;, Wenhu Chen</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">ICLR 2026</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2603.27862" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://openreview.net/forum?id=bld9g6jFh9" target="_blank" rel="noopener">OpenReview</a>
-                <a class="link-pill" href="https://github.com/TIGER-AI-Lab/ImagenWorld" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="eval" data-first="false">
-            <div class="pub-title">VideoScore2: Think before You Score in Generative Video Evaluation</div>
-            <div class="pub-authors">Xuan He, Dongfu Jiang, Ping Nie, Minghao Liu, Zhengxuan Jiang, Mingyi Su, Wentao Ma, Junru Lin, Chun Ye, Yi Lu, <span class="me">Keming Wu</span>, &hellip;, Wenhu Chen</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-journal">TMLR 2026</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2509.22799" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://tiger-ai-lab.github.io/VideoScore2/" target="_blank" rel="noopener">WebPage</a>
-                <a class="link-pill" href="https://github.com/TIGER-AI-Lab/VideoScore2" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="eval" data-first="false">
-            <div class="pub-title">DeepResearchEval: An Automated Framework for Deep Research Task Construction and Agentic Evaluation</div>
-            <div class="pub-authors">Yibo Wang, Lei Wang, Yue Deng, <span class="me">Keming Wu</span>, Yao Xiao, Huanjin Yao, Liwei Kang, Hai Ye, Yongcheng Jing, Lidong Bing</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">EACL 2027</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2601.09688" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://github.com/Infinity-AILab/DeepResearchEval" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="eval" data-first="false">
-            <div class="pub-title">A Rigorous Benchmark with Multidimensional Evaluation for Deep Research Agents: From Answers to Reports</div>
-            <div class="pub-authors">Yang Yao, Yixu Wang, Yuxuan Zhang, Yi Lu, Tianle Gu, Lingyu Li, Dingyi Zhao, <span class="me">Keming Wu</span>, Haozhe Wang, Ping Nie, Yan Teng, Yingchun Wang</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-preprint">Under Review</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2510.02190" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://github.com/EVIGBYEN/RigorousBench" target="_blank" rel="noopener">WebPage</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="eval" data-first="false">
-            <div class="pub-title">WideSWE: Can Coding Agents Coordinate Changes Across Repositories?</div>
-            <div class="pub-authors">Baoyi Wang, Xingliang Wang, Jinyang Wu, <span class="me">Keming Wu</span>, Chen Zhi, Jianwei Yin</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-preprint">Preprint</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2609.33382" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://github.com/ZJU-ACES-ISE/WideSWE" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-        </ul>
-      </div>
-
-      <!-- Group 3: Controllable Visual Generation & World Modeling -->
-      <div class="pub-group" data-group="gen">
-        <div class="pub-group-header t3">
-          <h3 class="pub-group-title">Controllable Visual Generation &amp; World Modeling</h3>
-          <span class="pub-group-sub">Diffusion Transformers &middot; Multi-Layer Synthesis &middot; Agentic World Models</span>
-        </div>
-        <ul class="pub-list">
-
-          <li class="pub-item" data-cat="gen" data-first="true">
-            <div class="pub-title">Visual Generation in the New Era: An Evolution from Atomic Mapping to Agentic World Modeling</div>
-            <div class="pub-authors"><span class="me">Keming Wu</span>, Zuhao Yang, Kaichen Zhang, Shizun Wang, Haowei Zhu, Sicong Leng, Zhongyu Yang, Qijie Wang, &hellip;, Xiaojuan Qi, Shijian Lu, Bin Wang</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-preprint">Preprint</span>
-                <span class="badge badge-role">First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2604.28185" target="_blank" rel="noopener">PDF</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="gen" data-first="true">
-            <div class="pub-title">Hybrid Layout Control for Diffusion Transformer: Fewer Annotations, Superior Aesthetics</div>
-            <div class="pub-authors"><span class="me">Keming Wu</span>, Junwen Chen, Zhanhao Liang, Yinuo Wang, Ji Li, Chao Zhang, Bin Wang, Yuhui Yuan</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">ICCV 2025</span>
-                <span class="badge badge-role">First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://hybrid-layout-msra.github.io/" target="_blank" rel="noopener">WebPage</a>
-                <a class="link-pill" href="https://github.com/KemingWu/HybridLayout" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="gen" data-first="true">
-            <div class="pub-title">PrismLayers: Open Data for High-Quality Multi-Layer Transparent Image Generative Models</div>
-            <div class="pub-authors">Junwen Chen*, Heyang Jiang*, <span class="me">Keming Wu*</span>, Yanbin Wang*, Ji Li, Chao Zhang, Keiji Yanai, Dong Chen, Yuhui Yuan</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-preprint">Under Review</span>
-                <span class="badge badge-role">Co-First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2505.22523" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://prism-layers.github.io/" target="_blank" rel="noopener">WebPage</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="gen" data-first="false">
-            <div class="pub-title">BizGen: Advancing Article-level Visual Text Rendering for Infographics Generation</div>
-            <div class="pub-authors">Yuyang Peng, Shishi Xiao, <span class="me">Keming Wu</span>, Qisheng Liao, Bohan Chen, Kevin Lin, Danqing Huang, Ji Li, Yuhui Yuan</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">CVPR 2025</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2503.20672" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://bizgen-msra.github.io/" target="_blank" rel="noopener">WebPage</a>
-                <a class="link-pill" href="https://github.com/1230young/bizgen" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-        </ul>
-      </div>
-
-      <!-- Group 4: Earlier & Other Publications -->
-      <div class="pub-group" data-group="earlier">
-        <div class="pub-group-header t4">
-          <h3 class="pub-group-title">Earlier &amp; Other Publications</h3>
-          <span class="pub-group-sub">Spiking Neural Networks &middot; Scientific AI &middot; Uncertainty Modeling</span>
-        </div>
-        <ul class="pub-list">
-
-          <li class="pub-item" data-cat="earlier" data-first="false">
-            <div class="pub-title">Modeling All-Atom Glycan Structures via Hierarchical Message Passing and Multi-Scale Pre-training</div>
-            <div class="pub-authors">Minghao Xu, Jiaze Song, <span class="me">Keming Wu</span>, Xiangxin Zhou, Bin Cui, Wentao Zhang</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">ICML 2025</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2506.01376" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://github.com/kasawa1234/GlycanAA" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="earlier" data-first="false">
-            <div class="pub-title">Physics-Informed Representation Alignment for Sparse Radio-Map Reconstruction</div>
-            <div class="pub-authors">Haozhe Jia, Wenshuo Chen, Zhihui Huang, Lei Wang, Hongru Xiao, Nanqian Jia, <span class="me">Keming Wu</span>, Songning Lai, Bowen Tian, Yutao Yue</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">ACM MM 2025</span>
-                <span class="badge badge-award">Brave New Ideas (Oral)</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://arxiv.org/abs/2501.19160" target="_blank" rel="noopener">PDF</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="earlier" data-first="true">
-            <div class="pub-title">RSC-SNN: Exploring the Trade-off Between Adversarial Robustness and Accuracy in Spiking Neural Networks via Randomized Smoothing Coding</div>
-            <div class="pub-authors"><span class="me">Keming Wu*</span>, Man Yao*, Yuhong Chou, Xuerui Qiu, Rui Yang, Bo Xu, Guoqi Li</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-top">ACM MM 2024</span>
-                <span class="badge badge-role">Co-First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://dl.acm.org/doi/abs/10.1145/3664647.3680639" target="_blank" rel="noopener">PDF</a>
-                <a class="link-pill" href="https://github.com/KemingWu/RSC-SNN" target="_blank" rel="noopener">Code</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="earlier" data-first="true">
-            <div class="pub-title">A Fractal-based Complex Belief Entropy for Uncertainty Measure in Complex Evidence Theory</div>
-            <div class="pub-authors"><span class="me">Keming Wu</span>, Fuyuan Xiao, Yi Zhang</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-journal">IEEE TSMC: Systems 2024</span>
-                <span class="badge badge-role">First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://ieeexplore.ieee.org/abstract/document/10770823/" target="_blank" rel="noopener">PDF</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="pub-item" data-cat="earlier" data-first="true">
-            <div class="pub-title">A Novel Quantum Belief Entropy for Uncertainty Measure in Complex Evidence Theory</div>
-            <div class="pub-authors"><span class="me">Keming Wu</span>, Fuyuan Xiao</div>
-            <div class="pub-footer">
-              <div class="pub-badges">
-                <span class="badge badge-journal">Information Sciences 2024</span>
-                <span class="badge badge-role">First Author</span>
-              </div>
-              <div class="pub-links">
-                <a class="link-pill" href="https://www.sciencedirect.com/science/article/abs/pii/S0020025523013294" target="_blank" rel="noopener">PDF</a>
-              </div>
-            </div>
-          </li>
-
-        </ul>
-      </div>
-    </section>
-
-    <!-- Open-Source Projects -->
-    <section id="open-source" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Open-Source Projects</h2>
-      </div>
       <div class="oss-grid">
-        <div class="oss-card">
-          <div class="oss-logo-wrap">
-            <img src="./files/open-source-proj/lmms-engine-logo.png" alt="LMMs-Engine" />
+        <a class="oss-card reveal" href="https://github.com/EvolvingLMMs-Lab/lmms-engine" target="_blank" rel="noopener">
+          <div class="oss-logo"><img src="./files/open-source-proj/lmms-engine-logo.png" alt="LMMs-Engine" /></div>
+          <div class="oss-body">
+            <div class="oss-title-row">
+              <h3>LMMs-Engine</h3>
+              <img class="oss-stars" alt="GitHub repo stars" src="https://img.shields.io/github/stars/EvolvingLMMs-Lab/lmms-engine?style=flat-square&color=1f2a44&labelColor=0b1020" />
+            </div>
+            <span class="lab-role">Core Contributor</span>
+            <p>A simple, unified, and extensible multimodal models training engine&mdash;lean, flexible, and built for scaling large multimodal post-training.</p>
           </div>
-          <div class="oss-title-row">
-            <h3 class="oss-title">LMMs-Engine</h3>
-            <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/EvolvingLMMs-Lab/lmms-engine?style=flat-square" />
+        </a>
+        <a class="oss-card reveal" href="https://github.com/EvolvingLMMs-Lab/lmms-eval" target="_blank" rel="noopener">
+          <div class="oss-logo"><img src="./files/open-source-proj/lmms-eval-logo.png" alt="LMMs-Eval" /></div>
+          <div class="oss-body">
+            <div class="oss-title-row">
+              <h3>LMMs-Eval</h3>
+              <img class="oss-stars" alt="GitHub repo stars" src="https://img.shields.io/github/stars/EvolvingLMMs-Lab/lmms-eval?style=flat-square&color=1f2a44&labelColor=0b1020" />
+            </div>
+            <span class="lab-role">Core Contributor</span>
+            <p>A comprehensive evaluation framework for large multimodal models (LMMs), supporting standardized benchmarks across text, image, video, and audio tasks.</p>
           </div>
-          <span class="oss-role">Core Contributor</span>
-          <p class="oss-desc">
-            A simple, unified, and extensible multimodal models training engine&mdash;lean, flexible, and built for scaling large multimodal post-training.
-          </p>
-          <a class="oss-link" href="https://github.com/EvolvingLMMs-Lab/lmms-engine" target="_blank" rel="noopener">github.com/EvolvingLMMs-Lab/lmms-engine &rarr;</a>
-        </div>
-
-        <div class="oss-card">
-          <div class="oss-logo-wrap">
-            <img src="./files/open-source-proj/lmms-eval-logo.png" alt="LMMs-Eval" />
-          </div>
-          <div class="oss-title-row">
-            <h3 class="oss-title">LMMs-Eval</h3>
-            <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/EvolvingLMMs-Lab/lmms-eval?style=flat-square" />
-          </div>
-          <span class="oss-role">Core Contributor</span>
-          <p class="oss-desc">
-            A comprehensive evaluation framework for large multimodal models (LMMs), supporting standardized benchmarks across text, image, video, and audio tasks.
-          </p>
-          <a class="oss-link" href="https://github.com/EvolvingLMMs-Lab/lmms-eval" target="_blank" rel="noopener">github.com/EvolvingLMMs-Lab/lmms-eval &rarr;</a>
-        </div>
+        </a>
       </div>
     </section>
 
-    <!-- Education, Honors & Service -->
-    <section id="background" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Education, Honors &amp; Service</h2>
-      </div>
-
-      <div class="edu-card">
-        <div class="edu-logo">
-          <img src="./files/experience/education/thu.png" alt="Tsinghua University" />
+    <!-- ===================== Education, Honors & Service ===================== -->
+    <section id="background" class="section wrap narrow" data-sky="rose">
+      <header class="section-head reveal">
+        <p class="kicker">Background</p>
+        <h2 class="display">Education, honors &amp; <em>service</em></h2>
+      </header>
+      <dl class="facts big reveal">
+        <div class="fact">
+          <dt>Education</dt>
+          <dd class="edu">
+            <span class="edu-logo"><img src="./files/experience/education/thu.png" alt="Tsinghua University" /></span>
+            <span>
+              <strong><a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener">Tsinghua University</a></strong>, <a href="https://www.thss.tsinghua.edu.cn/" target="_blank" rel="noopener">School of Software</a>
+              <span class="sub">Ph.D. Student in Software Engineering &middot; Aug. 2025 &ndash; Present</span>
+              <span class="sub">Research Focus: Multimodal Post-Training, Reinforcement Learning, Agentic Reasoning &amp; Deep Generative Models</span>
+            </span>
+          </dd>
         </div>
-        <div class="edu-info">
-          <h3><a href="https://www.tsinghua.edu.cn/en/" target="_blank" rel="noopener">Tsinghua University</a></h3>
-          <div class="edu-dept"><a href="https://www.thss.tsinghua.edu.cn/" target="_blank" rel="noopener">School of Software</a></div>
-          <div class="edu-detail">Ph.D. Student in Software Engineering &middot; Aug. 2025 &ndash; Present</div>
-          <div class="edu-topic">Research Focus: Multimodal Post-Training, Reinforcement Learning, Agentic Reasoning &amp; Deep Generative Models</div>
+        <div class="fact">
+          <dt>Honors</dt>
+          <dd><strong>National Scholarship</strong> <span class="muted">(three times, 2022&ndash;2024)</span></dd>
         </div>
-      </div>
-
-      <div class="two-col-info">
-        <div class="info-panel">
-          <h3>Honors &amp; Awards</h3>
-          <ul class="info-list">
-            <li><strong>National Scholarship</strong> (Three times, 2022&ndash;2024)</li>
-          </ul>
+        <div class="fact">
+          <dt>Reviewer</dt>
+          <dd>
+            <span class="venue-list"><span>CVPR 2027</span><span>ICLR 2027</span><span>NeurIPS 2026</span><span>ECCV 2026</span><span>CVPR 2026</span><span>ICLR 2026</span></span>
+            <span class="sub">Conference reviewer &middot; also serving as a journal reviewer</span>
+          </dd>
         </div>
-
-        <div class="info-panel">
-          <h3>Professional Service</h3>
-          <ul class="info-list">
-            <li><strong>Conference Reviewer:</strong> CVPR 2027, ICLR 2027, NeurIPS 2026, ECCV 2026, CVPR 2026, ICLR 2026</li>
-            <li><strong>Journal Reviewer</strong></li>
-          </ul>
-        </div>
-      </div>
+      </dl>
     </section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
+    <!-- ===================== Contact / Footer ===================== -->
+    <footer id="contact" class="section wrap footer" data-sky="nebula">
+      <div class="slot slot-mono" data-shape="2" tabindex="0" role="img" aria-label="Stars forming the initials KW. Drag or use arrow keys to rotate.">
+        <span class="slot-hint">drag to rotate</span>
+      </div>
+      <div class="footer-cta reveal">
+        <h2 class="display">Let&rsquo;s close the <em>loop</em> together.</h2>
+        <p>Always happy to discuss ideas on MLLM post-training, reinforcement learning, reward modeling, and world models.</p>
+        <a class="big-email" href="mailto:wukeming0608@gmail.com">wukeming0608@gmail.com</a>
+      </div>
       <div class="clustrmaps-wrap">
         <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=cKc7Wx7G5hG6Og0yBAYJLS_gR5Sc2FMlfnB9zn0pRhE&co=7897ae&ct=ffffff&cmo=3be39e&cmn=ff5353"></script>
       </div>
-      <p class="footer-copy">&copy; Keming Wu &middot; Last updated: Nov 2026</p>
+      <div class="foot-bottom">
+        <span>&copy; 2026 Keming Wu &middot; Last updated Nov 2026</span>
+        <span>The sky takes the color of the section you are reading.</span>
+      </div>
     </footer>
 
   </main>
 
-  <button class="back-to-top" type="button" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
-  </button>
+  <!-- Sky controls: current palette + pause -->
+  <div class="sky-ctl" aria-live="polite">
+    <span class="sky-dot" aria-hidden="true"></span>
+    <span class="sky-name">Aurora</span>
+    <button class="sky-pause" type="button" aria-label="Pause the sky animation" aria-pressed="false">
+      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="6" width="3.2" height="12" rx="1"/><rect x="13.8" y="6" width="3.2" height="12" rx="1"/></svg>
+      <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+    </button>
+  </div>
 
-  <script>
-    (function () {
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var items = document.querySelectorAll('.pub-item');
-
-      /* ---------- Publication filter ---------- */
-      var buttons = document.querySelectorAll('.filter-btn');
-      var groups = document.querySelectorAll('.pub-group');
-
-      function matches(item, filter) {
-        return filter === 'all' ||
-               (filter === 'first' && item.getAttribute('data-first') === 'true') ||
-               item.getAttribute('data-cat') === filter;
-      }
-
-      buttons.forEach(function (btn) {
-        var filter = btn.getAttribute('data-filter');
-        var count = Array.prototype.filter.call(items, function (it) { return matches(it, filter); }).length;
-        var badge = document.createElement('span');
-        badge.className = 'filter-count';
-        badge.textContent = count;
-        btn.appendChild(badge);
-      });
-
-      function applyFilter(filter) {
-        buttons.forEach(function (b) {
-          b.classList.toggle('active', b.getAttribute('data-filter') === filter);
-        });
-        var shown = 0;
-        items.forEach(function (item) {
-          var show = matches(item, filter);
-          item.classList.toggle('hidden', !show);
-          item.classList.remove('pop', 'reveal', 'in');
-          if (show && !reduceMotion) {
-            void item.offsetWidth; // restart the animation
-            item.style.animationDelay = Math.min(shown, 10) * 40 + 'ms';
-            item.classList.add('pop');
-            shown++;
-          }
-        });
-        groups.forEach(function (group) {
-          var visibleCount = group.querySelectorAll('.pub-item:not(.hidden)').length;
-          group.classList.toggle('hidden', visibleCount === 0);
-        });
-      }
-
-      buttons.forEach(function (btn) {
-        btn.addEventListener('click', function () { applyFilter(btn.getAttribute('data-filter')); });
-      });
-
-      /* Research cards & loop nodes jump to their publication group */
-      document.querySelectorAll('[data-filter-target]').forEach(function (el) {
-        el.addEventListener('click', function () { applyFilter(el.getAttribute('data-filter-target')); });
-      });
-
-      /* Hovering a loop node highlights the matching research card */
-      document.querySelectorAll('.loop-node').forEach(function (node) {
-        var card = document.querySelector('.roadmap-card[data-thread="' + node.getAttribute('data-filter-target') + '"]');
-        if (!card) return;
-        node.addEventListener('mouseenter', function () { card.classList.add('is-linked'); });
-        node.addEventListener('mouseleave', function () { card.classList.remove('is-linked'); });
-      });
-
-      /* Spotlight that follows the cursor on research cards */
-      document.querySelectorAll('.roadmap-card').forEach(function (card) {
-        card.addEventListener('mousemove', function (e) {
-          var r = card.getBoundingClientRect();
-          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-        });
-      });
-
-      /* ---------- Hero stats (derived from the publication list) ---------- */
-      function isAccepted2026(item) {
-        return Array.prototype.some.call(item.querySelectorAll('.badge-top, .badge-journal'), function (b) {
-          return /2026$/.test(b.textContent.trim());
-        });
-      }
-      var stats = {
-        total: items.length,
-        first: document.querySelectorAll('.pub-item[data-first="true"]').length,
-        neurips: Array.prototype.filter.call(document.querySelectorAll('.pub-item .badge-top'), function (b) {
-          return b.textContent.trim() === 'NeurIPS 2026';
-        }).length,
-        y2026: Array.prototype.filter.call(items, isAccepted2026).length
-      };
-      var statEls = document.querySelectorAll('.stat-num[data-stat]');
-      statEls.forEach(function (el) { el.textContent = stats[el.getAttribute('data-stat')]; });
-
-      function countUp(el) {
-        var target = stats[el.getAttribute('data-stat')];
-        var start = null;
-        function step(ts) {
-          if (!start) start = ts;
-          var p = Math.min((ts - start) / 1100, 1);
-          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-          if (p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      }
-
-      /* ---------- Typing effect ---------- */
-      var typed = document.querySelector('.typed-word');
-      if (typed && !reduceMotion) {
-        var words = JSON.parse(typed.getAttribute('data-words'));
-        var wi = 0, ci = words[0].length, deleting = false;
-        (function tick() {
-          var word = words[wi];
-          var delay;
-          if (!deleting && ci === word.length) { deleting = true; delay = 2200; }
-          else if (deleting && ci === 0) { deleting = false; wi = (wi + 1) % words.length; delay = 300; }
-          else { ci += deleting ? -1 : 1; delay = deleting ? 28 : 55; }
-          typed.textContent = words[wi].slice(0, ci);
-          setTimeout(tick, delay);
-        })();
-      }
-
-      /* ---------- Nav: scroll progress, shadow, scrollspy, back-to-top ---------- */
-      var nav = document.querySelector('.site-nav');
-      var progress = document.querySelector('.scroll-progress');
-      var toTop = document.querySelector('.back-to-top');
-      var navLinks = document.querySelectorAll('.nav-links a');
-      var sections = Array.prototype.map.call(navLinks, function (a) {
-        return document.querySelector(a.getAttribute('href'));
-      });
-      var ticking = false;
-
-      function onScroll() {
-        var y = window.scrollY;
-        var max = document.documentElement.scrollHeight - window.innerHeight;
-        progress.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
-        nav.classList.toggle('scrolled', y > 8);
-        toTop.classList.toggle('show', y > 600);
-
-        var current = -1;
-        sections.forEach(function (sec, i) {
-          if (sec && sec.getBoundingClientRect().top <= 120) current = i;
-        });
-        if (max - y < 4) current = sections.length - 1;
-        navLinks.forEach(function (a, i) { a.classList.toggle('active', i === current); });
-        ticking = false;
-      }
-
-      window.addEventListener('scroll', function () {
-        if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
-      }, { passive: true });
-      onScroll();
-
-      toTop.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-      });
-
-      /* ---------- Scroll reveal ---------- */
-      if (reduceMotion || !('IntersectionObserver' in window)) return;
-
-      document.documentElement.classList.add('js-reveal');
-      var targets = document.querySelectorAll(
-        '.section-header, .about-text, .research-intro, .roadmap-card, .loop, .news-box, ' +
-        '.pub-filters, .pub-group-header, .pub-item, .oss-card, .edu-card, .info-panel, .hero-stats'
-      );
-      targets.forEach(function (el) { el.classList.add('reveal'); });
-
-      var io = new IntersectionObserver(function (entries) {
-        var batch = 0;
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var el = entry.target;
-          io.unobserve(el);
-          var delay = Math.min(batch++, 6) * 70;
-          el.style.transitionDelay = delay + 'ms';
-          el.classList.add('in');
-          if (el.classList.contains('hero-stats')) statEls.forEach(countUp);
-          // Drop the reveal classes afterwards so hover transforms work normally
-          setTimeout(function () {
-            el.style.transitionDelay = '';
-            el.classList.remove('reveal', 'in');
-          }, 800 + delay);
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-
-      targets.forEach(function (el) { io.observe(el); });
-    })();
-  </script>
+  <script src="main.js?v=20261121"></script>
 </body>
 </html>
