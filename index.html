@@ -12,7 +12,7 @@
   <link rel="shortcut icon" href="myIcon.ico" />
   <link rel="preload" href="files/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="files/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="jemdoc.css?v=20261121" type="text/css" />
+  <link rel="stylesheet" href="jemdoc.css?v=20261124" type="text/css" />
   <title>Keming Wu | Tsinghua University</title>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -26,7 +26,7 @@
 <body>
 
   <!-- Night sky: CSS nebula underneath, WebGL stars on top. Each .slot below is an empty
-       box where the stars gather into a figure: a globe, the research loop, and a KW monogram. -->
+       box where the stars gather into a figure: the initials KMW, the research loop, and a globe. -->
   <div class="nebula" aria-hidden="true"></div>
   <canvas id="sky" aria-hidden="true"></canvas>
 
@@ -98,8 +98,8 @@
         <a class="scroll-cue rise" href="#research"><span class="cue-line"></span>Scroll, and the world becomes a loop</a>
       </div>
 
-      <div class="slot slot-globe" data-shape="0" tabindex="0" role="img" aria-label="Stars forming a rotating globe, a nod to world modeling. Drag or use arrow keys to rotate.">
-        <span class="slot-hint">drag to rotate</span>
+      <div class="slot slot-hero" data-shape="0" tabindex="0" role="img" aria-label="Stars gathering into the initials KMW. Move the cursor through them to scatter the stars; click or press Enter to burst them.">
+        <span class="slot-hint"><span class="hint-hover">move through the stars &middot; click to burst</span><span class="hint-touch">tap to burst</span></span>
       </div>
     </section>
 
@@ -655,7 +655,7 @@
 
     <!-- ===================== Contact / Footer ===================== -->
     <footer id="contact" class="section wrap footer" data-sky="nebula">
-      <div class="slot slot-mono" data-shape="2" tabindex="0" role="img" aria-label="Stars forming the initials KW. Drag or use arrow keys to rotate.">
+      <div class="slot slot-foot" data-shape="2" tabindex="0" role="img" aria-label="Stars forming a rotating globe, a nod to world modeling. Drag or use arrow keys to rotate.">
         <span class="slot-hint">drag to rotate</span>
       </div>
       <div class="footer-cta reveal">
@@ -684,6 +684,6 @@
     </button>
   </div>
 
-  <script src="main.js?v=20261121"></script>
+  <script src="main.js?v=20261124"></script>
 </body>
 </html>

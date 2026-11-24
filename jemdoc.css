@@ -357,7 +357,7 @@ main {
   padding-bottom: 40px;
 }
 
-.slot-globe {
+.slot-hero {
   position: sticky;
   top: 64px;
   align-self: start;
@@ -1158,7 +1158,19 @@ main {
   text-align: center;
 }
 
-.slot-mono { height: min(420px, 52vh); }
+.slot-foot { height: min(420px, 52vh); }
+
+/* The hero figure scatters under the cursor instead of rotating */
+.slot-hero,
+.slot-hero:active { cursor: crosshair; }
+
+.hint-touch { display: none; }
+
+@media (hover: none) {
+  .hint-hover { display: none; }
+  .hint-touch { display: inline; }
+  .slot-hero .slot-hint { opacity: 1; }
+}
 
 .footer-cta p {
   max-width: 560px;
@@ -1288,7 +1300,7 @@ main {
     gap: 0;
   }
 
-  .slot-globe {
+  .slot-hero {
     position: relative;
     top: auto;
     order: -1;
