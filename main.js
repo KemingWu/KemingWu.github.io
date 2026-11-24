@@ -322,7 +322,13 @@
       '  float tot = w.x + w.y + w.z;',
       '  if (tot > 1.0) { w /= tot; tot = 1.0; }',
       '  float inv = 1.0 / max(tot, 1e-4);',
-      '  vec3 p0 = place(aS0.xyz + vec3(aOff, 0.0), uC0, uR0), p1 = place(aS1.xyz, uC1, uR1), p2 = place(aS2.xyz, uC2, uR2);',
+      // KMW never sits still: each star circles its home, a wave ripples through the word in depth
+      '  vec3 s0 = aS0.xyz + vec3(aOff, 0.0);',
+      '  float ph = aSeed.x * 6.2832;',
+      '  s0.xy += vec2(cos(uTime * (0.6 + aSeed.y) + ph), sin(uTime * (0.5 + aSeed.z) + ph)) * 0.014;',
+      '  s0.y += sin(aS0.x * 3.0 - uTime * 1.4) * 0.022;',
+      '  s0.z += sin(aS0.x * 2.2 + uTime * 0.9) * 0.14;',
+      '  vec3 p0 = place(s0, uC0, uR0), p1 = place(aS1.xyz, uC1, uR1), p2 = place(aS2.xyz, uC2, uR2);',
       '  vec2 fig = (p0.xy * w.x + p1.xy * w.y + p2.xy * w.z) * inv;',
       '  vec2 dir = fig - sky;',
       '  vec2 pos = mix(sky, fig, tot) + vec2(-dir.y, dir.x) * 0.25 * sin(3.14159 * tot) * (aSeed.x - .5);', // curved flight
@@ -334,7 +340,8 @@
       // the loop carries a light pulse around its curve
       '  float pulse = pow(0.5 + 0.5 * cos(6.28318 * (aS1.w / 3.0 * 2.0 - uTime * 0.09)), 12.0);',
       '  float kick = min(length(aOff) * 5.0, 1.0);',                         // stars pushed by the cursor flare up
-      '  float l0 = fract(aS0.w) + 0.7 * kick, l1 = 0.4 + 0.6 * pulse, l2 = fract(aS2.w);',
+      '  float sweep = pow(0.5 + 0.5 * cos(aS0.x * 2.4 - uTime * 1.1), 18.0);',   // a band of light crosses the word
+      '  float l0 = fract(aS0.w) * (1.0 + 0.9 * sweep) + 0.25 * sweep + 0.7 * kick, l1 = 0.4 + 0.6 * pulse, l2 = fract(aS2.w);',
       '  float hi = uHi < -0.5 ? 1.0 : (abs(floor(aS1.w) - uHi) < .5 ? 1.6 : 0.3);',
       '  float lum = (l0 * w.x + l1 * w.y * hi + l2 * w.z) * inv;',
       '  vec3 fc = (thread(floor(aS0.w)) * w.x + thread(floor(aS1.w)) * w.y + thread(floor(aS2.w)) * w.z) * inv;',
@@ -435,7 +442,7 @@
     });
 
     // The cursor (or a finger) pushes KMW stars aside; a click or tap bursts them outward
-    var mouse = null, burst = null;
+    var mouse = null, burst = null, lastTouch = 0, nextRipple = 4;
     function bindScatter(s) {
       window.addEventListener('pointermove', function (e) {
         var t = performance.now();
@@ -443,6 +450,7 @@
           var k = 1 / Math.max((t - mouse.t) / 1000, 0.008);
           mouse.vx = (e.clientX - mouse.x) * k; mouse.vy = (e.clientY - mouse.y) * k;
         }
+        lastTouch = t;
         mouse = { x: e.clientX, y: e.clientY, t: t, vx: mouse ? mouse.vx : 0, vy: mouse ? mouse.vy : 0 };
       }, { passive: true });
       document.documentElement.addEventListener('pointerleave', function () { mouse = null; });
@@ -466,7 +474,8 @@
         mouse.vx *= Math.exp(-dt * 10); mouse.vy *= Math.exp(-dt * 10);   // cursor speed fades when it stops
       }
       var bx = 1e9, by = 1e9;
-      if (burst) { bx = (burst.x - s.cx) / s.rad; by = -(burst.y - s.cy) / s.rad; burst = null; }
+      var bk = 1;
+      if (burst) { bx = (burst.x - s.cx) / s.rad; by = -(burst.y - s.cy) / s.rad; bk = burst.k || 1; burst = null; }
       var near = mx > -1.6 && mx < 1.6 && my > -1 && my < 1;
       if (settled && !near && bx > 1e8) return;
 
@@ -484,7 +493,7 @@
           }
         }
         if (bx < 1e8) {
-          var ex = px - bx, ey = py - by, e = Math.sqrt(ex * ex + ey * ey) + 0.05, kick = (2.6 + rnd() * 2.2) / (0.35 + e * 1.8);
+          var ex = px - bx, ey = py - by, e = Math.sqrt(ex * ex + ey * ey) + 0.05, kick = bk * (2.6 + rnd() * 2.2) / (0.35 + e * 1.8);
           var a = (rnd() - 0.5) * 0.9, ca = Math.cos(a), sa = Math.sin(a);
           vx += (ex * ca - ey * sa) / e * kick;
           vy += (ex * sa + ey * ca) / e * kick;
@@ -590,7 +599,15 @@
         skyState.b[c] += (tb[c] - skyState.b[c]) * k;
       }
 
-      stepScatter(slots[0], dt);
+      var hero = slots[0];
+      if (moving && hero.w > 0.6 && !burst && time > nextRipple) {
+        nextRipple = time + 5 + rnd() * 3;
+        if (now - lastTouch > 2500) {
+          var q = ((rnd() * NF) | 0) * 4;
+          burst = { x: hero.cx + kmw[q] * hero.rad, y: hero.cy - kmw[q + 1] * hero.rad, k: 0.32 };
+        }
+      }
+      stepScatter(hero, dt);
 
       var g = slots[0], l = slots[1], m = slots[2];
       gl.uniform2f(U.uRes, W, H);
@@ -602,7 +619,7 @@
       gl.uniform3f(U.uC0, g.cx, g.cy, g.rad);
       gl.uniform3f(U.uC1, l.cx, l.cy, l.rad);
       gl.uniform3f(U.uC2, m.cx, m.cy, m.rad);
-      gl.uniformMatrix3fv(U.uR0, false, rot(0, 0));
+      gl.uniformMatrix3fv(U.uR0, false, rot(Math.sin(time * 0.31) * 0.22, Math.sin(time * 0.23) * 0.09));
       gl.uniformMatrix3fv(U.uR1, false, rot(l.yaw + Math.sin(time * 0.23) * l.conf.wobble,
         l.conf.tilt + l.pitch + Math.sin(time * 0.17) * l.conf.wobble * 0.6, time * l.conf.roll));
       gl.uniformMatrix3fv(U.uR2, false, rot(m.yaw, m.conf.tilt + m.pitch));
